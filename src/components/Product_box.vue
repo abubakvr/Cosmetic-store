@@ -179,37 +179,90 @@ export default{
     }
 
     /*Media Display */
-    @media only screen and (max-width: 500px) {
-    .mainbox{
-        width: 90%;
-        margin: 30px auto;
-        box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+
+   @media only screen and (max-width: 1100px) {
+        .mainbox{
+            width: 80%;
+            margin: 30px auto;
+            box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+        }
+
+        .productbox div img{
+            width: 75%;
+            height: 150px;
+            margin-left: 10%;
+        }
+
+         .productbox{
+            height: 340px;
+        }
     }
 
-    .mainbox .productbox{
-        float: left;
-        display: inline;
-        margin: auto;
-        margin-bottom: 10px;
-        margin-right: 0.1%;
-        height: auto;
 
+    @media only screen and (max-width: 800px) {
+        .mainbox{
+            width: 90%;
+            margin: 30px auto;
+            box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+        }
+
+        .mainbox .productbox{
+            float: left;
+            display: inline;
+            margin: auto;
+            margin-bottom: 10px;
+            margin-right: 0.1%;
+            height: auto;
+
+        }
+
+        .productbox{
+            width: 33.2%;
+            padding: 10px;
+        }
+
+        .productbox div img{
+            width: 75%;
+            height: 150px;
+            margin-left: 10%;
+        }
+
+        .class_btn{
+            display: none;
+        }
     }
 
-    .productbox{
-        width: 49.8%;
-        padding: 10px;
-    }
+     @media only screen and (max-width: 500px) {
+        .mainbox{
+            width: 90%;
+            margin: 30px auto;
+            box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+        }
 
-    .productbox div img{
-        width: 75%;
-        height: 150px;
-        margin-left: 10%;
-    }
+        .mainbox .productbox{
+            float: left;
+            display: inline;
+            margin: auto;
+            margin-bottom: 10px;
+            margin-right: 0.1%;
+            height: auto;
 
-    .class_btn{
-        display: none;
+        }
+
+        .productbox{
+            width: 49.8%;
+            padding: 10px;
+        }
+
+        .productbox div img{
+            width: 75%;
+            height: 150px;
+            margin-left: 10%;
+        }
+
+        .class_btn{
+            display: none;
+        }
     }
-}
 
 </style>

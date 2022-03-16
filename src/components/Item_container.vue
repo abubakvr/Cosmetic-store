@@ -12,7 +12,6 @@
                         <v-btn icon color="black">
                             <v-icon>mdi-twitter</v-icon>
                         </v-btn>
-
                     </div>
                 </div>
                 <div class="def_side">
@@ -37,7 +36,7 @@
                             <v-icon>mdi-plus</v-icon>
                         </v-btn><br>
                     </div>
-                    <div class="text-center my-3" style="width:100%;">
+                    <div id="#cart-btn" class=" text-center my-3" style="width:100%;">
                         <v-dialog
                         v-model="dialog"
                         transition="dialog-top-transition"
@@ -49,6 +48,7 @@
                                 width="100%" 
                                 style="margin-top:5px;"
                                 v-bind="attrs"
+                                class="cartButton"
                                 v-on="on"
                                 >
                                 Add to cart
@@ -136,7 +136,7 @@ export default {
     .mainBox{
         width: 900px;
         margin: 30px auto;
-        height: 600px;
+        overflow: auto;
         box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
     }
 
@@ -145,10 +145,6 @@ export default {
         display: inline;
     }
 
-    .buy_item{
-        box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
-
-    }
     .product_side{
         width: 350px;
         height: 600px;
@@ -195,8 +191,76 @@ export default {
     }
 
     @media only screen and (min-width: 1500px) {
-        .mainbox{
-            width: 55%;
+        .mainBox{
+            width: 50%;
         }
+    }
+
+    @media only screen and (min-width: 1200px) {
+        .mainBox{
+            width: 900px;
+        }
+    }
+
+    @media only screen and (max-width: 800px) {
+        .mainBox{
+            width: 90%;
+        }
+
+        .product_side{
+            width: 37%;
+            height: 600px;
+            padding: 15px;   
+            margin: auto; 
+        } 
+        
+        .def_side{
+            width: 63%;
+            height: 600px;
+            padding: 15px;
+        }
+
+        .product_side img{
+            width: 100%;
+            height: 240px;
+        }
+    }
+
+
+    @media only screen and (max-width: 500px) {
+        .mainBox{
+            width: 95%;
+            margin: 30px auto;
+            padding: 10px;
+        }
+
+        .buy_item div{
+            float: none;
+            width: 95%;
+            margin: auto;
+            padding: 0px;
+        }
+
+        .share_div{
+            visibility:hidden;
+            display: none;
+        }
+
+        .product_side{
+            width: 95%;
+            margin: auto;
+            height: 300px;
+        }   
+
+        .cartButton{
+            margin-top: 20px ;
+        }
+
+        .product_side img{
+            width: 100%;
+            height: 300px;
+            margin: auto;
+        }
+
     }
 </style>

@@ -3,6 +3,7 @@
     dark
     padless
     bottom="1"
+    width="100%"
   >
     <v-card
       flat

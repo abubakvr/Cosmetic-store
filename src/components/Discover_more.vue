@@ -8,7 +8,7 @@
             <v-tooltip top>
             <template v-slot:activator="{ on, attrs }">
             <img src="../assets/img/Beautiful-woman-face-makeup-artist-applies-eyeshadow-Stock-Photo-02.png" v-bind="attrs" v-on="on">
-            <h1 class="bottom-left"><i>Shop</i> Face</h1>
+            <h1 class="bottom-left">Shop Face</h1>
             </template>
             <span>Shop Face</span>
         </v-tooltip>
@@ -17,7 +17,7 @@
             <v-tooltip top>
             <template v-slot:activator="{ on, attrs }">
             <img src="../assets/img/maxresdefault2.jpg" v-bind="attrs" v-on="on">
-            <h1 class="bottom-left"><i>Shop</i> Eyes</h1>
+            <h1 class="bottom-left">Shop Eyes</h1>
             </template>
             <span>Shop Eyes</span>
         </v-tooltip>
@@ -26,7 +26,7 @@
             <v-tooltip top>
             <template v-slot:activator="{ on, attrs }">
                 <img src="../assets/img/Colour-Cosmetics-Blonde-Female-Wearing-Bright-Red-Lipstick.png" v-bind="attrs" v-on="on">
-                <h1 class="bottom-left"><i>Shop</i> Lips</h1>
+                <h1 class="bottom-left">Shop Lips</h1>
             </template>
             <span>Shop Lips</span>
             </v-tooltip>
@@ -79,10 +79,6 @@ export default {
   width: 100%;
 }
 
-.e_section_products img:hover {
-  transform: scale(1.1); 
-}
-
 .footer{
   width: 100%;
   background-color: black;
@@ -91,7 +87,7 @@ export default {
 }
 
 .e_section_products h1{
-    z-index: 9999; text-align: center; margin-top: -40px; font-size: 40px; color: white; text-shadow: 2px 2px #141414;
+    z-index: 9999; text-align: center; margin-top: -40px; font-size: 40px; color: white;
 }
 
 @media only screen and (max-width: 800px) {

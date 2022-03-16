@@ -1,7 +1,7 @@
 <template>
     <div>
     <div class="normalNav">
-    <v-app-bar absolute color="#141414" class="navbar" style="position: fixed; top: 0; color: white; padding:0px 7%;" >
+    <v-app-bar absolute color="#141414" class="navbar" style="position: fixed; top: 0; color: white;" >
 
       <router-link to="/" style="text-decoration:none;">
         <v-btn plain color="white">
@@ -61,7 +61,7 @@
           v-bind="attrs"
           v-on="on"
         >
-         <v-icon>mdi-account</v-icon>Login
+         <v-icon>mdi-account-circle</v-icon>Account
         </v-btn>
       </template>
       <v-list width="250px">
@@ -69,15 +69,27 @@
         v-model="selectedItem"
         color="primary"
       >
-        <v-list-item
-          v-for="(item, i) in items"
-          :key="i"
-        >
+        <v-list-item>
+          <v-list-item-content>
+            <v-btn color="orange white--text">
+              Login
+            </v-btn> 
+          </v-list-item-content>
+        </v-list-item>
+        <v-list-item @click="$router.push('/account')">
           <v-list-item-icon>
-            <v-icon v-text="item.icon"></v-icon>
+            <v-icon >mdi-account-circle-outline</v-icon>
           </v-list-item-icon>
           <v-list-item-content>
-            <v-list-item-title v-text="item.text"></v-list-item-title>
+            <v-list-item-title>My Account</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+        <v-list-item @click="$router.push('/orders')">
+          <v-list-item-icon>
+            <v-icon >mdi-store-check-outline</v-icon>
+          </v-list-item-icon>
+          <v-list-item-content>
+            <v-list-item-title>My orders</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
       </v-list-item-group>
@@ -160,9 +172,8 @@
         group: null,
         selectedItem: 1,
         items: [
-          { text: 'Real-Time', icon: 'mdi-clock' },
-          { text: 'Audience', icon: 'mdi-account' },
-          { text: 'Conversions', icon: 'mdi-flag' },
+          { text: 'My Account', icon: 'mdi-account-circle-outline' },
+          { text: 'My Orders', icon: 'mdi-store-check-outline' },
         ],
         }),
     }
@@ -180,7 +191,7 @@
   }
 
 
-@media only screen and (max-width: 700px) {
+@media only screen and (max-width: 790px) {
   .mobileNav{
     color: white;
     visibility: visible;

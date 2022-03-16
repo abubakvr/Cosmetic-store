@@ -1,13 +1,13 @@
 <template>
 <div class="cart_items">
-    <v-col>
-        <v-row>
-        <div class="mainbox">
+        <div class="mainBox">
             <div class="box_header">
                 <p>Cart Items</p>
             </div>
             <div class="box_content">
-                    <v-checkbox label="Select All" color="orange black--text"></v-checkbox>
+                    <div class="cart_checkbox">
+                        <v-checkbox label="Select All" color="orange black--text"></v-checkbox>
+                    </div>
                 <div class="buy_item">
                     <div class="cart_checkbox">
                         <v-checkbox color="orange"></v-checkbox>
@@ -36,7 +36,7 @@
                                 <v-btn icon small dark color="white" style="background-color:#555555">
                                     <v-icon>mdi-minus</v-icon>
                                 </v-btn>  
-                                <span style="margin-left:170px;">
+                                <span class="btn-buy">
                                     <v-btn color="orange white--text">Buy Now</v-btn>
                                 </span>
                                 </p>
@@ -72,7 +72,7 @@
                                 <v-btn icon small dark color="white" style="background-color:#555555">
                                     <v-icon>mdi-minus</v-icon>
                                 </v-btn>  
-                                <span style="margin-left:170px;">
+                                <span class="btn-buy">
                                     <v-btn color="orange white--text">Buy Now</v-btn>
                                 </span>
                                 </p>
@@ -108,7 +108,7 @@
                                 <v-btn icon small dark color="white" style="background-color:#555555">
                                     <v-icon>mdi-minus</v-icon>
                                 </v-btn>  
-                                <span style="margin-left:170px;">
+                                <span class="btn-buy">
                                     <v-btn color="orange white--text">Buy Now</v-btn>
                                 </span>
                                 </p>
@@ -132,8 +132,6 @@
             </div>
 
         </div>
-        </v-row>
-    </v-col>  
     </div>
 </template>
 
@@ -149,10 +147,12 @@ export default {
 </script>
 
 <style scoped>
-    .mainbox{
+    .mainBox{
         width: 750px;
         margin: 30px;
         box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+        overflow: none;
+        float: left;
     }
 
     .box_header{
@@ -176,8 +176,8 @@ export default {
     .buy_item{
         height: 270px;
         width: 100%;
-
     }
+
     .product_side{
         width: 230px;
         height: auto;
@@ -189,10 +189,6 @@ export default {
         width: 200px;
         height: auto;
         margin: auto;
-    }
-
-    .share_div{
-        margin-top: 10px;
     }
 
     .def_side{
@@ -232,10 +228,178 @@ export default {
         margin: auto;
     }
 
-    .order_summary{
+    .btn-buy{
+        margin-left: 170px;
+    }
+
+    .order_summary {
+        float: right;
+        display: inline;;
+        position: relative;
+        top: 0px;
         width: 450px;
         height: 270px;
         margin: 30px auto;
         box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+    }
+
+    @media only screen and (max-width: 1300px) {
+        .cart_items{
+            width: 90%;
+            margin: auto;
+        }
+
+        .mainBox{
+            width:65%;
+            margin: 30px auto;
+            padding: 0px;
+            box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+            padding: 0px;
+        }
+
+        .order_summary {
+            float:left;
+            display: inline;;
+            top: 0px;
+            width: 33%;
+            height: 270px;
+            margin: 30px auto;
+            box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+            margin-left: 2%;
+        }
+
+        .product_side{
+            width: 30%;
+            height: auto;
+            padding: 15px;   
+            margin: auto; 
+        }   
+
+        .product_side img{
+            width: 100%;
+            height: auto;
+            margin: auto;
+        }
+
+        .share_div{
+            margin-top: 10px;
+        }
+
+        .def_side{
+            width: 63%;
+            height: auto;
+            padding: 15px;
+        }
+
+         .btn-buy{
+            margin-left: 100px;
+            float: right;
+        }
+    }
+
+    @media only screen and (max-width: 800px) {
+        .cart_items{
+            width: 100%;
+            margin: auto;
+        }
+
+        .mainBox{
+            width:96%;
+            margin: 30px auto;
+            padding: 0px;
+            box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+            margin-left: 2%;
+            padding: 0px;
+        }
+
+        .order_summary {
+            float:left;
+            display: inline;;
+            top: 0px;
+            width: 96%;
+            height: 270px;
+            margin: 30px auto;
+            box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+            margin-left: 2%;
+        }
+
+        
+    }
+
+
+      @media only screen and (max-width: 700px) {
+        .cart_items{
+            width: 95%;
+            margin: auto;
+        }
+
+        .cart_items div{
+            float: none;
+            display: inline;;
+        }
+
+        .mainBox{
+            width:90%;
+            margin: 30px auto;
+            padding: 0px;
+            box-shadow: none;
+            padding: 0px;
+        }
+
+        .buy_item{
+            height: auto;
+            width: 100%;
+            padding: 0px;
+            margin: 10px auto;
+        }
+
+        .buy_item div{
+            float: none;
+            display: block;
+        }
+
+        .product_side{
+            width: 100%;
+            height: auto;
+            padding: 5px;   
+            margin: auto; 
+        }   
+
+        .product_side img{
+            width: 100%;
+            height: auto;
+            margin: auto;
+        }
+
+        .cart_checkbox{
+            margin-left: 0px;
+        }
+
+        .def_side{
+            width: 100%;
+            height: auto;
+            padding: 5px;
+            margin: auto;
+        }
+
+        .choose_option{
+            height: auto;
+            width: 100%;
+            padding: 15px;
+        }
+   
+        .order_summary{
+            height: unset;
+            width: unset;
+            visibility: collapse;
+            display: none;
+            overflow: hidden;
+        }
+
+        .btn-buy{
+            float: right;
+            margin-left: 0px;
+        }
+
     }
 </style>

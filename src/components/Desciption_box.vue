@@ -59,8 +59,22 @@ export default {
     }
 
     @media only screen and (min-width: 1500px) {
-        .mainbox{
-            width: 55%;
+        .mainBox{
+            width: 50%;
+        }
+    }
+
+     @media only screen and (min-width: 1200px) {
+        .mainBox{
+            width: 900px;
+        }
+    }
+
+    @media only screen and (max-width: 700px) {
+        .mainBox{
+            width: 95%;
+            margin: 30px auto;
+            padding: 10px;
         }
     }
 </style>
