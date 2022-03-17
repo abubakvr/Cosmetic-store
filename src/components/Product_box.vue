@@ -179,10 +179,27 @@ export default{
     }
 
     /*Media Display */
+    @media only screen and (max-width: 1450px) {
+        .mainbox{
+            width: 75%;
+            margin: 30px auto;
+            box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+        }
+
+        .productbox div img{
+            width: 75%;
+            height: 150px;
+            margin-left: 10%;
+        }
+
+         .productbox{
+            height: 340px;
+        }
+    }
 
    @media only screen and (max-width: 1100px) {
         .mainbox{
-            width: 80%;
+            width: 90%;
             margin: 30px auto;
             box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
         }

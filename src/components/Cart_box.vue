@@ -243,9 +243,9 @@ export default {
         box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
     }
 
-    @media only screen and (max-width: 1300px) {
+    @media only screen and (max-width: 1450px) {
         .cart_items{
-            width: 90%;
+            width: 80%;
             margin: auto;
         }
 

@@ -9,6 +9,9 @@ import Face from "./views/Face.vue";
 import Lips from "./views/Lips.vue";
 import ViewItem from "./views/View_item.vue";
 import Cart from "./views/Cart.vue";
+import Login from "./views/Login.vue";
+import Account from "./views/Account.vue";
+import Orders from "./views/Orders.vue";
 
 Vue.use(Router)
 
@@ -53,6 +56,21 @@ export default new Router({
             path: '/cart',
             name: 'Cart',
             component: Cart
+        },
+        {
+            path: '/login',
+            name: 'Login',
+            component: Login
+        },
+        {
+            path: '/account',
+            name: 'Account',
+            component: Account
+        },
+        {
+            path: '/orders',
+            name: 'Orders',
+            component: Orders
         },
     ]
 })
