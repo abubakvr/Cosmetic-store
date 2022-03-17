@@ -10,6 +10,7 @@ import Lips from "./views/Lips.vue";
 import ViewItem from "./views/View_item.vue";
 import Cart from "./views/Cart.vue";
 import Login from "./views/Login.vue";
+import Register from "./views/Register.vue";
 import Account from "./views/Account.vue";
 import Orders from "./views/Orders.vue";
 
@@ -61,6 +62,11 @@ export default new Router({
             path: '/login',
             name: 'Login',
             component: Login
+        },
+        {
+            path: '/register',
+            name: 'Register',
+            component: Register
         },
         {
             path: '/account',

@@ -1,23 +1,30 @@
 <template>
-    <div class="">
+    <v-container width="100%" height="100%" class="my-12">
         <v-col>
-            <v-row>
-                <v-card width="500px" height="300px">
-                    <v-toolbar>
+            <v-row justify="center" >
+                <v-sheet color="white" elevation="4" width="500px" height="390px" class="my-12">
+                    <v-toolbar flat color="#222222" class="white--text">
                         <v-toolbar-title>Login</v-toolbar-title>
                     </v-toolbar>
-                </v-card>
+                    <v-sheet height="10%" class="pa-8">
+                        <v-text-field outlined label="Username"></v-text-field>
+                        <v-text-field outlined label="Password"></v-text-field>
+                        <v-btn color="orange" width="100%" height="50px" class="white--text h3--text" style="font-size:19px">Login</v-btn>
+                        <v-row>
+                            <v-btn plain color="blue" justify="start" class="px-4 my-6">Forgot Password</v-btn>
+                            <v-spacer></v-spacer>
+                            <v-btn plain color="blue" style="float:right" class="px-3 my-6" @click="$router.push('/register')">Register</v-btn>
+                        </v-row>
+                    </v-sheet>
+                </v-sheet>
             </v-row>
         </v-col>
-    </div>
+    </v-container>
 </template>
 
 <script>
 export default {
     name: "LoginBox",
-    data() {
-        
-    },
 }
 </script>
 

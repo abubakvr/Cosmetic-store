@@ -71,7 +71,7 @@
       >
         <v-list-item>
           <v-list-item-content>
-            <v-btn color="orange white--text">
+            <v-btn color="orange white--text" @click="$router.push('/login')">
               Login
             </v-btn> 
           </v-list-item-content>
