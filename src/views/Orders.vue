@@ -1,6 +1,7 @@
 <template>
     <div class="">
         <Navbar/>
+        <orderBox/>
         <Footer/>
         
     </div>    
@@ -10,12 +11,14 @@
 
 import Navbar from "../components/Navbar.vue";
 import Footer from "../components/Footer.vue";
+import orderBox from '../components/order_box.vue';
 
 export default {
     name: "Orders",  
     components:{
         Navbar,
-        Footer
+        Footer,
+        orderBox
     }  
 }
 </script>

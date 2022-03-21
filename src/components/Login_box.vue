@@ -11,9 +11,9 @@
                         <v-text-field outlined label="Password"></v-text-field>
                         <v-btn color="orange" width="100%" height="50px" class="white--text h3--text" style="font-size:19px">Login</v-btn>
                         <v-row>
-                            <v-btn plain color="blue" justify="start" class="px-4 my-6">Forgot Password</v-btn>
+                            <v-btn plain color="blue darken-3" justify="start" class="px-4 my-6">Forgot Password</v-btn>
                             <v-spacer></v-spacer>
-                            <v-btn plain color="blue" style="float:right" class="px-3 my-6" @click="$router.push('/register')">Register</v-btn>
+                            <v-btn plain color="blue darken-3" style="float:right" class="px-3 my-6" @click="$router.push('/register')">Register</v-btn>
                         </v-row>
                     </v-sheet>
                 </v-sheet>

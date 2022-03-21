@@ -120,6 +120,7 @@ export default{
         width: 70%;
         height: auto;
         margin: 30px auto;
+        margin-bottom: 250px;
         box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
         overflow: auto;
     }

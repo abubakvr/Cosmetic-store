@@ -65,10 +65,7 @@
         </v-btn>
       </template>
       <v-list width="250px">
-           <v-list-item-group
-        v-model="selectedItem"
-        color="primary"
-      >
+           <v-list-item-group color="primary">
         <v-list-item>
           <v-list-item-content>
             <v-btn color="orange white--text" @click="$router.push('/login')">
@@ -171,10 +168,6 @@
         drawer: false,
         group: null,
         selectedItem: 1,
-        items: [
-          { text: 'My Account', icon: 'mdi-account-circle-outline' },
-          { text: 'My Orders', icon: 'mdi-store-check-outline' },
-        ],
         }),
     }
 </script>

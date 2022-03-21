@@ -13,6 +13,8 @@ import Login from "./views/Login.vue";
 import Register from "./views/Register.vue";
 import Account from "./views/Account.vue";
 import Orders from "./views/Orders.vue";
+import Dashboard from "./views/Dashboard.vue";
+
 
 Vue.use(Router)
 
@@ -77,6 +79,11 @@ export default new Router({
             path: '/orders',
             name: 'Orders',
             component: Orders
+        },
+        {
+            path: '/dashboard',
+            name: 'Dashboard',
+            component: Dashboard
         },
     ]
 })
