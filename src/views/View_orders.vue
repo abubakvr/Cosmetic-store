@@ -1,8 +1,19 @@
 <template>
-    <div>
-        <h2 class="pa-3">Add Products</h2>
+    <div class="my-3">
+        <v-row class="pa-0">
+            <v-col cols="7">
+            <h2>Orders</h2>
+            </v-col>
+            <v-col cols="2">
+                <v-text-field :items="items" label="Search" ></v-text-field>
+            </v-col>
+            <v-col cols="2">
+                <v-select :items="items" label="Filter By"  ></v-select>
+            </v-col>
+            
+        </v-row>
         <v-row>
-            <v-col cols=11>
+            <v-col cols="11">
             <table class="styled-table">
                 <thead>
                     <tr>
@@ -74,17 +85,16 @@
     </div>
 </template>
 
-
 <script>
 export default {
-    name:"AddProducts"
+    name: "ViewOrders",
 }
 </script>
 
 <style scoped>
 .styled-table {
     border-collapse: collapse;
-    margin: 25px 0;
+    margin: 5px 0;
     font-size: 14px;
     font-family: sans-serif;
     width: 100%;
@@ -112,5 +122,4 @@ export default {
 .styled-table tbody tr:last-of-type {
     border-bottom: 2px solid #333333;
 }
-
 </style>

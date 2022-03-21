@@ -14,6 +14,10 @@ import Register from "./views/Register.vue";
 import Account from "./views/Account.vue";
 import Orders from "./views/Orders.vue";
 import Dashboard from "./views/Dashboard.vue";
+import ViewOrders from "./views/View_orders.vue";
+import RemoveProducts from "./views/Remove_products.vue";
+import AddProducts from "./views/Add_products.vue";
+import ManageUsers from "./views/Manage_users.vue";
 
 
 Vue.use(Router)
@@ -83,7 +87,39 @@ export default new Router({
         {
             path: '/dashboard',
             name: 'Dashboard',
-            component: Dashboard
+            component: Dashboard,
+            children: [
+                {
+                  // UserProfile will be rendered inside User's <router-view>
+                  // when /user/:id/profile is matched
+                  path: '',
+                  component: ViewOrders,
+                },
+                {
+                  // UserPosts will be rendered inside User's <router-view>
+                  // when /user/:id/posts is matched
+                  path: 'orders',
+                  component: ViewOrders,
+                },
+                {
+                    // UserProfile will be rendered inside User's <router-view>
+                    // when /user/:id/profile is matched
+                    path: 'removeproducts',
+                    component: RemoveProducts,
+                },
+                {
+                    // UserPosts will be rendered inside User's <router-view>
+                    // when /user/:id/posts is matched
+                    path: 'addproducts',
+                    component: AddProducts,
+                },
+                {
+                    // UserProfile will be rendered inside User's <router-view>
+                    // when /user/:id/profile is matched
+                    path: 'manageusers',
+                    component: ManageUsers,
+                }
+              ],
         },
     ]
 })
