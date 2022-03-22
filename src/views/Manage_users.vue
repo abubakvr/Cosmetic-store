@@ -1,128 +1,120 @@
 <template>
-    <div>
-        <h2 class="pa-3">Manage Users</h2>
-        <v-row>
-         <v-col cols="3">
-            <v-card
-                color="#385F73"
-                dark
-                >
-                <v-card-title class="text-h5">
-                    Unlimited music now
-                </v-card-title>
-
-                <v-card-subtitle>Listen to your favorite artists and albums whenever and wherever, online and offline.</v-card-subtitle>
-
-                <v-card-actions>
-                    <v-btn text>
-                    Listen Now
-                    </v-btn>
-                </v-card-actions>
-            </v-card>
-         </v-col>
-         <v-col cols="3">
-            <v-card
-                color="#385F73"
-                dark
-                >
-                <v-card-title class="text-h5">
-                    Unlimited music now
-                </v-card-title>
-
-                <v-card-subtitle>Listen to your favorite artists and albums whenever and wherever, online and offline.</v-card-subtitle>
-
-                <v-card-actions>
-                    <v-btn text>
-                    Listen Now
-                    </v-btn>
-                </v-card-actions>
-            </v-card>
-         </v-col>
-         <v-col cols="3">
-            <v-card
-                color="#385F73"
-                dark
-                >
-                <v-card-title class="text-h5">
-                    Unlimited music now
-                </v-card-title>
-
-                <v-card-subtitle>Listen to your favorite artists and albums whenever and wherever, online and offline.</v-card-subtitle>
-
-                <v-card-actions>
-                    <v-btn text>
-                    Listen Now
-                    </v-btn>
-                </v-card-actions>
-            </v-card>
-         </v-col>
+    <div class="my-3">
+        <v-row class="pa-0">
+            <v-col cols="7">
+            <h2>Manage Users</h2>
+            </v-col>
+            <v-col cols="2">
+                <v-text-field :items="items" label="Search" ></v-text-field>
+            </v-col>
+            <v-col cols="2">
+                <v-select :items="items" label="Filter By"  ></v-select>
+            </v-col>
+            
         </v-row>
         <v-row>
-         <v-col cols="3">
-            <v-card
-                color="#385F73"
-                dark
-                >
-                <v-card-title class="text-h5">
-                    Unlimited music now
-                </v-card-title>
-
-                <v-card-subtitle>Listen to your favorite artists and albums whenever and wherever, online and offline.</v-card-subtitle>
-
-                <v-card-actions>
-                    <v-btn text>
-                    Listen Now
-                    </v-btn>
-                </v-card-actions>
-            </v-card>
-         </v-col>
-         <v-col cols="3">
-            <v-card
-                color="#385F73"
-                dark
-                >
-                <v-card-title class="text-h5">
-                    Unlimited music now
-                </v-card-title>
-
-                <v-card-subtitle>Listen to your favorite artists and albums whenever and wherever, online and offline.</v-card-subtitle>
-
-                <v-card-actions>
-                    <v-btn text>
-                    Listen Now
-                    </v-btn>
-                </v-card-actions>
-            </v-card>
-         </v-col>
-         <v-col cols="3">
-            <v-card
-                color="#385F73"
-                dark
-                >
-                <v-card-title class="text-h5">
-                    Unlimited music now
-                </v-card-title>
-
-                <v-card-subtitle>Listen to your favorite artists and albums whenever and wherever, online and offline.</v-card-subtitle>
-
-                <v-card-actions>
-                    <v-btn text>
-                    Listen Now
-                    </v-btn>
-                </v-card-actions>
-            </v-card>
-         </v-col>
+            <v-col cols="11">
+            <table class="styled-table">
+                <thead>
+                    <tr>
+                        <th>S/No</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Phone Number</th>
+                        <th>Email Address</th>
+                        <th>Country</th>
+                        <th>Gender</th>
+                        <th>Postal Code</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>11</td>
+                        <td>Abubakar</td>
+                        <td>Ibrahim</td>
+                        <td>909162222</td>
+                        <td>Boskitechh@gmail.com</td>
+                        <td>Boskitechh@gmail.com</td>
+                        <td>Boskitechh@gmail.com</td>
+                        <td>Boskitechh@gmail.com</td>
+                        <td><v-btn color="blue white--text">Block/Remove</v-btn></td>
+                    </tr>
+                    <tr>
+                        <td>11</td>
+                        <td>Abubakar</td>
+                        <td>Ibrahim</td>
+                        <td>909162222</td>
+                        <td>Boskitechh@gmail.com</td>
+                        <td>Boskitechh@gmail.com</td>
+                        <td>Boskitechh@gmail.com</td>
+                        <td>Boskitechh@gmail.com</td>
+                        <td><v-btn color="blue white--text">Block/Remove</v-btn></td>
+                    </tr>
+                    <tr>
+                        <td>11</td>
+                        <td>Abubakar</td>
+                        <td>Ibrahim</td>
+                        <td>909162222</td>
+                        <td>Boskitechh@gmail.com</td>
+                        <td>Boskitechh@gmail.com</td>
+                        <td>Boskitechh@gmail.com</td>
+                        <td>Boskitechh@gmail.com</td>
+                        <td><v-btn color="blue white--text">Block/Remove</v-btn></td>
+                    </tr>
+                    <tr>
+                        <td>11</td>
+                        <td>Abubakar</td>
+                        <td>Ibrahim</td>
+                        <td>909162222</td>
+                        <td>Boskitechh@gmail.com</td>
+                        <td>Boskitechh@gmail.com</td>
+                        <td>Boskitechh@gmail.com</td>
+                        <td>Boskitechh@gmail.com</td>
+                        <td><v-btn color="blue white--text">Block/Remove</v-btn></td>
+                    </tr>
+                </tbody>
+            </table>
+        </v-col>
         </v-row>
-</div>
+    </div>
 </template>
-
 
 <script>
 export default {
-    name:"ManageUsers"
+    name: "ManageUsers",
 }
 </script>
 
 <style scoped>
+.styled-table {
+    border-collapse: collapse;
+    margin: 5px 0;
+    font-size: 14px;
+    font-family: sans-serif;
+    width: 100%;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.15);
+}
 
+.styled-table thead tr {
+    background-color: #333333;
+    color: #ffffff;
+    text-align: left;
+}
+
+.styled-table th, .styled-table td {
+    padding: 12px 15px;
+}
+
+.styled-table tbody tr {
+    border-bottom: 1px solid #dddddd;
+}
+
+.styled-table tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+}
+
+.styled-table tbody tr:last-of-type {
+    border-bottom: 2px solid #333333;
+}
 </style>

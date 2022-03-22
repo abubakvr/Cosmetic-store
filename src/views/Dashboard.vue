@@ -4,11 +4,7 @@
         <router-view></router-view>
     </v-container>
 
-    <v-navigation-drawer
-      absolute
-      permanent
-      left
-    >
+    <v-navigation-drawer absolute permanent left >
       <template v-slot:prepend>
         <v-list-item>
           <v-list-item-avatar>
@@ -40,7 +36,7 @@
           </v-list-item-icon>
 
           <v-list-item-content>
-            <v-list-item-title>Add Products</v-list-item-title>
+            <v-list-item-title>Register Products</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
         <v-list-item @click="$router.push('/dashboard/removeproducts')">
@@ -49,7 +45,7 @@
           </v-list-item-icon>
 
           <v-list-item-content>
-            <v-list-item-title>Delete Products</v-list-item-title>
+            <v-list-item-title>Manage Products</v-list-item-title>
           </v-list-item-content>
         </v-list-item >
         <v-list-item @click="$router.push('/dashboard/manageusers')">

@@ -17,7 +17,6 @@
             <table class="styled-table">
                 <thead>
                     <tr>
-                        <th>S/No</th>
                         <th>Order ID</th>
                         <th>Product ID</th>
                         <th>Product Name</th>
@@ -27,11 +26,11 @@
                         <th>Receiver Address</th>
                         <th>Receiver No.</th>
                         <th></th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td>11</td>
                         <td>Abubakar</td>
                         <td>Ibrahim</td>
                         <td>909162222</td>
@@ -40,10 +39,10 @@
                         <td>Boskitechh@gmail.com</td>
                         <td>Boskitechh@gmail.com</td>
                         <td>Boskitechh@gmail.com</td>
+                        <td><v-btn color="blue white--text">View</v-btn></td>
                         <td><v-btn color="green white--text">Uncompleted</v-btn></td>
                     </tr>
                     <tr>
-                        <td>11</td>
                         <td>Abubakar</td>
                         <td>Ibrahim</td>
                         <td>909162222</td>
@@ -52,10 +51,10 @@
                         <td>Boskitechh@gmail.com</td>
                         <td>Boskitechh@gmail.com</td>
                         <td>Boskitechh@gmail.com</td>
+                        <td><v-btn color="blue white--text">View</v-btn></td>
                         <td><v-btn color="green white--text">Uncompleted</v-btn></td>
                     </tr>
                     <tr>
-                        <td>11</td>
                         <td>Abubakar</td>
                         <td>Ibrahim</td>
                         <td>909162222</td>
@@ -64,10 +63,10 @@
                         <td>Boskitechh@gmail.com</td>
                         <td>Boskitechh@gmail.com</td>
                         <td>Boskitechh@gmail.com</td>
+                        <td><v-btn color="blue white--text">View</v-btn></td>
                         <td><v-btn color="green white--text">Uncompleted</v-btn></td>
                     </tr>
                     <tr>
-                        <td>11</td>
                         <td>Abubakar</td>
                         <td>Ibrahim</td>
                         <td>909162222</td>
@@ -76,6 +75,7 @@
                         <td>Boskitechh@gmail.com</td>
                         <td>Boskitechh@gmail.com</td>
                         <td>Boskitechh@gmail.com</td>
+                        <td><v-btn color="blue white--text small--text">View</v-btn></td>
                         <td><v-btn color="green white--text">Uncompleted</v-btn></td>
                     </tr>
                 </tbody>

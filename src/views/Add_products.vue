@@ -1,76 +1,54 @@
 <template>
-    <div>
-        <h2 class="pa-3">Add Products</h2>
+    <div class="my-3">
+        <h2>Register Product</h2>
         <v-row>
-            <v-col cols=11>
-            <table class="styled-table">
-                <thead>
-                    <tr>
-                        <th>S/No</th>
-                        <th>Order ID</th>
-                        <th>Product ID</th>
-                        <th>Product Name</th>
-                        <th>Date Ordered</th>
-                        <th>Delivery Date</th>
-                        <th>Receiver Name</th>
-                        <th>Receiver Address</th>
-                        <th>Receiver No.</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>11</td>
-                        <td>Abubakar</td>
-                        <td>Ibrahim</td>
-                        <td>909162222</td>
-                        <td>Boskitechh@gmail.com</td>
-                        <td>Boskitechh@gmail.com</td>
-                        <td>Boskitechh@gmail.com</td>
-                        <td>Boskitechh@gmail.com</td>
-                        <td>Boskitechh@gmail.com</td>
-                        <td><v-btn color="green white--text">Uncompleted</v-btn></td>
-                    </tr>
-                    <tr>
-                        <td>11</td>
-                        <td>Abubakar</td>
-                        <td>Ibrahim</td>
-                        <td>909162222</td>
-                        <td>Boskitechh@gmail.com</td>
-                        <td>Boskitechh@gmail.com</td>
-                        <td>Boskitechh@gmail.com</td>
-                        <td>Boskitechh@gmail.com</td>
-                        <td>Boskitechh@gmail.com</td>
-                        <td><v-btn color="green white--text">Uncompleted</v-btn></td>
-                    </tr>
-                    <tr>
-                        <td>11</td>
-                        <td>Abubakar</td>
-                        <td>Ibrahim</td>
-                        <td>909162222</td>
-                        <td>Boskitechh@gmail.com</td>
-                        <td>Boskitechh@gmail.com</td>
-                        <td>Boskitechh@gmail.com</td>
-                        <td>Boskitechh@gmail.com</td>
-                        <td>Boskitechh@gmail.com</td>
-                        <td><v-btn color="green white--text">Uncompleted</v-btn></td>
-                    </tr>
-                    <tr>
-                        <td>11</td>
-                        <td>Abubakar</td>
-                        <td>Ibrahim</td>
-                        <td>909162222</td>
-                        <td>Boskitechh@gmail.com</td>
-                        <td>Boskitechh@gmail.com</td>
-                        <td>Boskitechh@gmail.com</td>
-                        <td>Boskitechh@gmail.com</td>
-                        <td>Boskitechh@gmail.com</td>
-                        <td><v-btn color="green white--text">Uncompleted</v-btn></td>
-                    </tr>
-                </tbody>
-            </table>
-        </v-col>
+            <v-col cols="5">
+                <div class="mainbox pa-7">
+                    <v-row>
+                        <v-col cols="6">
+                            <v-text-field filled label="Product Name"></v-text-field>
+                        </v-col>    
+                        <v-col cols="6">
+                            <v-text-field filled label="Price"></v-text-field>
+                        </v-col>
+                    </v-row>
+                    <v-row>
+                        <v-col cols="6">
+                            <v-text-field filled label="Brand"></v-text-field>
+                        </v-col>    
+                        <v-col cols="6">
+                            <v-text-field filled label="Quantity"></v-text-field>
+                        </v-col>
+                    </v-row>
+                    <v-row>
+                        <v-col cols="6">
+                            <template>
+                                <v-file-input
+                                    label="Product Image"
+                                    filled
+                                    prepend-icon="mdi-camera"
+                                ></v-file-input>
+                            </template>
+                        </v-col>
+                        <v-col cols="6">
+                            <v-select filled label="Category"></v-select>
+                        </v-col>  
+                    </v-row>
+                    <v-row>
+                        <v-col cols="12">
+                            <v-textarea filled label="Description"></v-textarea>
+                        </v-col>
+                    </v-row>
+                    <v-row>
+                        <v-col cols="12">
+                            <v-btn align="right" style="float:right;" color="orange white--text">Register Product</v-btn>
+                        </v-col>
+                    </v-row>
+
+                </div>
+            </v-col>
         </v-row>
+        
     </div>
 </template>
 
@@ -82,35 +60,13 @@ export default {
 </script>
 
 <style scoped>
-.styled-table {
-    border-collapse: collapse;
-    margin: 25px 0;
-    font-size: 14px;
-    font-family: sans-serif;
-    width: 100%;
-    box-shadow: 0 0 4px rgba(0, 0, 0, 0.15);
-}
-
-.styled-table thead tr {
-    background-color: #333333;
-    color: #ffffff;
-    text-align: left;
-}
-
-.styled-table th, .styled-table td {
-    padding: 12px 15px;
-}
-
-.styled-table tbody tr {
-    border-bottom: 1px solid #dddddd;
-}
-
-.styled-table tbody tr:nth-of-type(even) {
-    background-color: #f3f3f3;
-}
-
-.styled-table tbody tr:last-of-type {
-    border-bottom: 2px solid #333333;
-}
-
+.mainbox{
+        width: 100%;
+        height: auto;
+        margin: 30px 0;
+        margin-bottom: 250px;
+        box-shadow: 0 0px 8px rgb(0 0 0 / 0.2);
+        overflow: none;
+        float: left;
+    }
 </style>
