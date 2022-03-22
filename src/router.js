@@ -15,7 +15,7 @@ import Account from "./views/Account.vue";
 import Orders from "./views/Orders.vue";
 import Dashboard from "./views/Dashboard.vue";
 import ViewOrders from "./views/View_orders.vue";
-import RemoveProducts from "./views/Remove_products.vue";
+import ManageProducts from "./views/Manage_products.vue";
 import AddProducts from "./views/Add_products.vue";
 import ManageUsers from "./views/Manage_users.vue";
 
@@ -104,8 +104,8 @@ export default new Router({
                 {
                     // UserProfile will be rendered inside User's <router-view>
                     // when /user/:id/profile is matched
-                    path: 'removeproducts',
-                    component: RemoveProducts,
+                    path: 'manageproducts',
+                    component: ManageProducts,
                 },
                 {
                     // UserPosts will be rendered inside User's <router-view>

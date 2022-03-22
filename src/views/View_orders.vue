@@ -39,8 +39,26 @@
                         <td>Boskitechh@gmail.com</td>
                         <td>Boskitechh@gmail.com</td>
                         <td>Boskitechh@gmail.com</td>
-                        <td><v-btn color="blue white--text">View</v-btn></td>
-                        <td><v-btn color="green white--text">Uncompleted</v-btn></td>
+                         <td>
+                        <v-tooltip top>
+                            <template v-slot:activator="{ on, attrs }">
+                                <v-btn fab small color="blue white--text" v-bind="attrs" v-on="on" >
+                                    <v-icon>mdi-view-list</v-icon>
+                                </v-btn>
+                            </template>
+                            <span>View Order</span>
+                        </v-tooltip>
+                        </td>
+                        <td>
+                        <v-tooltip top>
+                            <template v-slot:activator="{ on, attrs }">
+                                <v-btn fab small color="indigo white--text" v-bind="attrs" v-on="on" >
+                                    <v-icon>mdi-clock</v-icon>
+                                </v-btn>
+                            </template>
+                            <span>Completed</span>
+                        </v-tooltip>
+                        </td>
                     </tr>
                     <tr>
                         <td>Abubakar</td>
@@ -51,8 +69,26 @@
                         <td>Boskitechh@gmail.com</td>
                         <td>Boskitechh@gmail.com</td>
                         <td>Boskitechh@gmail.com</td>
-                        <td><v-btn color="blue white--text">View</v-btn></td>
-                        <td><v-btn color="green white--text">Uncompleted</v-btn></td>
+                        <td>
+                        <v-tooltip top>
+                            <template v-slot:activator="{ on, attrs }">
+                                <v-btn fab small color="blue white--text" v-bind="attrs" v-on="on" >
+                                    <v-icon>mdi-view-list</v-icon>
+                                </v-btn>
+                            </template>
+                            <span>View Order</span>
+                        </v-tooltip>
+                        </td>
+                        <td>
+                        <v-tooltip top>
+                            <template v-slot:activator="{ on, attrs }">
+                                <v-btn fab small color="green white--text" v-bind="attrs" v-on="on" >
+                                    <v-icon>mdi-clock-check</v-icon>
+                                </v-btn>
+                            </template>
+                            <span>Uncompleted</span>
+                        </v-tooltip>
+                        </td>
                     </tr>
                     <tr>
                         <td>Abubakar</td>
@@ -63,8 +99,26 @@
                         <td>Boskitechh@gmail.com</td>
                         <td>Boskitechh@gmail.com</td>
                         <td>Boskitechh@gmail.com</td>
-                        <td><v-btn color="blue white--text">View</v-btn></td>
-                        <td><v-btn color="green white--text">Uncompleted</v-btn></td>
+                        <td>
+                        <v-tooltip top>
+                            <template v-slot:activator="{ on, attrs }">
+                                <v-btn fab small color="blue white--text" v-bind="attrs" v-on="on" >
+                                    <v-icon>mdi-view-list</v-icon>
+                                </v-btn>
+                            </template>
+                            <span>View Order</span>
+                        </v-tooltip>
+                        </td>
+                        <td>
+                        <v-tooltip top>
+                            <template v-slot:activator="{ on, attrs }">
+                                <v-btn fab small color="indigo white--text" v-bind="attrs" v-on="on" >
+                                    <v-icon>mdi-clock</v-icon>
+                                </v-btn>
+                            </template>
+                            <span>Uncompleted</span>
+                        </v-tooltip>
+                        </td>
                     </tr>
                     <tr>
                         <td>Abubakar</td>
@@ -75,8 +129,26 @@
                         <td>Boskitechh@gmail.com</td>
                         <td>Boskitechh@gmail.com</td>
                         <td>Boskitechh@gmail.com</td>
-                        <td><v-btn color="blue white--text small--text">View</v-btn></td>
-                        <td><v-btn color="green white--text">Uncompleted</v-btn></td>
+                         <td>
+                        <v-tooltip top>
+                            <template v-slot:activator="{ on, attrs }">
+                                <v-btn fab small color="blue white--text" v-bind="attrs" v-on="on" >
+                                    <v-icon>mdi-view-list</v-icon>
+                                </v-btn>
+                            </template>
+                            <span>View Order</span>
+                        </v-tooltip>
+                        </td>
+                        <td>
+                        <v-tooltip top>
+                            <template v-slot:activator="{ on, attrs }">
+                                <v-btn fab small color="indigo white--text" v-bind="attrs" v-on="on" >
+                                    <v-icon>mdi-clock</v-icon>
+                                </v-btn>
+                            </template>
+                            <span>Uncompleted</span>
+                        </v-tooltip>
+                        </td>
                     </tr>
                 </tbody>
             </table>

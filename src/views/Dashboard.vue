@@ -39,7 +39,7 @@
             <v-list-item-title>Register Products</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
-        <v-list-item @click="$router.push('/dashboard/removeproducts')">
+        <v-list-item @click="$router.push('/dashboard/manageproducts')">
           <v-list-item-icon>
             <v-icon>mdi-card-minus</v-icon>
           </v-list-item-icon>
