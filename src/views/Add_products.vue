@@ -31,7 +31,7 @@
                             </template>
                         </v-col>
                         <v-col cols="6">
-                            <v-select filled label="Category"></v-select>
+                            <v-select :items="items" filled label="Category"></v-select>
                         </v-col>  
                     </v-row>
                     <v-row>
@@ -55,7 +55,12 @@
 
 <script>
 export default {
-    name:"AddProducts"
+    name:"AddProducts",
+    data(){
+        return{
+            items:["Face", "Lips", "Eyes", "Body"],
+        }
+    }
 }
 </script>
 

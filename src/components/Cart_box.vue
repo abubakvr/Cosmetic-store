@@ -1,13 +1,13 @@
 <template>
-<div class="cart_items">
+    <div class="cart_items">
         <div class="mainBox">
             <div class="box_header">
                 <p>Cart Items</p>
             </div>
             <div class="box_content">
-                    <div class="cart_checkbox">
-                        <v-checkbox label="Select All" color="orange black--text"></v-checkbox>
-                    </div>
+                <div class="cart_checkbox">
+                    <v-checkbox label="Select All" color="orange black--text" value="1,200" @click="addToSummary()"></v-checkbox>
+                </div>
                 <div class="buy_item">
                     <div class="cart_checkbox">
                         <v-checkbox color="orange"></v-checkbox>
@@ -16,7 +16,7 @@
                         <img src="../assets/img/Beautiful-woman-face-makeup-artist-applies-eyeshadow-Stock-Photo-02.png">
                     </div>
                     <div class="def_side">
-                        <span style="font-size: 15px">Black Powder Pencil with abity draw itself on demand</span>
+                        <span style="font-size: 15px">Black Powder Pencil with abity draw itself on demand pencil with abity draw itself on demand</span>
                         <hr style="border-bottom: 1px  solid #dfdfdf; border-top:-0px; margin-top:7px">
                             <span style="font-size: 20px; margin-top:15px" ><b>₦16,000</b></span>
                             <br>
@@ -28,18 +28,16 @@
 
                         <div class="choose_option">
                             <v-row>
-                                <p>
-                                <v-btn icon small dark color="white" style="background-color:#555555">
-                                    <v-icon>mdi-plus</v-icon>
-                                </v-btn>
-                                15
-                                <v-btn icon small dark color="white" style="background-color:#555555">
+                                <v-btn icon small dark color="white" style="background-color:#555555" @click="minusFunc()" :disabled="quantity == 1">
                                     <v-icon>mdi-minus</v-icon>
+                                </v-btn>
+                                {{quantity}}
+                                <v-btn icon small dark color="white" style="background-color:#555555" @click="plusFunc()" >
+                                    <v-icon>mdi-plus</v-icon>
                                 </v-btn>  
                                 <span class="btn-buy">
                                     <v-btn color="orange white--text">Buy Now</v-btn>
                                 </span>
-                                </p>
                             </v-row>
                         </div>
                     </div>
@@ -64,18 +62,16 @@
 
                         <div class="choose_option">
                             <v-row>
-                                <p>
-                                <v-btn icon small dark color="white" style="background-color:#555555">
-                                    <v-icon>mdi-plus</v-icon>
-                                </v-btn>
-                                15
-                                <v-btn icon small dark color="white" style="background-color:#555555">
+                                <v-btn icon small dark color="white" style="background-color:#555555" @click="minusFunc()" :disabled="quantity == 1">
                                     <v-icon>mdi-minus</v-icon>
+                                </v-btn>
+                                {{quantity}}
+                                <v-btn icon small dark color="white" style="background-color:#555555" @click="plusFunc()">
+                                    <v-icon>mdi-plus</v-icon>
                                 </v-btn>  
                                 <span class="btn-buy">
                                     <v-btn color="orange white--text">Buy Now</v-btn>
                                 </span>
-                                </p>
                             </v-row>
                         </div>
                     </div>
@@ -100,21 +96,28 @@
 
                         <div class="choose_option">
                             <v-row>
-                                <p>
-                                <v-btn icon small dark color="white" style="background-color:#555555">
-                                    <v-icon>mdi-plus</v-icon>
-                                </v-btn>
-                                15
-                                <v-btn icon small dark color="white" style="background-color:#555555">
+                                <v-btn icon small dark color="white" style="background-color:#555555" @click="minusFunc()" :disabled="quantity == 1">
                                     <v-icon>mdi-minus</v-icon>
+                                </v-btn>
+                                {{quantity}}
+                                <v-btn icon small dark color="white" style="background-color:#555555" @click="plusFunc()">
+                                    <v-icon>mdi-plus</v-icon>
                                 </v-btn>  
                                 <span class="btn-buy">
                                     <v-btn color="orange white--text">Buy Now</v-btn>
                                 </span>
-                                </p>
                             </v-row>
                         </div>
                     </div>
+                </div>
+                <div class="buy_item">
+                    <div class="user" v-for="user in items" :key="user.id">
+                        <p>{{ user.name }}</p>
+                        <p>{{ user.age }}</p>
+                        <!-- Set the checkbox value to `user.id` and bind the model to your array -->
+                        <input type="checkbox" :value="user.id" v-model="userIds" @change="getUserId()"/>
+                    </div>
+                    <v-btn @click="getUserId()">Get user id</v-btn>
                 </div>
             </div>
         </div>  
@@ -126,11 +129,9 @@
                 <p style="font-size: 15px;" >Subtotal: <span style="float:right" >N0.00</span></p>
                 <p style="font-size: 15px;" >Shipping: <span style="float:right" >N0.00</span></p>
                 <br>
-
                 <p style="font-size: 20px;" >Total: <span style="float: right" >N0.00</span></p>
                 <v-btn color="orange white--text" width="100%">Buy</v-btn>
             </div>
-
         </div>
     </div>
 </template>
@@ -140,9 +141,26 @@
 
 export default {
     name: 'CartBox',
-    components: {
+    data(){
+        return{
+            quantity:1,
+            items: [{"id":1,"name":"Alex","age":23},{"id":2,"name":"Robert","age":33},{"id":3,"name":"Jacob","age":55}],
+            userIds: [] // start with an empty array
+        }
+    },
+    methods:{
+        plusFunc(){
+            this.quantity++
+        },
 
-    }
+        minusFunc(){
+            this.quantity--
+        },
+
+       getUserId() {
+            console.log("userIds", this.userIds)
+        },
+    },
 }
 </script>
 
@@ -327,8 +345,7 @@ export default {
         
     }
 
-
-      @media only screen and (max-width: 700px) {
+    @media only screen and (max-width: 700px) {
         .cart_items{
             width: 95%;
             margin: auto;
@@ -401,6 +418,5 @@ export default {
             float: right;
             margin-left: 0px;
         }
-
     }
 </style>
