@@ -8,7 +8,24 @@
                         <v-spacer></v-spacer>
                     </v-toolbar>
                     <v-sheet class="pa-8">
-                       
+                         <div class="todos">
+                            <div 
+                            class="todo" v-for="product in allProducts" 
+                            :key="product._id"
+                            >
+                            {{ product.productName }}
+                            {{ product._id }}
+                            </div>
+                        </div>
+                        <div class="todos">
+                            <div 
+                            class="todo" v-for="product in oneProduct" 
+                            :key="product._id"
+                            >This is one fetch
+                            {{ product.productName }}
+                            {{ product._id }}
+                            </div>
+                        </div>
                     </v-sheet>
                 </v-sheet>
             </v-row>
@@ -17,11 +34,40 @@
 </template>
 
 <script>
+import { mapGetters, mapActions } from 'vuex';
+
 export default {
     name: "orderBox",
+    data(){
+        return{
+            id: ``
+        }
+    },
+    methods:{
+        ...mapActions(['fetchProducts']),
+    },
+    computed: mapGetters(['allProducts', 'oneProduct']),
+    created(){
+        this.fetchProducts()
+        this.fetchOneProduct(`623f79e56febd0e24b03c9ed`)
+    }
 }
 </script>
 
 <style scoped>
+    .todos{
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-gap: 1em;
+    }
 
+    .todo{
+        border: 1px solid #ccc;
+        background: #41b883;
+        padding: 1rem;
+        border-radius: 5px;
+        text-align: center;
+        position: relative;
+        cursor: pointer;
+    }
 </style>
