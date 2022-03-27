@@ -31,7 +31,7 @@ const actions = {
     },
 
     async fetchOneProduct({commit}, id){
-        const response =  await axios.get(`http://localhost:5200/api${id}`)
+        const response =  await axios.get(`http://localhost:5200/api/${id}`)
         commit('setProduct', response.data)
     },
 
@@ -41,7 +41,7 @@ const actions = {
     },
 
     async deleteProduct({commit}, id){
-        await axios.delete(`http://localhost:5200/api${id}`)
+        await axios.delete(`http://localhost:5200/api/${id}`)
         commit('removeProduct')
     },
     async updateProduct({ commit }, updateProduct){
