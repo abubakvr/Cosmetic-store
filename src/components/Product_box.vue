@@ -3,115 +3,56 @@
         <div class="box_header">
             <p>Shop All</p>
         </div>
-        <div class="productbox">
-            <div class="inBox" >
+        <!-- <div class="productbox">
+            <div class="inBox">
                 <div @click="$router.push('/viewitem')">
-                    <img src="../assets/img/favpng_pencil-eye-liner-color-black.png">
+                    <img src="../assets/img/78aaf2734c731e2b8231ae6f65a7ef39.jpg">
                     <br>
                     <br>
-                    <p>Black Powder Pencil with abity draw itself on demand
-                    <br><b>$150</b>
-                    <br>150 orders</p>
+                    <h4 style="height:45px">Black Powder Pencil with abity draw itself on demand</h4>
+                    <hr style="border-bottom: 1px  solid #dfdfdf; border-top:-0px; margin-top:14px">
+                    <h3>$150</h3>
+                    <hr style="border-bottom: 1px  solid #dfdfdf; border-top:-0px; margin-top:7px">
+                    <p>150 available</p>
                 </div>
+                <v-btn outlined color="orange" width="100%" style="z-index:999" @click="$router.push('/dashboard')">Add to cart</v-btn>
             </div>
-        </div>
-        <div class="productbox">
-            <div class="inBox" @click="$router.push('/viewitem')">
-                <img src="../assets/img/kindpng_2387099.png">
-                <br>
-                <br>
-                <p>Black Powder Pencil with abity draw itself on demand
-                <br><b>$150</b>
-                <br>150 orders</p>
-            </div>
-        </div>
-        <div class="productbox">
-            <div class="inBox" @click="$router.push('/viewitem')">
-                <img src="../assets/img/pngwing.com.png">
-                <br>
-                <br>
-                <p>Black Powder Pencil with abity draw itself on demand
-                <br><b>$150</b>
-                <br>150 orders</p>
-            </div>
-        </div>
-        <div class="productbox">
-            <div class="inBox" >
-                <img src="../assets/img/kindpng_2386942.png">
-                <br>
-                <br>
-                <p>Black Powder Pencil with abity draw itself on demand
-                <br><b>$150</b>
-                <br>150 orders</p>
-            </div>
-        </div>
-        <div class="productbox">
-            <div class="inBox" >
-                <img src="../assets/img/—Pngtree—liquid foundation_5649017.png">
-                <br>
-                <br>
-                <p>Black Powder Pencil with abity draw itself on demand
-                <br><b>$150</b>
-                <br>150 orders</p>
-            </div>
-        </div>
-        <div class="productbox">
-            <div class="inBox" >
-                <img src="../assets/img/pngwing.com.png">
-                <br>
-                <br>
-                <p>Black Powder Pencil with abity draw itself on demand
-                <br><b>$150</b>
-                <br>150 orders</p>
-            </div>
-        </div>
-        <div class="productbox">
-            <div class="inBox" >
-                <img src="../assets/img/—Pngtree—liquid foundation_5649017.png">
-                <br>
-                <br>
-                <p>Black Powder Pencil with abity draw itself on demand
-                <br><b>$150</b>
-                <br>150 orders</p>
-                <v-btn color="orange white--text" class="cart-btn" id="cart-btn7" width="100%" style="display: none;">Add to cart</v-btn>
-            </div>
-        </div>
-        <div class="productbox">
-            <div class="inBox" >
-                <img src="../assets/img/kindpng_2387099.png">
-                <br>
-                <br>
-                <p>Black Powder Pencil with abity draw itself on demand
-                <br><b>$150</b>
-                <br>150 orders</p>
-            </div>
-        </div>
-        <div class="productbox">
-            <div class="inBox" >
-                <img src="../assets/img/favpng_pencil-eye-liner-color-black.png">
-                <br>
-                <br>
-                <p>Black Powder Pencil with abity draw itself on demand
-                <br><b>$150</b>
-                <br>150 orders</p>
-            </div>
-        </div>
-        <div class="productbox">
-            <div class="inBox" >
-                <img src="../assets/img/pngwing.com.png">
-                <br>
-                <br>
-                <p>Black Powder Pencil with abity draw itself on demand
-                <br><b>$150</b>
-                <br>150 orders</p>
+        </div> -->
+        <div class="productbox"  v-for="product in allProducts" :key="product._id">
+            <div class="inBox">
+                <div @click="$router.push('/viewitem')">
+                    <img :src="'http://localhost:5200' + product.productImage">
+                    <br>
+                    <br>
+                    <h4 style="height:45px">{{ product.productName }}</h4>
+                    <hr style="border-bottom: 1px  solid #dfdfdf; border-top:-0px; margin-top:14px">
+                    <h3>₦{{ product.productPrice }}</h3>
+                    <hr style="border-bottom: 1px  solid #dfdfdf; border-top:-0px; margin-top:7px">
+                    <p>{{ product.productQuantity}} available</p>
+                </div>
+                <v-btn outlined color="orange" width="100%" @click="$router.push('/dashboard')">Add to cart</v-btn>
             </div>
         </div>
     </div>
 </template>
 
 <script>
+import {mapActions, mapGetters } from 'vuex'
+
 export default{
         name:"ProductBox",
+        data(){
+            return{
+                
+            }
+        },
+        methods:{
+            ...mapActions(['fetchProducts'])
+        },
+        computed: mapGetters(['allProducts']),
+        mounted(){
+            this.fetchProducts()
+        }
     }
 </script>
 
@@ -141,7 +82,7 @@ export default{
         margin-bottom: 10px;
         margin-right: 0.1%;
         width: 19.9%;
-        height: 400px;
+        height: 450px;
         padding: 7px;
     }
 
@@ -156,7 +97,6 @@ export default{
         width: 100%;
         margin: auto;
         transition: transform .08s; /* Animation */
-
     }
     
     .cart-btn{
@@ -174,9 +114,8 @@ export default{
     }
 
     .productbox div img{
-        width: 75%;
+        width: 100%;
         height: 220px;
-        margin-left: 10%;
     }
 
     /*Media Display */

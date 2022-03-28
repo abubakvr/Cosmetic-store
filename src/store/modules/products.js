@@ -21,7 +21,6 @@ const mutations = {
         }
     },
     removeProduct: (state, id) => state.products = state.products.filter(product => product.id !== id),
-
 }
 
 const actions = {
