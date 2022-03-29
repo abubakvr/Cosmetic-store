@@ -55,7 +55,7 @@ export default new Router({
             component: Lips
         },
         {
-            path: '/viewitem',
+            path: '/viewitem/:id',
             name: 'ViewItem',
             component: ViewItem
         },

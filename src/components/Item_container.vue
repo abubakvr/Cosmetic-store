@@ -3,7 +3,7 @@
         <div class="mainBox">
             <div class="buy_item">
                 <div class="product_side">
-                    <img src="../assets/img/Beautiful-woman-face-makeup-artist-applies-eyeshadow-Stock-Photo-02.png">
+                    <img :src="'http://localhost:5200' + oneProduct.productImage">
                     <div class="share_div">
                         <span style="font-size: 17px">SHARE THIS PRODUCT</span><br>
                         <v-btn icon dark color="black">
@@ -15,13 +15,13 @@
                     </div>
                 </div>
                 <div class="def_side">
-                    <p style="font-size: 22px">Black Powder Pencil with abity draw itself on demand</p>
+                    <p style="font-size: 22px">{{oneProduct.productName }}</p>
                     <hr style="border-bottom: 1px  solid #dfdfdf; border-top:0px">
-                    <v-chip class="my-3 black--text" color="#dfdfdf"> Official Store</v-chip>
+                    <v-chip class="my-3 black--text" color="#dfdfdf">{{ oneProduct.productBrand }}</v-chip>
                     <div class="price_div">
                         <div class="price_content">
-                            <p style="font-size: 25px"><b>₦16,000</b></p>
-                            <p style="font-size: 14px; margin-top:-5px">18 orders</p>
+                            <p style="font-size: 25px"><b>₦{{ oneProduct.productPrice }}</b></p>
+                            <p style="font-size: 14px; margin-top:-5px">{{ oneProduct.productQuantity }} available</p>
                         </div>
                     </div>
                     <div class="choose_option">
@@ -50,6 +50,7 @@
                                 v-bind="attrs"
                                 class="cartButton"
                                 v-on="on"
+                                @click="addToCart()"
                                 >
                                 Add to cart
                                 </v-btn>
@@ -99,7 +100,7 @@
 </template>
 
 <script>
-
+import {mapActions, mapGetters} from 'vuex'
 
 export default {
     name: 'ItemContainer',
@@ -107,10 +108,13 @@ export default {
       return {
         dialog: false,
         quantity: 1,
-        minusBtn: false
+        minusBtn: false,
+        id: this.$route.params.id,
       }
     },
     methods: {
+        ...mapActions(['fetchOneProduct']),
+
         plusfunc(){
             this.quantity++;
         },
@@ -119,13 +123,14 @@ export default {
             this.quantity--;
         },
 
-        quantityfunc(){
-            if(this.quantity == 1){
-               return this.minusBtn = false;
-            }
-        }
+        addToCArt(){
+            
+        },
+
     },
+    computed:mapGetters(['oneProduct']),
     mounted(){
+        this.fetchOneProduct(this.id)
     }
 }
 

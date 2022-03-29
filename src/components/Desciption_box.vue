@@ -5,22 +5,7 @@
                 <p>Description</p>
             </div>
             <div class="box_content">
-
-            <h3> Advantages of NAGARAKU Eyelash Extensions:</h3>
-
-            <p>NAGARAKU's specially designed materials have three primary features: light, natural and soft.</p>
-
-            <p>Eyelashes remain unchanged for 12 months or longer.</p>
-
-            <p>Attached to foils paper, our eyelashextensions are convenient to pick up and transfer, and not easy to deform or break.</p>
-
-            <p>With solid packaging, eyelashes bear no damage during transportation.</p>
-
-            <p>We are manufacturetherefore we secure the fastest delivery and most favorable price.</p>
-
-            <p>ertified by MSDS and SDS, NAGARAKU eyelashes are handmade in whole, which it cruelty free. We use environment-friendly materials only.</p>
-
-            <p>Bulk price and customized label are negotiable.</p>
+                <p>{{oneProduct.productDescription}}</p>
             </div>
        </div>
     </div>    
@@ -28,9 +13,31 @@
 
 <script>
 
+import{ mapActions, mapGetters } from 'vuex'
 
 export default {
     name: 'DescriptionBox',
+    data(){
+        return{
+            id: this.$route.params.id,
+        }
+    },
+    methods: {
+        ...mapActions(['fetchOneProduct']),
+
+        plusfunc(){
+            this.quantity++;
+        },
+
+        minusfunc(){
+            this.quantity--;
+        },
+
+    },
+    computed:mapGetters(['oneProduct']),
+    mounted(){
+        this.fetchOneProduct(this.id)
+    }
 }
 
 </script>
@@ -42,7 +49,8 @@ export default {
         height: auto;
         margin: 30px auto;
         box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
-        margin-top: 50px;
+        margin-top: 0px;
+        margin-bottom: 250px;
     }
 
     .box_header{
