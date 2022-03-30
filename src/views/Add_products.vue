@@ -88,12 +88,11 @@ export default {
             formData.append('productImage', this.product.image)
             formData.append('meta', JSON.stringify(meta))
         
-            axios.post('http://localhost:5200/api',formData, {}).
+            axios.post('http://localhost:5200/api/product/',formData, {}).
                 then((res) => console.log(res))
                 .catch(err => console.log(err));
 
             }
-            
     }
 }
 </script>

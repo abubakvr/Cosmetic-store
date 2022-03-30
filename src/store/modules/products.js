@@ -25,26 +25,26 @@ const mutations = {
 
 const actions = {
     async fetchProducts({commit}){
-        const response = await axios.get('http://localhost:5200/api');
+        const response = await axios.get('http://localhost:5200/api/product');
         commit('setProducts', response.data)
     },
 
     async fetchOneProduct({commit}, id){
-        const response =  await axios.get(`http://localhost:5200/api/${id}`)
+        const response =  await axios.get(`http://localhost:5200/api/product/${id}`)
         commit('setProduct', response.data)
     },
 
     async addProducts({commit}, payload){
-        const response = await axios.post('http://localhost:5200/api', {payload, completed: false});
+        const response = await axios.post('http://localhost:5200/api/product/', {payload, completed: false});
         commit('newProduct', response.data)
     },
 
     async deleteProduct({commit}, id){
-        await axios.delete(`http://localhost:5200/api/${id}`)
+        await axios.delete(`http://localhost:5200/api/product${id}`)
         commit('removeProduct')
     },
     async updateProduct({ commit }, updateProduct){
-        const response =  await axios.put(`http://localhost:5200/api/${updateProduct.id}`, updateProduct);
+        const response =  await axios.put(`http://localhost:5200/api/product/${updateProduct.id}`, updateProduct);
         commit('updateTodo', response.data)
     }
 }
