@@ -18,12 +18,12 @@ import ViewOrders from "./views/View_orders.vue";
 import ManageProducts from "./views/Manage_products.vue";
 import AddProducts from "./views/Add_products.vue";
 import ManageUsers from "./views/Manage_users.vue";
+import store from "./store/index";
 
 
 Vue.use(Router)
 
-export default new Router({
-    routes: [
+const routes = [
         {
             path: '/',
             name: 'Home',
@@ -62,7 +62,10 @@ export default new Router({
         {
             path: '/cart',
             name: 'Cart',
-            component: Cart
+            component: Cart,
+            meta: {
+                requiresAuth: true
+            }
         },
         {
             path: '/login',
@@ -77,48 +80,59 @@ export default new Router({
         {
             path: '/account',
             name: 'Account',
-            component: Account
+            component: Account,
+            meta: {
+                requiresAuth: true
+            }
         },
         {
             path: '/orders',
             name: 'Orders',
-            component: Orders
+            component: Orders,
+            meta: {
+                requiresAuth: true
+            }
         },
         {
             path: '/dashboard',
             component: Dashboard,
             children: [
                 {
-                  // UserProfile will be rendered inside User's <router-view>
-                  // when /user/:id/profile is matched
                   path: '',
                   component: ViewOrders,
                 },
                 {
-                  // UserPosts will be rendered inside User's <router-view>
-                  // when /user/:id/posts is matched
                   path: 'orders',
                   component: ViewOrders,
                 },
                 {
-                    // UserProfile will be rendered inside User's <router-view>
-                    // when /user/:id/profile is matched
                     path: 'manageproducts',
                     component: ManageProducts,
                 },
                 {
-                    // UserPosts will be rendered inside User's <router-view>
-                    // when /user/:id/posts is matched
                     path: 'addproducts',
                     component: AddProducts,
                 },
                 {
-                    // UserProfile will be rendered inside User's <router-view>
-                    // when /user/:id/profile is matched
                     path: 'manageusers',
                     component: ManageUsers,
                 }
               ],
         },
     ]
+
+const router = new Router({
+    routes
 })
+
+router.beforeEach((to, from, next) => {
+    const requiresAuth = to.matched.some((record) => record.meta.requiresAuth);
+  
+    if (requiresAuth && !store.state.user.token) {
+      next("/login");
+    } else {
+      next();
+    }
+});
+
+export default router

@@ -16,13 +16,15 @@
                     <hr style="border-bottom: 1px  solid #dfdfdf; border-top:-0px; margin-top:7px">
                     <p>{{ product.productQuantity}} available</p>
                 </div>
-                <v-btn outlined color="orange" width="100%" @click="$router.push('/dashboard')">Add to cart</v-btn>
+                <v-btn outlined color="orange" width="100%" @click="addToCart(product)">Add to cart</v-btn>
             </div>
         </div>
     </div>
 </template>
 
 <script>
+import axios from "axios";
+
 import {mapActions, mapGetters } from 'vuex'
 
 export default{
@@ -33,9 +35,26 @@ export default{
             }
         },
         methods:{
-            ...mapActions(['fetchProducts'])
+            ...mapActions(['fetchProducts']),
+            addToCart(product){
+                const meta = {
+                    userID: this.getId,
+                    itemID: product. _id,
+                    cartItemName: product.productName,
+                    cartItemPrice: product.productPrice,
+                    cartItemQuantity: 1,
+                    cartItemImage: product.productImage
+                }
+
+                axios.post('http://localhost:5200/api/cart/',meta, {}).
+                    then(this.$router.push('/cart'))
+                    .catch(err => console.log(err));
+
+
+                // this.$store.dispatch("signUp", meta);
+            }
         },
-        computed: mapGetters(['allProducts']),
+        computed: mapGetters(['allProducts', 'getId']),
         mounted(){
             this.fetchProducts()
         }

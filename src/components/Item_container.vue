@@ -25,7 +25,7 @@
                         </div>
                     </div>
                     <div class="choose_option">
-                        <p style="font-size: 14px; margin-top:10px">Shipping ₦1,200</p>
+                        <p style="font-size: 14px; margin-top:10px">Shipping ₦1,200-------ID is {{ getId }}</p>
                         <hr style="border-bottom: 1px  solid #dfdfdf; border-top:0px">
                         <p style="font-size: 17px; margin-top:10px">Quantity</p>
                         <v-btn icon small dark color="white" style="background-color:#444444" @click="minusfunc()" :disabled="quantity == 1">
@@ -50,7 +50,7 @@
                                 v-bind="attrs"
                                 class="cartButton"
                                 v-on="on"
-                                @click="addToCart()"
+                                @click="addToCart(oneProduct)"
                                 >
                                 Add to cart
                                 </v-btn>
@@ -100,6 +100,8 @@
 </template>
 
 <script>
+import axios from 'axios'
+
 import {mapActions, mapGetters} from 'vuex'
 
 export default {
@@ -123,12 +125,24 @@ export default {
             this.quantity--;
         },
 
-        addToCArt(){
-            
-        },
+        addToCart(product){
+                const meta = {
+                    userID: this.getId,
+                    itemID: product. _id,
+                    cartItemName: product.productName,
+                    cartItemPrice: product.productPrice,
+                    cartItemQuantity: this.quantity,
+                    cartItemImage: product.productImage
+                }
+
+                axios.post('http://localhost:5200/api/cart/',meta, {})
+
+
+                // this.$store.dispatch("signUp", meta);
+            }
 
     },
-    computed:mapGetters(['oneProduct']),
+    computed:mapGetters(['oneProduct', 'getId']),
     mounted(){
         this.fetchOneProduct(this.id)
     }

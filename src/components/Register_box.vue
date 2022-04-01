@@ -9,20 +9,19 @@
                     <v-sheet class="pa-10">
                         <v-row>
                             <v-col cols="6">
-                                <v-text-field outlined label="Firstname"></v-text-field>
-                                <v-text-field outlined label="Email"></v-text-field><v-spacer></v-spacer>
-                                <v-text-field outlined label="Country"></v-text-field>
-                                <v-text-field outlined label="Password"></v-text-field><v-spacer></v-spacer>
+                                <v-text-field v-model="firstname" outlined label="Firstname"></v-text-field>
+                                <v-text-field v-model="email" outlined label="Email"></v-text-field><v-spacer></v-spacer>
+                                <v-select v-model="gender" :items="genderItems" outlined label="Gender"></v-select>
                             </v-col>
                             <v-col cols="6">
-                                <v-text-field outlined label="Lastname"></v-text-field>
-                                <v-text-field outlined label="Username"></v-text-field>
-                                <v-select outlined label="Gender"></v-select>
-                                <v-text-field outlined label="Confirm Password"></v-text-field>
+                                <v-text-field v-model="lastname" outlined label="Lastname"></v-text-field>
+                                <v-text-field v-model="country" outlined label="Country"></v-text-field>
+                                <v-text-field v-model="password" outlined label="Password"></v-text-field><v-spacer></v-spacer>
+                                <v-text-field v-model="confPass" outlined label="Confirm Password"></v-text-field>
                             </v-col>
                         </v-row>
                         <v-row>
-                        <v-btn color="orange" width="100%" height="50px" class="white--text h3--text" style="font-size:19px" >Register</v-btn>
+                        <v-btn color="orange" width="100%" height="50px" class="white--text h3--text" style="font-size:19px" @click="submit()">Register</v-btn>
                         </v-row>
                         <v-row>
                             <v-btn plain color="blue" justify="start" class="px-0 my-2" @click="$router.push('/login')">Already have an account? Login</v-btn>
@@ -35,9 +34,42 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
     name: "registerBox",
-}
+    data(){
+        return{
+            firstname:'',
+            lastname: '',
+            email:'',
+            country:'',
+            genderItems:['Male', 'Female'],
+            gender:'',
+            password:'',
+            confPass:'',
+        }
+    },
+    methods:{
+        submit(){
+            const meta = {
+                firstname: this.firstname,
+                lastname: this.lastname,
+                country: this.country,
+                email:this.email,
+                gender: this.gender,
+                password:this.password
+            }
+
+            axios.post('http://localhost:5200/api/users/register/',meta, {}).
+                then(this.$router.push('/login'))
+                .catch(err => console.log(err));
+
+
+            // this.$store.dispatch("signUp", meta);
+            }
+        }
+    }
 </script>
 
 <style scoped>

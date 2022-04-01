@@ -66,7 +66,7 @@
       </template>
       <v-list width="250px">
            <v-list-item-group color="primary">
-        <v-list-item>
+        <v-list-item v-if="loginBtn">
           <v-list-item-content>
             <v-btn color="orange white--text" @click="$router.push('/login')">
               Login
@@ -165,10 +165,22 @@
     export default{
         name: 'Navbar',
         data: () => ({
-        drawer: false,
-        group: null,
-        selectedItem: 1,
+          drawer: false,
+          group: null,
+          selectedItem: 1,
+          chkToken: localStorage.getItem('token'),
+          loginBtn: false
         }),
+        methods:{
+
+        },
+        mounted(){
+          if(this.chkToken){
+            return this.loginBtn = false
+          }else{
+            return this.loginBtn = true
+          }
+        }
     }
 </script>
 

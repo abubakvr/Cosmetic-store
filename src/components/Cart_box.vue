@@ -36,23 +36,23 @@
                                     <v-icon>mdi-plus</v-icon>
                                 </v-btn>  
                                 <span class="btn-buy">
-                                    <v-btn color="orange white--text">Buy Now</v-btn>
+                                    <v-btn color="orange white--text" >Buy Now</v-btn>
                                 </span>
                             </v-row>
                         </div>
                     </div>
                 </div>
-               <div class="buy_item">
+               <div class="buy_item" v-for="cartItem in getUserItems(getId)" :key="cartItem._id">
                     <div class="cart_checkbox">
                         <v-checkbox color="orange"></v-checkbox>
                     </div>
                     <div class="product_side">
-                        <img src="../assets/img/Beautiful-woman-face-makeup-artist-applies-eyeshadow-Stock-Photo-02.png">
+                        <img :src="'http://localhost:5200' + cartItem.cartItemImage">
                     </div>
                     <div class="def_side">
-                        <span style="font-size: 15px">Black Powder Pencil with abity draw itself on demand</span>
+                        <span style="font-size: 15px">{{cartItem.cartItemName}}</span>
                         <hr style="border-bottom: 1px  solid #dfdfdf; border-top:-0px; margin-top:7px">
-                            <span style="font-size: 20px; margin-top:15px" ><b>₦16,000</b></span>
+                            <span style="font-size: 20px; margin-top:15px" ><b>{{cartItem.cartItemPrice}}</b></span>
                             <br>
                             <span style="font-size: 12px; margin-top:10px" >18 available</span>
                             <br>
@@ -65,41 +65,7 @@
                                 <v-btn icon small dark color="white" style="background-color:#555555" @click="minusFunc()" :disabled="quantity == 1">
                                     <v-icon>mdi-minus</v-icon>
                                 </v-btn>
-                                {{quantity}}
-                                <v-btn icon small dark color="white" style="background-color:#555555" @click="plusFunc()">
-                                    <v-icon>mdi-plus</v-icon>
-                                </v-btn>  
-                                <span class="btn-buy">
-                                    <v-btn color="orange white--text">Buy Now</v-btn>
-                                </span>
-                            </v-row>
-                        </div>
-                    </div>
-                </div>
-                <div class="buy_item">
-                    <div class="cart_checkbox">
-                        <v-checkbox color="orange"></v-checkbox>
-                    </div>
-                    <div class="product_side">
-                        <img src="../assets/img/Beautiful-woman-face-makeup-artist-applies-eyeshadow-Stock-Photo-02.png">
-                    </div>
-                    <div class="def_side">
-                        <span style="font-size: 15px">Black Powder Pencil with abity draw itself on demand</span>
-                        <hr style="border-bottom: 1px  solid #dfdfdf; border-top:-0px; margin-top:7px">
-                            <span style="font-size: 20px; margin-top:15px" ><b>₦16,000</b></span>
-                            <br>
-                            <span style="font-size: 12px; margin-top:10px" >18 available</span>
-                            <br>
-                            <span style="font-size: 12px; margin-top:5px" >Shipping ₦1,200</span>
-                            <br>
-                            <br>
-
-                        <div class="choose_option">
-                            <v-row>
-                                <v-btn icon small dark color="white" style="background-color:#555555" @click="minusFunc()" :disabled="quantity == 1">
-                                    <v-icon>mdi-minus</v-icon>
-                                </v-btn>
-                                {{quantity}}
+                                {{cartItem.cartItemQuantity}}
                                 <v-btn icon small dark color="white" style="background-color:#555555" @click="plusFunc()">
                                     <v-icon>mdi-plus</v-icon>
                                 </v-btn>  
@@ -137,7 +103,7 @@
 </template>
 
 <script>
-
+import {mapActions, mapGetters } from 'vuex'
 
 export default {
     name: 'CartBox',
@@ -149,6 +115,7 @@ export default {
         }
     },
     methods:{
+        ...mapActions(['fetctCartItems']),
         plusFunc(){
             this.quantity++
         },
@@ -161,6 +128,10 @@ export default {
             console.log("userIds", this.userIds)
         },
     },
+    computed: mapGetters(['getUserItems', 'getId']),
+    mounted(){
+        this.fetctCartItems()
+    }
 }
 </script>
 
