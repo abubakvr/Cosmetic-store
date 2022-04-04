@@ -16,7 +16,7 @@ const getters = {
 
 const mutations = {
     setCart: (state, cart) => (state.cart = cart),
-    removeProduct: (state, id) => state.products = state.products.filter(product => product.id !== id),
+    removeFromCart: (state, id) => state.cart = state.cart.filter(item => item._id !== id),
 }
 
 const actions = {
@@ -25,35 +25,27 @@ const actions = {
         commit('setCart', response.data)
     },
 
-    async signUp(payload){
-        let data = {
-            firstname: payload.firstname,
-            lastname: payload.lastname,
-            email: payload.email,
-            password: payload.password,
-            country: payload.country,
-            gender: payload.gender
+    async addToCart({commit}, payload){
+        const data = {
+            userID: payload.userID,
+            itemID: payload. itemID,
+            cartItemName: payload.cartItemName,
+            cartItemPrice: payload.cartItemPrice,
+            itemShippingPrice: payload.itemShippingPrice,
+            cartItemQuantity: payload.cartItemQuantity,
+            cartItemImage: payload.cartItemImage
         }
-        await axios.post('http://localhost:5200/api/users/register/',data, {withCredentials:true})
-        .then((response) => {
-            if(response.data.message === 'success'){
-                router.push('/login')
-                .catch(error => {
-                    console.info(error.message)
-                });
-            }else{
-                console.log("Sign In Error")
-            }
-            
-        })
-        .catch((error) => {
-            console.log('Error>>> ', error)
-        });
+
+        await axios.post('http://localhost:5200/api/cart/', data, {})
+        .then(router.push('/cart'))
+        .catch(err => console.log(err));
+        commit('setCart')
+
     },
 
     async deleteFromCart({commit}, id){
         await axios.delete(`http://localhost:5200/api/cart/${id}`)
-        commit('removeFromCart')
+        commit('removeFromCart', id)
     },
 }
 

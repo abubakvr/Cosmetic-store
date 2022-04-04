@@ -3,7 +3,7 @@
         <div class="box_header">
             <p>Shop All</p>
         </div>
-        <div class="productbox"  v-for="product in allProducts" :key="product._id">
+        <div class="productbox"  v-for="product in allProducts" :key="product._id" style="cursor: pointer;">
             <div class="inBox">
                 <div @click="$router.push(`/viewitem/${product._id}`)" >
                     <img :src="'http://localhost:5200' + product.productImage">
@@ -42,6 +42,7 @@ export default{
                     itemID: product. _id,
                     cartItemName: product.productName,
                     cartItemPrice: product.productPrice,
+                    itemShippingPrice: product.productShipping,
                     cartItemQuantity: 1,
                     cartItemImage: product.productImage
                 }

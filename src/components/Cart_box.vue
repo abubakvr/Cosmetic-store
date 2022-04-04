@@ -6,57 +6,24 @@
             </div>
             <div class="box_content">
                 <div class="cart_checkbox">
-                    <v-checkbox label="Select All" color="orange black--text" value="1,200" @click="addToSummary()"></v-checkbox>
+                    <v-checkbox label="Select All" v-model="allItem" color="orange black--text" :value="getUserItems(getId)" @click="getAllPrice()"></v-checkbox>
                 </div>
-                <div class="buy_item">
+               <div class="buy_item" v-for="cartItem in getUserItems(getId)" :key="cartItem._id" >
                     <div class="cart_checkbox">
-                        <v-checkbox color="orange"></v-checkbox>
+                        <v-checkbox color="orange" ref="n" v-model="item" :value="cartItem" @change="getPrices()"></v-checkbox>
                     </div>
-                    <div class="product_side">
-                        <img src="../assets/img/Beautiful-woman-face-makeup-artist-applies-eyeshadow-Stock-Photo-02.png">
-                    </div>
-                    <div class="def_side">
-                        <span style="font-size: 15px">Black Powder Pencil with abity draw itself on demand pencil with abity draw itself on demand</span>
-                        <hr style="border-bottom: 1px  solid #dfdfdf; border-top:-0px; margin-top:7px">
-                            <span style="font-size: 20px; margin-top:15px" ><b>₦16,000</b></span>
-                            <br>
-                            <span style="font-size: 12px; margin-top:10px" >18 available</span>
-                            <br>
-                            <span style="font-size: 12px; margin-top:5px" >Shipping ₦1,200</span>
-                            <br>
-                            <br>
-
-                        <div class="choose_option">
-                            <v-row>
-                                <v-btn icon small dark color="white" style="background-color:#555555" @click="minusFunc()" :disabled="quantity == 1">
-                                    <v-icon>mdi-minus</v-icon>
-                                </v-btn>
-                                {{quantity}}
-                                <v-btn icon small dark color="white" style="background-color:#555555" @click="plusFunc()" >
-                                    <v-icon>mdi-plus</v-icon>
-                                </v-btn>  
-                                <span class="btn-buy">
-                                    <v-btn color="orange white--text" >Buy Now</v-btn>
-                                </span>
-                            </v-row>
-                        </div>
-                    </div>
-                </div>
-               <div class="buy_item" v-for="cartItem in getUserItems(getId)" :key="cartItem._id">
-                    <div class="cart_checkbox">
-                        <v-checkbox color="orange"></v-checkbox>
-                    </div>
-                    <div class="product_side">
-                        <img :src="'http://localhost:5200' + cartItem.cartItemImage">
+                    <div class="product_side" @click="$router.push(`/viewitem/${cartItem.itemID}`)">
+                        <img :src="'http://localhost:5200' + cartItem.cartItemImage" style="cursor: pointer;">
                     </div>
                     <div class="def_side">
                         <span style="font-size: 15px">{{cartItem.cartItemName}}</span>
+                        <v-btn fab small plain style="float:right; padding-bottom:15px" @click="removeItem(cartItem._id)"><v-icon>mdi-trash-can</v-icon></v-btn>
                         <hr style="border-bottom: 1px  solid #dfdfdf; border-top:-0px; margin-top:7px">
-                            <span style="font-size: 20px; margin-top:15px" ><b>{{cartItem.cartItemPrice}}</b></span>
+                            <span style="font-size: 20px; margin-top:15px" ><b>₦{{cartItem.cartItemPrice}}</b></span>
                             <br>
                             <span style="font-size: 12px; margin-top:10px" >18 available</span>
                             <br>
-                            <span style="font-size: 12px; margin-top:5px" >Shipping ₦1,200</span>
+                            <span style="font-size: 12px; margin-top:5px" >Shipping ₦{{cartItem.itemShippingPrice}}</span>
                             <br>
                             <br>
 
@@ -76,15 +43,6 @@
                         </div>
                     </div>
                 </div>
-                <div class="buy_item">
-                    <div class="user" v-for="user in items" :key="user.id">
-                        <p>{{ user.name }}</p>
-                        <p>{{ user.age }}</p>
-                        <!-- Set the checkbox value to `user.id` and bind the model to your array -->
-                        <input type="checkbox" :value="user.id" v-model="userIds" @change="getUserId()"/>
-                    </div>
-                    <v-btn @click="getUserId()">Get user id</v-btn>
-                </div>
             </div>
         </div>  
         <div class="order_summary">
@@ -92,11 +50,11 @@
                 <p>Order Summary</p>
             </div>
             <div class="box_content">
-                <p style="font-size: 15px;" >Subtotal: <span style="float:right" >N0.00</span></p>
-                <p style="font-size: 15px;" >Shipping: <span style="float:right" >N0.00</span></p>
+                <p style="font-size: 15px;" >Subtotal: <span style="float:right" >N{{subTotal}}</span></p>
+                <p style="font-size: 15px;" >Shipping: <span style="float:right" >N{{shipping}}</span></p>
                 <br>
-                <p style="font-size: 20px;" >Total: <span style="float: right" >N0.00</span></p>
-                <v-btn color="orange white--text" width="100%">Buy</v-btn>
+                <p style="font-size: 20px;" >Total: <span style="float: right" >N{{totalPrice}}</span></p>
+                <v-btn color="orange white--text" width="100%">Buy({{prods}})</v-btn>
             </div>
         </div>
     </div>
@@ -110,8 +68,13 @@ export default {
     data(){
         return{
             quantity:1,
-            items: [{"id":1,"name":"Alex","age":23},{"id":2,"name":"Robert","age":33},{"id":3,"name":"Jacob","age":55}],
-            userIds: [] // start with an empty array
+            item: [],
+            allItem:[],
+            prods:0,
+            subTotal:"0.00",
+            shipping: "0.00",
+            totalPrice:"0.00"
+            // 82522403296
         }
     },
     methods:{
@@ -123,12 +86,33 @@ export default {
         minusFunc(){
             this.quantity--
         },
+        getAllPrice(){
+            let  myprice = this.allItem.slice(0, -1);
+            this.subTotal = myprice.reduce((n, {cartItemPrice}) => n + parseFloat(cartItemPrice), 0);
+            this.shipping = myprice.reduce((n, {itemShippingPrice}) => n + parseFloat(itemShippingPrice), 0);
 
-       getUserId() {
-            console.log("userIds", this.userIds)
+            this.totalPrice = this.subTotal + this.shipping;
+
+            this.prods = myprice.length;
         },
+
+        getPrices() {
+            const price = this.item;
+            this.subTotal = price.reduce((n, {cartItemPrice}) => n + parseInt(cartItemPrice), 0);
+            this.shipping = price.reduce((n, {itemShippingPrice}) => n + parseInt(itemShippingPrice), 0);
+
+            this.totalPrice = this.subTotal + this.shipping;
+            this.prods = price.length;
+        },
+
+        removeItem(id){
+            this.$store.dispatch("deleteFromCart", id);
+        }
     },
-    computed: mapGetters(['getUserItems', 'getId']),
+    computed:{ 
+        ...mapGetters(['getUserItems', 'getId']),
+
+    },
     mounted(){
         this.fetctCartItems()
     }

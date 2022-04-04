@@ -24,11 +24,6 @@ const mutations = {
         state.token = null
         localStorage.clear()
     },
-    loginUser(state, userData) {
-        state.token = userData.token;
-        state.user = userData.user;
-        state.usr = userData.user;
-    }
 }
 
 const actions = {
@@ -56,7 +51,7 @@ const actions = {
             console.log('Error>>> ', error)
         });
     },
-    async signUp({ commit }, payload){
+    async signUp({commit}, payload){
         const data = {
             firstname: payload.firstname,
             lastname: payload.lastname,
@@ -74,7 +69,7 @@ const actions = {
                 });
             }else{
                 console.log("Sign In Error")
-                commit('stopSignUpLoader')
+                commit('setUsr')
         }
             
         })
