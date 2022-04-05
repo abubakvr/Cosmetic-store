@@ -8,16 +8,57 @@
                 <div class="cart_checkbox">
                     <v-checkbox label="Select All" v-model="allItem" color="orange black--text" :value="getUserItems(getId)" @click="getAllPrice()"></v-checkbox>
                 </div>
+                <v-dialog
+                    v-model="dialog"
+                    transition="dialog-top-transition"
+                    persistent
+                    :retain-focus="false"
+                    width="500"
+                >
+
+
+                    <v-card>
+                        <v-card-title class="text-h5 lighten-2 white--text" style="background-color:#222222">
+                        Warning
+                        </v-card-title>
+
+                        <v-card-text class="py-4">
+                            Are you sure you want to Delete this item?
+                        </v-card-text>
+
+                        <v-divider></v-divider>
+
+                        <v-card-actions>
+                        <v-spacer></v-spacer>
+                        <v-btn
+                            plain
+                            color="#141414 white--text"
+                            @click="confirmDelete()" 
+                        >
+                            Yes
+                        </v-btn>
+                        <v-btn
+                            plain
+                            color="#141414"
+                            @click="dialog = false"
+                        >
+                            No
+                        </v-btn>
+                        </v-card-actions>
+                    </v-card>
+                </v-dialog>
                <div class="buy_item" v-for="cartItem in getUserItems(getId)" :key="cartItem._id" >
                     <div class="cart_checkbox">
-                        <v-checkbox color="orange" ref="n" v-model="item" :value="cartItem" @change="getPrices()"></v-checkbox>
+                        <v-checkbox color="orange" v-model="item" :value="cartItem" @change="getPrices()"></v-checkbox>
                     </div>
                     <div class="product_side" @click="$router.push(`/viewitem/${cartItem.itemID}`)">
                         <img :src="'http://localhost:5200' + cartItem.cartItemImage" style="cursor: pointer;">
                     </div>
                     <div class="def_side">
                         <span style="font-size: 15px">{{cartItem.cartItemName}}</span>
-                        <v-btn fab small plain style="float:right; padding-bottom:15px" @click="removeItem(cartItem._id)"><v-icon>mdi-trash-can</v-icon></v-btn>
+                        <v-btn fab small plain style="float:right; padding-bottom:15px" @click="removeItem(cartItem._id)">
+                            <v-icon>mdi-trash-can</v-icon>
+                        </v-btn>
                         <hr style="border-bottom: 1px  solid #dfdfdf; border-top:-0px; margin-top:7px">
                             <span style="font-size: 20px; margin-top:15px" ><b>₦{{cartItem.cartItemPrice}}</b></span>
                             <br>
@@ -41,6 +82,7 @@
                                 </span>
                             </v-row>
                         </div>
+                        
                     </div>
                 </div>
             </div>
@@ -57,6 +99,19 @@
                 <v-btn color="orange white--text" width="100%">Buy({{prods}})</v-btn>
             </div>
         </div>
+        <v-snackbar v-model="snackbar" >
+            Item Deleted
+            <template v-slot:action="{ attrs }">
+                <v-btn
+                color="pink"
+                text
+                v-bind="attrs"
+                @click="snackbar = false"
+                >
+                Close
+                </v-btn>
+            </template>
+        </v-snackbar>
     </div>
 </template>
 
@@ -73,7 +128,10 @@ export default {
             prods:0,
             subTotal:"0.00",
             shipping: "0.00",
-            totalPrice:"0.00"
+            totalPrice:"0.00",
+            deleteProduct:'',
+            dialog: false,
+            snackbar:false
             // 82522403296
         }
     },
@@ -86,6 +144,7 @@ export default {
         minusFunc(){
             this.quantity--
         },
+
         getAllPrice(){
             let  myprice = this.allItem.slice(0, -1);
             this.subTotal = myprice.reduce((n, {cartItemPrice}) => n + parseFloat(cartItemPrice), 0);
@@ -106,8 +165,17 @@ export default {
         },
 
         removeItem(id){
+            this.dialog = true;
+            this.deleteProduct = id
+        },
+
+        confirmDelete(){
+            const id = this.deleteProduct
             this.$store.dispatch("deleteFromCart", id);
-        }
+            this.dialog = false;
+            this.snackbar = true
+        },
+
     },
     computed:{ 
         ...mapGetters(['getUserItems', 'getId']),

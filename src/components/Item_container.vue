@@ -100,7 +100,7 @@
 </template>
 
 <script>
-// import axios from 'axios'
+import axios from 'axios'
 
 import {mapActions, mapGetters} from 'vuex'
 
@@ -136,10 +136,10 @@ export default {
                     cartItemImage: product.productImage
                 }
 
-                // axios.post('http://localhost:5200/api/cart/',meta, {})
+                axios.post('http://localhost:5200/api/cart/',meta, {})
 
 
-                this.$store.dispatch("addToCart", meta);
+                // this.$store.dispatch("addToCart", meta);
             }
 
     },

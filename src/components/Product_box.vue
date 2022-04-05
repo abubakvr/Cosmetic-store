@@ -19,11 +19,26 @@
                 <v-btn outlined color="orange" width="100%" @click="addToCart(product)">Add to cart</v-btn>
             </div>
         </div>
+         <v-snackbar
+        v-model="snackbar"
+        >
+            Item Added to cart
+            <template v-slot:action="{ attrs }">
+                <v-btn
+                color="pink"
+                text
+                v-bind="attrs"
+                @click="snackbar = false"
+                >
+                Close
+                </v-btn>
+            </template>
+        </v-snackbar>
     </div>
 </template>
 
 <script>
-import axios from "axios";
+// import axios from "axios";
 
 import {mapActions, mapGetters } from 'vuex'
 
@@ -31,7 +46,7 @@ export default{
         name:"ProductBox",
         data(){
             return{
-                
+                snackbar: false
             }
         },
         methods:{
@@ -47,12 +62,13 @@ export default{
                     cartItemImage: product.productImage
                 }
 
-                axios.post('http://localhost:5200/api/cart/',meta, {}).
-                    then(this.$router.push('/cart'))
-                    .catch(err => console.log(err));
+                // axios.post('http://localhost:5200/api/cart/',meta, {}).
+                //     then(this.$router.push('/cart'))
+                //     .catch(err => console.log(err));
 
 
-                // this.$store.dispatch("signUp", meta);
+                this.$store.dispatch("addToCart", meta);
+                this.snackbar = true
             }
         },
         computed: mapGetters(['allProducts', 'getId']),

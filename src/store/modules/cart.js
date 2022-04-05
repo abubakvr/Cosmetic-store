@@ -1,5 +1,5 @@
 import axios from 'axios'
-import router from '../../router'
+// import router from '../../router'
 
 const state = {
     user: JSON.parse(localStorage.getItem('user')) || null,
@@ -11,7 +11,7 @@ const getters = {
     allCartItems: state => state.cart,
     getUserItems: (state) => (id) => {
         return state.cart.filter(items => items.userID === id);
-     }
+    }
 }
 
 const mutations = {
@@ -37,7 +37,6 @@ const actions = {
         }
 
         await axios.post('http://localhost:5200/api/cart/', data, {})
-        .then(router.push('/cart'))
         .catch(err => console.log(err));
         commit('setCart')
 

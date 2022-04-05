@@ -89,6 +89,13 @@
             <v-list-item-title>My orders</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
+        <v-list-item v-if="!loginBtn">
+          <v-list-item-content>
+            <v-btn color="orange white--text" @click="logout()">
+              logout
+            </v-btn> 
+          </v-list-item-content>
+        </v-list-item>
       </v-list-item-group>
       </v-list>
     </v-menu>
@@ -172,7 +179,9 @@
           loginBtn: false
         }),
         methods:{
-
+          logout(){
+                this.$store.dispatch("logOut");
+          }
         },
         mounted(){
           if(this.chkToken){

@@ -16,7 +16,7 @@ const getters = {
 }
 
 const mutations = {
-    setProfile: (state, profile) => (state.profile = profile),
+    setToken: (state, token) => (state.token = token),
     setUser: (state, user) => (state.user = user),
     setUsr: (state, usr) => (state.usr = usr),
     signOut(state) {
@@ -35,7 +35,7 @@ const actions = {
         await axios.post('http://localhost:5200/api/users/login/',data, {withCredentials:true})
         .then((response) => {
             if(response.data.message === 'success'){
-                commit('setUsr', response.data.user)
+                commit('setToken', response.data.token)
                 localStorage.setItem('token', response.data.token);
                 localStorage.setItem('user', JSON.stringify(response.data.user));
                 router.push('/')
@@ -78,7 +78,7 @@ const actions = {
         });
     },
     logOut({ commit }) {
-        this.$router.push('/')
+        router.push('/')
         commit('signOut')
     },
 }
