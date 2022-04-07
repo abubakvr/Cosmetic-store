@@ -36,6 +36,7 @@ const actions = {
         .then((response) => {
             if(response.data.message === 'success'){
                 commit('setToken', response.data.token)
+                commit('setUser', response.data.user)
                 localStorage.setItem('token', response.data.token);
                 localStorage.setItem('user', JSON.stringify(response.data.user));
                 router.push('/')

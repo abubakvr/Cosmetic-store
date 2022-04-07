@@ -137,9 +137,6 @@ export default{
                     this.dialog = true
                 })
 
-
-                // this.$store.dispatch("addToCart", meta);
-
             },
         },
         computed: mapGetters(['allProducts', 'getId']),

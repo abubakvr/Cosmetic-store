@@ -6,7 +6,7 @@
             </div>
             <div class="box_content">
                 <div class="cart_checkbox">
-                    <v-checkbox label="Select All" v-model="allItem" color="orange black--text" :value="getUserItems(getId)" @click="getAllPrice()"></v-checkbox>
+                    <v-checkbox label="Select All" v-model="allItem" color="orange black--text" :value="getUserItems" @click="getAllPrice()"></v-checkbox>
                 </div>
                 <v-dialog v-model="dialog" transition="dialog-top-transition" persistent :retain-focus="false" width="500" >
                     <v-card>
@@ -31,9 +31,9 @@
                         </v-card-actions>
                     </v-card>
                 </v-dialog>
-               <div class="buy_item" v-for="cartItem in getUserItems(getId)" :key="cartItem._id" >
+               <div class="buy_item" v-for="cartItem in getUserItems" :key="cartItem._id" >
                     <div class="cart_checkbox">
-                        <v-checkbox color="orange" v-model="item" :value="cartItem" @change="getPrices()"></v-checkbox>
+                        <v-checkbox color="orange" v-model="item" :value="cartItem" @click.prevent="getPrices()"></v-checkbox>
                     </div>
                     <div class="product_side" @click="$router.push(`/viewitem/${cartItem.itemID}`)">
                         <img :src="'http://localhost:5200' + cartItem.cartItemImage" style="cursor: pointer;">
@@ -107,7 +107,7 @@ export default {
     data(){
         return{
             quantity:1,
-            item: [],
+            item: false,
             allItem:[],
             prods:0,
             subTotal:"0.00",
@@ -115,12 +115,12 @@ export default {
             totalPrice:"0.00",
             deleteProduct:'',
             dialog: false,
-            snackbar:false
+            snackbar:false,
             // 82522403296
         }
     },
     methods:{
-        ...mapActions(['fetctCartItems']),
+        ...mapActions(['fetchByUser']),
         plusFunc(){
             this.quantity++
         },
@@ -165,8 +165,8 @@ export default {
         ...mapGetters(['getUserItems', 'getId']),
 
     },
-    mounted(){
-        this.fetctCartItems()
+    created(){
+        this.fetchByUser(this.getId)
     }
 }
 </script>
@@ -215,6 +215,10 @@ export default {
         width: 200px;
         height: auto;
         margin: auto;
+    }
+
+    .product_side img:hover{
+        transform: scale(1.05);
     }
 
     .def_side{

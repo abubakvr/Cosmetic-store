@@ -8,20 +8,26 @@ const state = {
 }
 
 const getters = {
-    allCartItems: state => state.cart,
-    getUserItems: (state) => (id) => {
+    getUserItems: state => state.myCart,
+    Deet: (state) => (id) => {
         return state.cart.filter(items => items.userID === id);
-    }
+    },
 }
 
 const mutations = {
-    setCart: (state, cart) => (state.cart = cart),
+    setCart: (state, cart) => (state.myCart = cart),
+    setAllCart: (state, cart) => (state.cart = cart),
     removeFromCart: (state, id) => state.cart = state.cart.filter(item => item._id !== id),
 }
 
 const actions = {
     async fetctCartItems({commit}){
         const response = await axios.get('http://localhost:5200/api/cart/');
+        commit('setCart', response.data)
+    },
+
+    async fetchByUser({commit}, user){
+        const response =  await axios.get(`http://localhost:5200/api/cart/user/${user}`)
         commit('setCart', response.data)
     },
 

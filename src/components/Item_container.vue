@@ -152,7 +152,6 @@ export default {
                     this.dialog = true
                 })
 
-
                 // this.$store.dispatch("addToCart", meta);
             }
 
