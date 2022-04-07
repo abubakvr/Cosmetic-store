@@ -2,16 +2,19 @@ import axios from 'axios'
 
 const state = {
     products: [],
-    product: []
+    product: [],
+    category: []
 }
 
 const getters = {
     allProducts: state => state.products,
+    prodCategory: state => state.category,
     oneProduct: state => state.product
 }
 
 const mutations = {
     setProducts: (state, products) => (state.products = products),
+    setCategory: (state, category) => (state.category = category),
     setProduct: (state, product) => (state.product = product),
     newProduct: (state, product) => (state.products.unshift(product)),
     updateTodo: (state, updateProduct) => {
@@ -29,9 +32,15 @@ const actions = {
         commit('setProducts', response.data)
     },
 
+
     async fetchOneProduct({commit}, id){
-        const response =  await axios.get(`http://localhost:5200/api/product/${id}`)
+        const response =  await axios.get(`http://localhost:5200/api/product/getone/${id}`)
         commit('setProduct', response.data)
+    },
+
+    async fetchByCategory({commit}, category){
+        const response =  await axios.get(`http://localhost:5200/api/product/category/${category}`)
+        commit('setCategory', response.data)
     },
 
     async addProducts({commit}, payload){

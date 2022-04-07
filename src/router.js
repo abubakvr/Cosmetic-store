@@ -4,7 +4,7 @@ import Router from 'vue-router';
 import Home from "./views/Home.vue"
 import Shopall from "./views/Shopall.vue";
 import Newitems from "./views/Newitems.vue";
-import Bestsellers from "./views/Bestsellers.vue";
+import Eyes from "./views/Eyes.vue";
 import Face from "./views/Face.vue";
 import Lips from "./views/Lips.vue";
 import ViewItem from "./views/View_item.vue";
@@ -40,17 +40,17 @@ const routes = [
             component: Newitems
         },
         {
-            path: '/bestsellers',
-            name: 'BestSellers',
-            component: Bestsellers
+            path: '/eyeproducts',
+            name: 'Eyes',
+            component: Eyes
         },
         {
-            path: '/shopface',
+            path: '/faceproducts',
             name: 'Face',
             component: Face
         },
         {
-            path: '/shoplips',
+            path: '/lipsproducts',
             name: 'Lips',
             component: Lips
         },

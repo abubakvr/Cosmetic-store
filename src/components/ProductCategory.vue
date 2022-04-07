@@ -1,7 +1,7 @@
 <template>
     <div class="mainbox">
         <div class="box_header">
-            <p>Shop All</p>
+            <p>{{category}}</p>
         </div>
         <v-dialog
         v-model="dialog"
@@ -39,20 +39,20 @@
                 </v-card-actions>
             </v-card>
         </v-dialog>
-        <div class="productbox"  v-for="product in allProducts" :key="product._id" style="cursor: pointer;">
+        <div class="productbox"  v-for="prod in prodCategory" :key="prod._id" style="cursor: pointer;">
             <div class="inBox">
-                <div @click="$router.push(`/viewitem/${product._id}`)" >
-                    <img :src="'http://localhost:5200' + product.productImage">
+                <div @click="$router.push(`/viewitem/${prod._id}`)" >
+                    <img :src="'http://localhost:5200' + prod.productImage">
                     <br>
                     <br>
-                    <h4 v-if="product.productName.length < 50" style="height:45px;">{{ product.productName }}</h4>
-                    <h4 v-else style="height:45px;">{{ product.productName.substring(0,50)+'...'  }}</h4>
+                    <h4 v-if="prod.productName.length < 50" style="height:45px;">{{ prod.productName }}</h4>
+                    <h4 v-else style="height:45px;">{{ prod.productName.substring(0,50)+'...'  }}</h4>
                     <hr style="border-bottom: 1px  solid #dfdfdf; border-top:-0px; margin-top:14px">
-                    <h3>₦{{ product.productPrice }}</h3>
+                    <h3>₦{{ prod.productPrice }}</h3>
                     <hr style="border-bottom: 1px  solid #dfdfdf; border-top:-0px; margin-top:7px">
-                    <p>{{ product.productQuantity}} available</p>
+                    <p>{{ prod.productQuantity}} available</p>
                 </div>
-                <v-btn outlined color="orange" width="100%" @click="addToCart(product)">Add to cart</v-btn>
+                <v-btn outlined color="orange" width="100%" @click="addToCart(prod)">Add to cart</v-btn>
             </div>
         </div>
          <v-snackbar v-model="snackbar">
@@ -77,36 +77,18 @@ import axios from "axios";
 import {mapActions, mapGetters } from 'vuex'
 
 export default{
-        name:"ProductBox",
+        props: ['category'],
+        name:"ProductCategory",
         data(){
             return{
                 snackbar: false,
                 headerMessage:'',
                 contentMessage:'',
-                dialog: false
+                dialog: false,
             }
         },
         methods:{
-            ...mapActions(['fetchProducts']),
-            // addToCart(product){
-            //     const meta = {
-            //         userID: this.getId,
-            //         itemID: product. _id,
-            //         cartItemName: product.productName,
-            //         cartItemPrice: product.productPrice,
-            //         itemShippingPrice: product.productShipping,
-            //         cartItemQuantity: 1,
-            //         cartItemImage: product.productImage
-            //     }
-
-            //     // axios.post('http://localhost:5200/api/cart/',meta, {}).
-            //     //     then(this.$router.push('/cart'))
-            //     //     .catch(err => console.log(err));
-
-
-            //     this.$store.dispatch("addToCart", meta);
-            //     this.snackbar = true
-            // },
+            ...mapActions(['fetchByCategory']),
 
             addToCart(product){
                 const meta = {
@@ -142,9 +124,9 @@ export default{
 
             },
         },
-        computed: mapGetters(['allProducts', 'getId']),
+        computed: mapGetters(['prodCategory', 'getId']),
         mounted(){
-            this.fetchProducts()
+            this.fetchByCategory(this.category)
         }
     }
 </script>

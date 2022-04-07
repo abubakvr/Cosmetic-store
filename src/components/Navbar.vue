@@ -23,23 +23,17 @@
         </v-btn>
       </router-link>
 
-      <router-link to="/bestsellers" style="text-decoration:none">
-        <v-btn plain color="white"> 
-          BEST SELLERS
+        <v-btn plain color="white" @click="$router.push('/eyeproducts')"> 
+          EYES
         </v-btn>
-      </router-link>
 
-      <router-link to="/shopface" style="text-decoration:none">
-        <v-btn plain color="white">
+        <v-btn plain color="white" @click="$router.push(`/faceproducts`)" >
           FACE 
         </v-btn>
-      </router-link>
 
-      <router-link to="/shoplips" style="text-decoration:none">
-        <v-btn plain color="white">
+        <v-btn plain color="white" @click="$router.push(`/lipsproducts`)">
           LIPS 
         </v-btn>
-      </router-link>
 
       <v-spacer></v-spacer>
   
@@ -55,7 +49,7 @@
       </router-link>
       <v-menu offset-y max-width="300px">
       <template v-slot:activator="{ on, attrs }">
-        <v-btn
+        <v-btn  
           color="white"
           plain
           v-bind="attrs"

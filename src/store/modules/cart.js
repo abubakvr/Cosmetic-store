@@ -44,6 +44,7 @@ const actions = {
 
     async deleteFromCart({commit}, id){
         await axios.delete(`http://localhost:5200/api/cart/${id}`)
+        .catch(err => console.log(err));
         commit('removeFromCart', id)
     },
 }

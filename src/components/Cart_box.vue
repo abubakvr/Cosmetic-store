@@ -8,15 +8,7 @@
                 <div class="cart_checkbox">
                     <v-checkbox label="Select All" v-model="allItem" color="orange black--text" :value="getUserItems(getId)" @click="getAllPrice()"></v-checkbox>
                 </div>
-                <v-dialog
-                    v-model="dialog"
-                    transition="dialog-top-transition"
-                    persistent
-                    :retain-focus="false"
-                    width="500"
-                >
-
-
+                <v-dialog v-model="dialog" transition="dialog-top-transition" persistent :retain-focus="false" width="500" >
                     <v-card>
                         <v-card-title class="text-h5 lighten-2 white--text" style="background-color:#222222">
                         Warning
@@ -30,18 +22,10 @@
 
                         <v-card-actions>
                         <v-spacer></v-spacer>
-                        <v-btn
-                            plain
-                            color="#141414 white--text"
-                            @click="confirmDelete()" 
-                        >
+                        <v-btn  plain color="#141414 white--text" @click="confirmDelete()"  >
                             Yes
                         </v-btn>
-                        <v-btn
-                            plain
-                            color="#141414"
-                            @click="dialog = false"
-                        >
+                        <v-btn plain color="#141414" @click="dialog = false" >
                             No
                         </v-btn>
                         </v-card-actions>
@@ -87,7 +71,7 @@
                 </div>
             </div>
         </div>  
-        <div class="order_summary">
+        <div class="order_summary" position="fixed" top="0">
             <div class="box_header">
                 <p>Order Summary</p>
             </div>
@@ -96,7 +80,7 @@
                 <p style="font-size: 15px;" >Shipping: <span style="float:right" >N{{shipping}}</span></p>
                 <br>
                 <p style="font-size: 20px;" >Total: <span style="float: right" >N{{totalPrice}}</span></p>
-                <v-btn color="orange white--text" width="100%">Buy({{prods}})</v-btn>
+                <v-btn color="orange white--text" width="100%" :disabled="prods == 0">Buy({{prods}})</v-btn>
             </div>
         </div>
         <v-snackbar v-model="snackbar" >

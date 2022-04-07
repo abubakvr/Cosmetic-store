@@ -1,7 +1,7 @@
 <template>
 <div>
     <Navbar/>
-    <ProductCategory category="Lips"/>
+    <ProductCategory category="Eyes"/>
     <Footer/>
 </div>
 </template>
@@ -13,7 +13,10 @@ import ProductCategory from "../components/ProductCategory.vue";
 import Footer from "../components/Footer.vue";
 
 export default {
-    name: 'Lips',
+    props:{
+
+    },
+    name: 'Eyes',
     components: {
         Navbar,
         ProductCategory,

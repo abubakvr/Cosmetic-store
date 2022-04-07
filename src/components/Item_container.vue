@@ -14,6 +14,42 @@
                         </v-btn>
                     </div>
                 </div>
+                <v-dialog
+                v-model="dialog"
+                transition="dialog-top-transition"
+                width="500"
+                >
+                    <v-card>
+                        <v-card-title class="text-h5 lighten-2 white--text" style="background-color:#222222">
+                        {{headerMessage}}
+                        </v-card-title>
+
+                        <v-card-text class="py-4">
+                            {{contentMessage}}
+                        </v-card-text>
+
+                        <v-divider></v-divider>
+
+                        <v-card-actions>
+                        <v-spacer></v-spacer>
+                        <v-btn
+                            v-if="headerMessage === 'Success'"
+                            plain
+                            color="#141414 white--text"
+                            @click="$router.push('/cart')"
+                        >
+                            View Cart
+                        </v-btn>
+                        <v-btn
+                            plain
+                            color="#141414"
+                            @click="dialog = false"
+                        >
+                            Continue Shopping
+                        </v-btn>
+                        </v-card-actions>
+                    </v-card>
+                </v-dialog>
                 <div class="def_side">
                     <p style="font-size: 22px">{{oneProduct.productName }}</p>
                     <hr style="border-bottom: 1px  solid #dfdfdf; border-top:0px">
@@ -37,55 +73,15 @@
                         </v-btn><br>
                     </div>
                     <div id="#cart-btn" class=" text-center my-3" style="width:100%;">
-                        <v-dialog
-                        v-model="dialog"
-                        transition="dialog-top-transition"
-                        width="500"
+                       <v-btn
+                        color="orange white--text"
+                        width="100%" 
+                        style="margin-top:5px;"
+                        class="cartButton"
+                        @click="addToCart(oneProduct)"
                         >
-                            <template v-slot:activator="{ on, attrs }">
-                                <v-btn
-                                color="orange white--text"
-                                width="100%" 
-                                style="margin-top:5px;"
-                                v-bind="attrs"
-                                class="cartButton"
-                                v-on="on"
-                                @click="addToCart(oneProduct)"
-                                >
-                                Add to cart
-                                </v-btn>
-                            </template>
-
-                            <v-card>
-                                <v-card-title class="text-h5 lighten-2 white--text" style="background-color:#222222">
-                                Success
-                                </v-card-title>
-
-                                <v-card-text class="py-4">
-                                    {{quantity}}Item(s) suucessufully added to cart. You can checkout or continue shopping
-                                </v-card-text>
-
-                                <v-divider></v-divider>
-
-                                <v-card-actions>
-                                <v-spacer></v-spacer>
-                                <v-btn
-                                    plain
-                                    color="#141414 white--text"
-                                    @click="$router.push('/cart')"
-                                >
-                                    View Cart
-                                </v-btn>
-                                <v-btn
-                                    plain
-                                    color="#141414"
-                                    @click="dialog = false"
-                                >
-                                    Continue Shopping
-                                </v-btn>
-                                </v-card-actions>
-                            </v-card>
-                        </v-dialog>
+                        Add to cart
+                        </v-btn>
                     </div>
                     <div style="width:100%">
                         <hr style="border-bottom: 1px  solid #dfdfdf; border-top:0px; margin-top:10px">
@@ -111,6 +107,8 @@ export default {
         dialog: false,
         quantity: 1,
         minusBtn: false,
+        headerMessage:'',
+        contentMessage:'',
         id: this.$route.params.id,
       }
     },
@@ -137,6 +135,22 @@ export default {
                 }
 
                 axios.post('http://localhost:5200/api/cart/',meta, {})
+                .then((res) =>{
+                    if(res.data.message === "success"){
+                        this.headerMessage = "Success"
+                        this.contentMessage = "Item successfully added to cart"
+                        this.dialog = true
+                    }else{
+                        this.headerMessage = "Error"
+                        this.contentMessage = "Item not added. Try again later"
+                        this.dialog = true
+                    }
+                })
+                .catch(() => { 
+                    this.headerMessage = "Error"
+                    this.contentMessage = "Item not added. Try again later"
+                    this.dialog = true
+                })
 
 
                 // this.$store.dispatch("addToCart", meta);
