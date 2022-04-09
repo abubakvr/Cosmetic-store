@@ -2,11 +2,10 @@
     <div class="cart_items">
         <div class="mainBox">
             <div class="box_header">
-                <p>Cart Items</p>
+                <p>Cart Items({{getUserItems.length}})</p>
             </div>
             <div class="box_content">
                 <div class="cart_checkbox">
-                    <v-checkbox label="Select All" v-model="allItem" color="orange black--text" :value="getUserItems" @click="getAllPrice()"></v-checkbox>
                 </div>
                 <v-dialog v-model="dialog" transition="dialog-top-transition" persistent :retain-focus="false" width="500" >
                     <v-card>
@@ -33,16 +32,12 @@
                 </v-dialog>
                <div class="buy_item" v-for="cartItem in getUserItems" :key="cartItem._id" >
                     <div class="cart_checkbox">
-                        <v-checkbox color="orange" v-model="item" :value="cartItem" @click.prevent="getPrices()"></v-checkbox>
                     </div>
                     <div class="product_side" @click="$router.push(`/viewitem/${cartItem.itemID}`)">
                         <img :src="'http://localhost:5200' + cartItem.cartItemImage" style="cursor: pointer;">
                     </div>
                     <div class="def_side">
                         <span style="font-size: 15px">{{cartItem.cartItemName}}</span>
-                        <v-btn fab small plain style="float:right; padding-bottom:15px" @click="removeItem(cartItem._id)">
-                            <v-icon>mdi-trash-can</v-icon>
-                        </v-btn>
                         <hr style="border-bottom: 1px  solid #dfdfdf; border-top:-0px; margin-top:7px">
                             <span style="font-size: 20px; margin-top:15px" ><b>₦{{cartItem.cartItemPrice}}</b></span>
                             <br>
@@ -53,18 +48,20 @@
                             <br>
 
                         <div class="choose_option">
-                            <v-row>
+                            <div class="add-btn">
                                 <v-btn icon small dark color="white" style="background-color:#555555" @click="minusFunc()" :disabled="quantity == 1">
                                     <v-icon>mdi-minus</v-icon>
                                 </v-btn>
-                                {{cartItem.cartItemQuantity}}
+                                    {{cartItem.cartItemQuantity}}
                                 <v-btn icon small dark color="white" style="background-color:#555555" @click="plusFunc()">
                                     <v-icon>mdi-plus</v-icon>
-                                </v-btn>  
-                                <span class="btn-buy">
-                                    <v-btn color="orange white--text">Buy Now</v-btn>
-                                </span>
-                            </v-row>
+                                </v-btn>
+                            </div>
+                            <div class="del-btn">
+                                <v-btn fab small plain color="red" style="padding-bottom:15px" @click="removeItem(cartItem._id)">
+                                    <v-icon>mdi-trash-can</v-icon>
+                                </v-btn>
+                            </div>
                         </div>
                         
                     </div>
@@ -76,11 +73,11 @@
                 <p>Order Summary</p>
             </div>
             <div class="box_content">
-                <p style="font-size: 15px;" >Subtotal: <span style="float:right" >N{{subTotal}}</span></p>
-                <p style="font-size: 15px;" >Shipping: <span style="float:right" >N{{shipping}}</span></p>
+                <p style="font-size: 15px;" >Subtotal: <span style="float:right" >N{{getSubTotal}}</span></p>
+                <p style="font-size: 15px;" >Shipping: <span style="float:right" >N{{getShipping}}</span></p>
                 <br>
-                <p style="font-size: 20px;" >Total: <span style="float: right" >N{{totalPrice}}</span></p>
-                <v-btn color="orange white--text" width="100%" :disabled="prods == 0">Buy({{prods}})</v-btn>
+                <p style="font-size: 20px;" >Total: <span style="float: right" >N{{getTotal}}</span></p>
+                <v-btn color="orange white--text" width="100%" :disabled="getUserItems.length == 0">Buy({{getUserItems.length}})</v-btn>
             </div>
         </div>
         <v-snackbar v-model="snackbar" >
@@ -107,12 +104,8 @@ export default {
     data(){
         return{
             quantity:1,
-            item: false,
+            item_id: [],
             allItem:[],
-            prods:0,
-            subTotal:"0.00",
-            shipping: "0.00",
-            totalPrice:"0.00",
             deleteProduct:'',
             dialog: false,
             snackbar:false,
@@ -129,25 +122,6 @@ export default {
             this.quantity--
         },
 
-        getAllPrice(){
-            let  myprice = this.allItem.slice(0, -1);
-            this.subTotal = myprice.reduce((n, {cartItemPrice}) => n + parseFloat(cartItemPrice), 0);
-            this.shipping = myprice.reduce((n, {itemShippingPrice}) => n + parseFloat(itemShippingPrice), 0);
-
-            this.totalPrice = this.subTotal + this.shipping;
-
-            this.prods = myprice.length;
-        },
-
-        getPrices() {
-            const price = this.item;
-            this.subTotal = price.reduce((n, {cartItemPrice}) => n + parseInt(cartItemPrice), 0);
-            this.shipping = price.reduce((n, {itemShippingPrice}) => n + parseInt(itemShippingPrice), 0);
-
-            this.totalPrice = this.subTotal + this.shipping;
-            this.prods = price.length;
-        },
-
         removeItem(id){
             this.dialog = true;
             this.deleteProduct = id
@@ -162,10 +136,10 @@ export default {
 
     },
     computed:{ 
-        ...mapGetters(['getUserItems', 'getId']),
+        ...mapGetters(['getUserItems', 'getId', 'getTotal', 'getShipping', 'getSubTotal']),
 
     },
-    created(){
+    mounted(){
         this.fetchByUser(this.getId)
     }
 }
@@ -251,6 +225,12 @@ export default {
         height: auto;
         width: 100%;
         padding: 15px;
+    }
+
+    .del-btn {
+        float: right;
+        margin-left: 100%;
+        margin-top: -30px;
     }
 
     .cart_items{

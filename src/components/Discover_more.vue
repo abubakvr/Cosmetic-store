@@ -84,6 +84,7 @@ export default {
   background-color: black;
   margin-top: 300px;
   padding-top: 200px;
+  padding-bottom: 30px;
 }
 
 .e_section_products h1{

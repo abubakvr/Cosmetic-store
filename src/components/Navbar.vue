@@ -42,7 +42,7 @@
         <v-badge
         color="orange"
         overlap
-        dot
+        :content="getUserItems.length"
         >
         <v-icon>mdi-cart</v-icon></v-badge> Cart
       </v-btn>
@@ -163,6 +163,7 @@
 </template>
 
 <script>
+import {mapActions, mapGetters } from 'vuex'
     export default{
         name: 'Navbar',
         data: () => ({
@@ -173,11 +174,14 @@
           loginBtn: false
         }),
         methods:{
+        ...mapActions(['fetchByUser']),
           logout(){
                 this.$store.dispatch("logOut");
           }
         },
+        computed:mapGetters(['getUserItems', 'getId']),
         mounted(){
+          this.fetchByUser(this.getId)
           if(this.chkToken){
             return this.loginBtn = false
           }else{

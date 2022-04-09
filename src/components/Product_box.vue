@@ -87,26 +87,7 @@ export default{
             }
         },
         methods:{
-            ...mapActions(['fetchProducts']),
-            // addToCart(product){
-            //     const meta = {
-            //         userID: this.getId,
-            //         itemID: product. _id,
-            //         cartItemName: product.productName,
-            //         cartItemPrice: product.productPrice,
-            //         itemShippingPrice: product.productShipping,
-            //         cartItemQuantity: 1,
-            //         cartItemImage: product.productImage
-            //     }
-
-            //     // axios.post('http://localhost:5200/api/cart/',meta, {}).
-            //     //     then(this.$router.push('/cart'))
-            //     //     .catch(err => console.log(err));
-
-
-            //     this.$store.dispatch("addToCart", meta);
-            //     this.snackbar = true
-            // },
+            ...mapActions(['fetchProducts', 'addToCart', 'fetchByUser']),
 
             addToCart(product){
                 const meta = {
@@ -122,9 +103,11 @@ export default{
                 axios.post('http://localhost:5200/api/cart/',meta, {})
                 .then((res) =>{
                     if(res.data.message === "success"){
+                        this.$store.dispatch("addToCart", meta);
                         this.headerMessage = "Success"
                         this.contentMessage = "Item successfully added to cart"
                         this.dialog = true
+                        
                     }else{
                         this.headerMessage = "Error"
                         this.contentMessage = "Item not added. Try again later"
@@ -139,9 +122,10 @@ export default{
 
             },
         },
-        computed: mapGetters(['allProducts', 'getId']),
+        computed: mapGetters(['allProducts', 'getId', 'getUserItems']),
         mounted(){
             this.fetchProducts()
+            this.fetchByUser(this.getId)
         }
     }
 </script>

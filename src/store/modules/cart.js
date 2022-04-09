@@ -3,12 +3,21 @@ import axios from 'axios'
 
 const state = {
     user: JSON.parse(localStorage.getItem('user')) || null,
-    cart: [],
-    myCart: []
+    price: [],
+    myCart: [],
+    shipping: [],
+    subTotal: [],
+    total: [],
+    items:[],
+    itemNo:[]
 }
 
 const getters = {
     getUserItems: state => state.myCart,
+    getSubTotal: state => state.subTotal,
+    getShipping: state => state.shipping,
+    getTotal: state => state.total,
+    getItemNo: state => state.itemNo = state.myCart.length,
     Deet: (state) => (id) => {
         return state.cart.filter(items => items.userID === id);
     },
@@ -16,8 +25,11 @@ const getters = {
 
 const mutations = {
     setCart: (state, cart) => (state.myCart = cart),
-    setAllCart: (state, cart) => (state.cart = cart),
-    removeFromCart: (state, id) => state.cart = state.cart.filter(item => item._id !== id),
+    removeFromCart: (state, id) => state.myCart = state.myCart.filter(item => item._id !== id),
+    setSubTotal: (state) => state.subTotal = state.myCart.reduce((n, {cartItemPrice}) => n + parseFloat(cartItemPrice), 0),
+    setShipping: (state) => state.shipping = state.myCart.reduce((n, {itemShippingPrice}) => n + parseFloat(itemShippingPrice), 0),
+    setTotal: (state) => state.total = state.subTotal + state.shipping,
+    setBadge:(state, cartt) => state.myCart.push(cartt),
 }
 
 const actions = {
@@ -29,6 +41,9 @@ const actions = {
     async fetchByUser({commit}, user){
         const response =  await axios.get(`http://localhost:5200/api/cart/user/${user}`)
         commit('setCart', response.data)
+        commit('setSubTotal')
+        commit('setShipping')
+        commit('setTotal')
     },
 
     async addToCart({commit}, payload){
@@ -42,16 +57,16 @@ const actions = {
             cartItemImage: payload.cartItemImage
         }
 
-        await axios.post('http://localhost:5200/api/cart/', data, {})
-        .catch(err => console.log(err));
-        commit('setCart')
-
+        commit('setBadge', data)
     },
 
     async deleteFromCart({commit}, id){
         await axios.delete(`http://localhost:5200/api/cart/${id}`)
         .catch(err => console.log(err));
         commit('removeFromCart', id)
+        commit('setSubTotal')
+        commit('setShipping')
+        commit('setTotal')
     },
 }
 

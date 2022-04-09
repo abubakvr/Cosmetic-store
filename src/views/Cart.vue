@@ -1,7 +1,7 @@
 <template>
     <div>
         <Navbar/>
-            <CartBox/>
+            <CartBox :key="$route.fullPath"/>
         <Footer/>
     </div>
 </template>

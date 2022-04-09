@@ -7,7 +7,7 @@
               <br>
               <p>Get to know our new eyeshadow <br>palette with a glossy fresh finish, smooth <br>lightweight feel and 10 hour stay on.</p>
               <br>
-              <v-btn outlined color="white">Shop</v-btn>
+              <v-btn outlined color="white" @click="$router.push('/shopall')">Shop</v-btn>
           </div>
         </section>
 </template>

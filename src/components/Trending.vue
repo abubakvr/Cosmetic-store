@@ -5,19 +5,19 @@
         <h1>Now <i>Trending</i></h1>
         </div>
         <div class="section_products">
-        <div>
+        <div class="inner_divv">
             <img src="../assets/img/kindpng_2386942.png">
         </div>
-        <div>
+        <div class="inner_divv">
             <img src="../assets/img/kindpng_2386897.png">
         </div>
-        <div>
+        <div class="inner_divv">
             <img src="../assets/img/favpng_pencil-eye-liner-color-black.png">
         </div>
-        <div>
+        <div class="inner_divv">
             <img src="../assets/img/—Pngtree—liquid foundation_5649017.png">
         </div>
-        <div>
+        <div class="inner_divv">
             <img src="../assets/img/face_powder_PNG76465.png">
         </div>
         <br>
@@ -58,6 +58,16 @@ export default {
 
 .section_products img{
   height: 150px;
+}
+
+.section_products :hover{
+        transform: scale(1.06); 
+        cursor: pointer;
+}
+
+.inner_divv :hover{
+        box-shadow: none;
+        transform: none; 
 }
 
 @media only screen and (max-width: 500px) {  
