@@ -12,7 +12,7 @@
                   vel vitae dolore? Iste, mollitia!
                 </p>
                 <br>
-                <v-btn color="white">Shop Now</v-btn>
+                <v-btn color="white" @click="$router.push('/lipsproducts')">Shop Now</v-btn>
               </div>
             </div>
             <div class="left_div" data-aos="fade-left">

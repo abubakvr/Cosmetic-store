@@ -11,7 +11,7 @@ const state = {
 const getters = {
     getId: state => state.user._id,
     getProfile: state => state.profile,
-    currentUser: state => state.token,
+    getToken: state => state.token,
     getUsr: (state) => state.usr,
 }
 

@@ -104,6 +104,7 @@ export default{
                 axios.post('http://localhost:5200/api/cart/',meta, {})
                 .then((res) =>{
                     if(res.data.message === "success"){
+                        this.$store.dispatch("addToCart", meta);
                         this.headerMessage = "Success"
                         this.contentMessage = "Item successfully added to cart"
                         this.dialog = true

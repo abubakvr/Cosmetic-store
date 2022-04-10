@@ -9,7 +9,8 @@ const state = {
     subTotal: [],
     total: [],
     items:[],
-    itemNo:[]
+    itemNo:[],
+    quantity:''
 }
 
 const getters = {
@@ -17,19 +18,28 @@ const getters = {
     getSubTotal: state => state.subTotal,
     getShipping: state => state.shipping,
     getTotal: state => state.total,
-    getItemNo: state => state.itemNo = state.myCart.length,
-    Deet: (state) => (id) => {
-        return state.cart.filter(items => items.userID === id);
-    },
+    getQuantity: state => state.quantity,
+    getItemNo: state => state.itemNo = state.myCart.length
 }
 
 const mutations = {
     setCart: (state, cart) => (state.myCart = cart),
     removeFromCart: (state, id) => state.myCart = state.myCart.filter(item => item._id !== id),
-    setSubTotal: (state) => state.subTotal = state.myCart.reduce((n, {cartItemPrice}) => n + parseFloat(cartItemPrice), 0),
-    setShipping: (state) => state.shipping = state.myCart.reduce((n, {itemShippingPrice}) => n + parseFloat(itemShippingPrice), 0),
+    setSubTotal(state) {
+        const pricesArray = state.myCart.map(product=>product.cartItemPrice*product.cartItemQuantity)
+        state.subTotal = pricesArray.flat().reduce((acc,sum)=>acc+sum)
+    }, 
+    setShipping(state) {
+        const priceArray = state.myCart.map(product=>product.itemShippingPrice*product.cartItemQuantity)
+        state.shipping = priceArray.flat().reduce((acc,sum)=>acc+sum)
+    }, 
+    //setShipping: (state) => state.shipping = state.myCart.reduce((n, {itemShippingPrice}) => n + parseFloat(itemShippingPrice), 0),
+    setQuantity: (state) => state.quantity = state.myCart.reduce((n, {cartItemQuantity}) => n + parseFloat(cartItemQuantity), 0),
     setTotal: (state) => state.total = state.subTotal + state.shipping,
     setBadge:(state, cartt) => state.myCart.push(cartt),
+    clearBadge(state) {
+        state.myCart = []
+    },
 }
 
 const actions = {
@@ -44,6 +54,7 @@ const actions = {
         commit('setSubTotal')
         commit('setShipping')
         commit('setTotal')
+        commit('setQuantity')
     },
 
     async addToCart({commit}, payload){
@@ -67,7 +78,12 @@ const actions = {
         commit('setSubTotal')
         commit('setShipping')
         commit('setTotal')
+        commit('setQuantity')
     },
+
+    clearCart({commit}){
+        commit('clearBadge')
+    }
 }
 
 export default {

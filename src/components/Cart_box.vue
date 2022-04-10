@@ -5,8 +5,6 @@
                 <p>Cart Items({{getUserItems.length}})</p>
             </div>
             <div class="box_content">
-                <div class="cart_checkbox">
-                </div>
                 <v-dialog v-model="dialog" transition="dialog-top-transition" persistent :retain-focus="false" width="500" >
                     <v-card>
                         <v-card-title class="text-h5 lighten-2 white--text" style="background-color:#222222">
@@ -45,20 +43,18 @@
                             <br>
                             <span style="font-size: 12px; margin-top:5px" >Shipping ₦{{cartItem.itemShippingPrice}}</span>
                             <br>
-                            <br>
-
                         <div class="choose_option">
                             <div class="add-btn">
-                                <v-btn icon small dark color="white" style="background-color:#555555" @click="minusFunc()" :disabled="quantity == 1">
+                                <v-btn icon small dark color="white" style="background-color:#555555" @click="minusFunc(cartItem)" :disabled="cartItem.cartItemQuantity == 1">
                                     <v-icon>mdi-minus</v-icon>
                                 </v-btn>
-                                    {{cartItem.cartItemQuantity}}
-                                <v-btn icon small dark color="white" style="background-color:#555555" @click="plusFunc()">
+                                    {{quant = cartItem.cartItemQuantity}}
+                                <v-btn icon small dark color="white" style="background-color:#555555" @click="plusFunc(cartItem)">
                                     <v-icon>mdi-plus</v-icon>
                                 </v-btn>
                             </div>
                             <div class="del-btn">
-                                <v-btn fab small plain color="red" style="padding-bottom:15px" @click="removeItem(cartItem._id)">
+                                <v-btn fab small text color="red darken--5" style="padding-bottom:15px" @click="removeItem(cartItem._id)">
                                     <v-icon>mdi-trash-can</v-icon>
                                 </v-btn>
                             </div>
@@ -76,7 +72,7 @@
                 <p style="font-size: 15px;" >Subtotal: <span style="float:right" >N{{getSubTotal}}</span></p>
                 <p style="font-size: 15px;" >Shipping: <span style="float:right" >N{{getShipping}}</span></p>
                 <br>
-                <p style="font-size: 20px;" >Total: <span style="float: right" >N{{getTotal}}</span></p>
+                <p style="font-size: 20px;" >Total: <span style="float: right" >N{{getTotal }}</span></p>
                 <v-btn color="orange white--text" width="100%" :disabled="getUserItems.length == 0">Buy({{getUserItems.length}})</v-btn>
             </div>
         </div>
@@ -97,15 +93,16 @@
 </template>
 
 <script>
+import axios from 'axios'
 import {mapActions, mapGetters } from 'vuex'
 
 export default {
     name: 'CartBox',
     data(){
         return{
-            quantity:1,
-            item_id: [],
-            allItem:[],
+            quantity: [],
+            id: '',
+            allItem:'',
             deleteProduct:'',
             dialog: false,
             snackbar:false,
@@ -114,12 +111,24 @@ export default {
     },
     methods:{
         ...mapActions(['fetchByUser']),
-        plusFunc(){
-            this.quantity++
+        plusFunc(cartItem){
+            this.id = cartItem._id
+            this.quantity = parseInt(cartItem.cartItemQuantity) + 1
+            const meta = {
+                quantity: this.quantity
+            }
+            axios.patch(`http://localhost:5200/api/cart/quantity/${this.id}`, meta, {})
+            console.log(this.quantity)
         },
 
-        minusFunc(){
-            this.quantity--
+        minusFunc(cartItem){
+            this.id = cartItem._id
+            this.quantity = parseInt(cartItem.cartItemQuantity) - 1
+            const meta = {
+                quantity: this.quantity
+            }
+            axios.patch(`http://localhost:5200/api/cart/quantity/${this.id}`, meta, {})
+            console.log(this.quantity)
         },
 
         removeItem(id){
@@ -136,7 +145,7 @@ export default {
 
     },
     computed:{ 
-        ...mapGetters(['getUserItems', 'getId', 'getTotal', 'getShipping', 'getSubTotal']),
+        ...mapGetters(['getUserItems', 'getId', 'getTotal', 'getShipping', 'getSubTotal', 'getQuantity']),
 
     },
     mounted(){
@@ -224,7 +233,7 @@ export default {
     .choose_option{
         height: auto;
         width: 100%;
-        padding: 15px;
+        padding-top: 17px;
     }
 
     .del-btn {

@@ -90,42 +90,48 @@ export default{
             ...mapActions(['fetchProducts', 'addToCart', 'fetchByUser']),
 
             addToCart(product){
-                const meta = {
-                    userID: this.getId,
-                    itemID: product. _id,
-                    cartItemName: product.productName,
-                    cartItemPrice: product.productPrice,
-                    itemShippingPrice: product.productShipping,
-                    cartItemQuantity: 1,
-                    cartItemImage: product.productImage
-                }
-                    
-                axios.post('http://localhost:5200/api/cart/',meta, {})
-                .then((res) =>{
-                    if(res.data.message === "success"){
-                        this.$store.dispatch("addToCart", meta);
-                        this.headerMessage = "Success"
-                        this.contentMessage = "Item successfully added to cart"
-                        this.dialog = true
+                if(localStorage.getItem('token')){
+                    const meta = {
+                        userID: this.getId,
+                        itemID: product. _id,
+                        cartItemName: product.productName,
+                        cartItemPrice: product.productPrice,
+                        itemShippingPrice: product.productShipping,
+                        cartItemQuantity: 1,
+                        cartItemImage: product.productImage
+                    }
                         
-                    }else{
+                    axios.post('http://localhost:5200/api/cart/',meta, {})
+                    .then((res) =>{
+                        if(res.data.message === "success"){
+                            this.$store.dispatch("addToCart", meta);
+                            this.headerMessage = "Success"
+                            this.contentMessage = "Item successfully added to cart"
+                            this.dialog = true
+                            
+                        }else{
+                            this.headerMessage = "Error"
+                            this.contentMessage = "Item not added. Try again later"
+                            this.dialog = true
+                        }
+                    })
+                    .catch(() => { 
                         this.headerMessage = "Error"
                         this.contentMessage = "Item not added. Try again later"
                         this.dialog = true
-                    }
-                })
-                .catch(() => { 
-                    this.headerMessage = "Error"
-                    this.contentMessage = "Item not added. Try again later"
+                    })
+                }else{
+                    this.headerMessage = "You're not logged in"
+                    this.contentMessage = "Log in to continue"
                     this.dialog = true
-                })
+                }
+                
 
             },
         },
         computed: mapGetters(['allProducts', 'getId', 'getUserItems']),
         mounted(){
             this.fetchProducts()
-            this.fetchByUser(this.getId)
         }
     }
 </script>
@@ -144,7 +150,7 @@ export default{
         height: 70px;
         width: 100%;
         border-bottom: 1px solid #e0dfdf;
-        padding: 17px;
+        padding: 10px;
         font-size: 25px;
         color: #141414;
     }
@@ -156,14 +162,14 @@ export default{
         margin-bottom: 10px;
         margin-right: 0.1%;
         width: 19.9%;
-        height: 450px;
-        padding: 7px;
+        height: 480px;
+        padding: 17px;
     }
 
     .productbox .inBox{
         width: 100%;
         height: 100%;
-        padding: 5px;
+        padding: 10px;
         margin: auto;
     }
 

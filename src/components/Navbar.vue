@@ -4,7 +4,7 @@
     <v-app-bar absolute color="#141414" class="navbar" style="position: fixed; top: 0; color: white;" >
 
       <router-link to="/" style="text-decoration:none;">
-        <v-btn plain color="white">
+        <v-btn text color="white">
           SHOPPEE
         </v-btn>
       </router-link>
@@ -12,46 +12,48 @@
       <v-spacer></v-spacer>
 
         <router-link to="/shopall" style="text-decoration:none">
-          <v-btn plain color="white">
+          <v-btn text color="white">
               SHOP ALL
           </v-btn>
         </router-link>
 
       <router-link to="/newitems" style="text-decoration:none">
-        <v-btn plain color="white">
+        <v-btn text color="white">
           NEW
         </v-btn>
       </router-link>
 
-        <v-btn plain color="white" @click="$router.push('/eyeproducts')"> 
+        <v-btn text color="white" @click="$router.push('/eyeproducts')"> 
           EYES
         </v-btn>
 
-        <v-btn plain color="white" @click="$router.push(`/faceproducts`)" >
+        <v-btn text color="white" @click="$router.push(`/faceproducts`)" >
           FACE 
         </v-btn>
 
-        <v-btn plain color="white" @click="$router.push(`/lipsproducts`)">
+        <v-btn text color="white" @click="$router.push(`/lipsproducts`)">
           LIPS 
         </v-btn>
 
       <v-spacer></v-spacer>
   
       <router-link to="/cart" style="text-decoration:none">
-      <v-btn plain color="white lighten-5">
+      <v-btn text color="white lighten-5">
         <v-badge
         color="orange"
         overlap
-        :content="getUserItems.length"
+        :content="getItemNo"
+        v-if="getItemNo > 0"
         >
-        <v-icon>mdi-cart</v-icon></v-badge> Cart
+        <v-icon>mdi-cart</v-icon></v-badge>
+        <v-icon  v-if="getItemNo < 1">mdi-cart</v-icon> Cart
       </v-btn>
       </router-link>
       <v-menu offset-y max-width="300px">
       <template v-slot:activator="{ on, attrs }">
         <v-btn  
           color="white"
-          plain
+          text
           v-bind="attrs"
           v-on="on"
         >
@@ -163,7 +165,7 @@
 </template>
 
 <script>
-import {mapActions, mapGetters } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
     export default{
         name: 'Navbar',
         data: () => ({
@@ -171,22 +173,27 @@ import {mapActions, mapGetters } from 'vuex'
           group: null,
           selectedItem: 1,
           chkToken: localStorage.getItem('token'),
-          loginBtn: false
+          loginBtn: false,
         }),
         methods:{
-        ...mapActions(['fetchByUser']),
+          ...mapActions(['fetchByUser']),
           logout(){
                 this.$store.dispatch("logOut");
+                this.$store.dispatch("clearCart");
           }
         },
-        computed:mapGetters(['getUserItems', 'getId']),
+        computed:mapGetters(['getItemNo', 'getId']),
+        created(){
+        },
         mounted(){
-          this.fetchByUser(this.getId)
           if(this.chkToken){
-            return this.loginBtn = false
+            this.loginBtn = false
+            this.fetchByUser(this.getId)
+
           }else{
             return this.loginBtn = true
           }
+          
         }
     }
 </script>

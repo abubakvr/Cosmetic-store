@@ -4,7 +4,7 @@
         <h1><b>Discover</b> <i>More</i></h1>
         </div>
         <div class="e_section_products">
-        <div class ="img_1" data-aos="fade-up">
+        <div class ="img_1" data-aos="fade-up" @click="$router.push('/faceproducts')">
             <v-tooltip top>
             <template v-slot:activator="{ on, attrs }">
             <img src="../assets/img/Beautiful-woman-face-makeup-artist-applies-eyeshadow-Stock-Photo-02.png" v-bind="attrs" v-on="on">
@@ -13,7 +13,7 @@
             <span>Shop Face</span>
         </v-tooltip>
         </div >
-        <div data-aos="zoom-in">
+        <div data-aos="zoom-in" @click="$router.push('/eyeproducts')">
             <v-tooltip top>
             <template v-slot:activator="{ on, attrs }">
             <img src="../assets/img/maxresdefault2.jpg" v-bind="attrs" v-on="on">
@@ -22,7 +22,7 @@
             <span>Shop Eyes</span>
         </v-tooltip>
         </div>
-        <div data-aos="fade-up">
+        <div data-aos="fade-up" @click="$router.push('/lipsproducts')">
             <v-tooltip top>
             <template v-slot:activator="{ on, attrs }">
                 <img src="../assets/img/Colour-Cosmetics-Blonde-Female-Wearing-Bright-Red-Lipstick.png" v-bind="attrs" v-on="on">
@@ -70,6 +70,7 @@ export default {
   width: 30%;
   margin: 30px 25px 30px 0px;
   height: 400px;
+  cursor: pointer;
 }
 
 .e_section_products img{

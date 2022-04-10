@@ -23,7 +23,7 @@
         <br>
         <br>
         <br>
-        <p><v-btn outlined color="black">SEE MORE</v-btn></p>
+        <p style=""><v-btn outlined color="black" @click="$router.push('/shopall')">SEE MORE</v-btn></p>
         </div>
     </section>
 </template>
@@ -60,9 +60,9 @@ export default {
   height: 150px;
 }
 
-.section_products :hover{
-        transform: scale(1.06); 
-        cursor: pointer;
+.inner_divv :hover{
+    transform: scale(1.06); 
+    cursor: pointer;
 }
 
 .inner_divv :hover{
