@@ -12,7 +12,7 @@ const getters = {
     getId: state => state.user._id,
     getProfile: state => state.profile,
     getToken: state => state.token,
-    getUsr: (state) => state.usr,
+    getUser: (state) => state.user,
 }
 
 const mutations = {
@@ -39,10 +39,7 @@ const actions = {
                 commit('setUser', response.data.user)
                 localStorage.setItem('token', response.data.token);
                 localStorage.setItem('user', JSON.stringify(response.data.user));
-                router.push('/')
-                .catch(() => {
-                    console.log("Error")
-                });
+                router.go(-1)
             }else{
                 console.log("Sign In Error")
             }
@@ -79,7 +76,7 @@ const actions = {
         });
     },
     logOut({ commit }) {
-        router.push('/')
+        router.push('/login')
         commit('signOut')
     },
 }

@@ -178,8 +178,9 @@ import { mapActions, mapGetters } from 'vuex'
         methods:{
           ...mapActions(['fetchByUser']),
           logout(){
-                this.$store.dispatch("logOut");
-                this.$store.dispatch("clearCart");
+              this.$store.dispatch("logOut");
+              this.$store.dispatch("clearCart");
+
           }
         },
         computed:mapGetters(['getItemNo', 'getId']),
@@ -191,7 +192,7 @@ import { mapActions, mapGetters } from 'vuex'
             this.fetchByUser(this.getId)
 
           }else{
-            return this.loginBtn = true
+            this.loginBtn = true
           }
           
         }

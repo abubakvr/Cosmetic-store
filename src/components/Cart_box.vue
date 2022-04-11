@@ -48,13 +48,13 @@
                                 <v-btn icon small dark color="white" style="background-color:#555555" @click="minusFunc(cartItem)" :disabled="cartItem.cartItemQuantity == 1">
                                     <v-icon>mdi-minus</v-icon>
                                 </v-btn>
-                                    {{quant = cartItem.cartItemQuantity}}
+                                    {{cartItem.cartItemQuantity}}
                                 <v-btn icon small dark color="white" style="background-color:#555555" @click="plusFunc(cartItem)">
                                     <v-icon>mdi-plus</v-icon>
                                 </v-btn>
                             </div>
                             <div class="del-btn">
-                                <v-btn fab small text color="red darken--5" style="padding-bottom:15px" @click="removeItem(cartItem._id)">
+                                <v-btn icon text color="red darken--5" style="padding-bottom:15px" @click="removeItem(cartItem._id)">
                                     <v-icon>mdi-trash-can</v-icon>
                                 </v-btn>
                             </div>
@@ -102,7 +102,6 @@ export default {
         return{
             quantity: [],
             id: '',
-            allItem:'',
             deleteProduct:'',
             dialog: false,
             snackbar:false,
@@ -118,6 +117,7 @@ export default {
                 quantity: this.quantity
             }
             axios.patch(`http://localhost:5200/api/cart/quantity/${this.id}`, meta, {})
+            .then(() => this.fetchByUser(this.getId))
             console.log(this.quantity)
         },
 
@@ -128,6 +128,7 @@ export default {
                 quantity: this.quantity
             }
             axios.patch(`http://localhost:5200/api/cart/quantity/${this.id}`, meta, {})
+            .then(() => this.fetchByUser(this.getId))
             console.log(this.quantity)
         },
 
@@ -146,7 +147,6 @@ export default {
     },
     computed:{ 
         ...mapGetters(['getUserItems', 'getId', 'getTotal', 'getShipping', 'getSubTotal', 'getQuantity']),
-
     },
     mounted(){
         this.fetchByUser(this.getId)

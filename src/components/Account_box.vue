@@ -16,7 +16,10 @@
                         </v-tooltip>
                     </v-toolbar>
                     <v-sheet class="pa-8">
-                       
+                       <p><b>Name:</b> {{getUser.firstname + ' ' + getUser.lastname}}</p>
+                       <p><b>Email:</b> {{getUser.email}}</p>
+                       <p><b>Country:</b> {{getUser.country}}</p>
+                       <p><b>Gender:</b> {{getUser.gender}}</p>
                     </v-sheet>
                 </v-sheet>
             </v-row>
@@ -25,8 +28,17 @@
 </template>
 
 <script>
+import {mapGetters} from 'vuex';
+
 export default {
     name: "accountBox",
+    data(){
+        return{
+
+        }
+    },
+    methods:{},
+    computed: mapGetters(['getUser'])
 }
 </script>
 
