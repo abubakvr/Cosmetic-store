@@ -1,5 +1,33 @@
 <template>
     <div class="cart_items">
+        <v-dialog
+        v-model="checkout_dialog"
+        transition="dialog-top-transition"
+        width="500"
+        >
+            <v-card>
+                <v-card-title class="text-h5 lighten-2 white--text" style="background-color:#222222">
+                {{headerMessage}}
+                </v-card-title>
+
+                <v-card-text class="py-4">
+                    {{contentMessage}}
+                </v-card-text>
+
+                <v-divider></v-divider>
+
+                <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn
+                    plain
+                    color="#141414"
+                    @click="checkout_dialog = false"
+                >
+                    Continue Shopping
+                </v-btn>
+                </v-card-actions>
+            </v-card>
+        </v-dialog>
         <div class="mainBox">
             <div class="box_header">
                 <p>Cart Items({{getUserItems.length}})</p>
@@ -73,7 +101,9 @@
                 <p style="font-size: 15px;" >Shipping: <span style="float:right" >N{{getShipping}}</span></p>
                 <br>
                 <p style="font-size: 20px;" >Total: <span style="float: right" >N{{getTotal }}</span></p>
-                <v-btn color="orange white--text" width="100%" :disabled="getUserItems.length == 0">Buy({{getUserItems.length}})</v-btn>
+                <v-btn color="orange white--text" width="100%" :disabled="getUserItems.length == 0" @click="addOrder()">
+                    Buy({{getUserItems.length}})
+                </v-btn>
             </div>
         </div>
         <v-snackbar v-model="snackbar" >
@@ -94,7 +124,7 @@
 
 <script>
 import axios from 'axios'
-import {mapActions, mapGetters } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 
 export default {
     name: 'CartBox',
@@ -103,13 +133,17 @@ export default {
             quantity: [],
             id: '',
             deleteProduct:'',
+            headerMessage:'',
+            contentMessage:'',  
             dialog: false,
+            checkout_dialog:false,
             snackbar:false,
             // 82522403296
         }
     },
     methods:{
         ...mapActions(['fetchByUser']),
+        //Adding quantity in cart
         plusFunc(cartItem){
             this.id = cartItem._id
             this.quantity = parseInt(cartItem.cartItemQuantity) + 1
@@ -121,6 +155,7 @@ export default {
             console.log(this.quantity)
         },
 
+        //Subtacting quantity in cart
         minusFunc(cartItem){
             this.id = cartItem._id
             this.quantity = parseInt(cartItem.cartItemQuantity) - 1
@@ -132,11 +167,13 @@ export default {
             console.log(this.quantity)
         },
 
+        //Remove item modal
         removeItem(id){
             this.dialog = true;
             this.deleteProduct = id
         },
 
+        //Confirm delete
         confirmDelete(){
             const id = this.deleteProduct
             this.$store.dispatch("deleteFromCart", id);
@@ -144,11 +181,59 @@ export default {
             this.snackbar = true
         },
 
+        //CheckOut
+        addOrder(){
+            let Arr = []
+            this.getUserItems.forEach(element => {
+                console.log(element)
+                Arr.push({ 
+                    userID:element.userID, 
+                    itemID:element.itemID, 
+                    cartItemName:element.cartItemName, 
+                    dateOrdered:Date.now(),
+                    receiverName:this.getUser.firstname + ' ' + this.getUser.lastname, 
+                    receiverAddress:this.getUser.country, 
+                    receiverNo:this.getUser.email, 
+                    completed:"False"
+                })
+            });    
+
+            axios.post('http://localhost:5200/api/orders/',Arr, {})
+                .then((res) =>{
+                    if(res.data.message === "success"){
+                        axios.delete(`http://localhost:5200/api/cart/clearcart/${this.getId}`)
+                        .then((res) => {
+                            if(res.data.message === "success"){
+                                this.headerMessage = "Success"
+                                this.contentMessage = "You've successfully placed your order"
+                                this.checkout_dialog = true
+                                this.fetchByUser(this.getId)
+                            }else{
+                                this.headerMessage = "Error"
+                                this.contentMessage = "Unsuccessful. Try again later"
+                                this.checkout_dialog = true
+                            }
+                        })
+                    }else{
+                        this.headerMessage = "Error"
+                        this.contentMessage = "Unsuccessful. Try again later"
+                        this.checkout_dialog = true
+                    }
+                })
+                .catch(() => { 
+                    this.headerMessage = "Error"
+                    this.contentMessage = "Unsuccessful. Try again later"
+                    this.checkout_dialog = true
+                })
+            console.log(Arr)
+        }
+
     },
     computed:{ 
-        ...mapGetters(['getUserItems', 'getId', 'getTotal', 'getShipping', 'getSubTotal', 'getQuantity']),
+        ...mapGetters(['getUserItems', 'getId', 'getTotal', 'getShipping', 'getSubTotal', 'getQuantity', 'getUser']),
     },
     mounted(){
+        //Fetch user details
         this.fetchByUser(this.getId)
     }
 }

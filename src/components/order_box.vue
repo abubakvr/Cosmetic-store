@@ -8,25 +8,7 @@
                         <v-spacer></v-spacer>
                     </v-toolbar>
                     <v-sheet class="pa-8">
-                         <div class="todos">
-                            <div 
-                            class="todo" v-for="product in allProducts" 
-                            :key="product._id"
-                            >
-                            {{ product.productName }}
-                            {{ product._id }}
-                            </div>
-                        </div>
-                        <div class="todos">
-                            <div 
-                            class="todo"  
-                            >
-                            {{ oneProduct.productName}}
-                            {{ oneProduct._id}}
-                            {{ oneProduct.productQuantity}}
-                            {{ oneProduct.productBrand}}
-                            </div>
-                        </div>
+                        
                     </v-sheet>
                 </v-sheet>
             </v-row>
@@ -48,8 +30,6 @@ export default {
     },
     computed: mapGetters(['allProducts', 'oneProduct']),
     created(){
-        this.fetchProducts()
-        this.fetchOneProduct("623f79e56febd0e24b03c9ed")
     }
 }
 </script>

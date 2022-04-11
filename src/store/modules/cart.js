@@ -3,13 +3,11 @@ import axios from 'axios'
 
 const state = {
     user: JSON.parse(localStorage.getItem('user')) || null,
-    price: [],
     myCart: [],
-    shipping: [],
-    subTotal: [],
-    total: [],
-    items:[],
-    itemNo:[],
+    shipping: 0,
+    subTotal: 0,
+    total: 0,
+    itemNo:0,
     quantity:''
 }
 
@@ -67,7 +65,6 @@ const actions = {
             cartItemQuantity: payload.cartItemQuantity,
             cartItemImage: payload.cartItemImage
         }
-
         commit('setBadge', data)
     },
 
