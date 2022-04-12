@@ -1,19 +1,28 @@
 <template>
-    <v-container width="100%" height="100%" class="my-6">
-        <v-col>
-            <v-row justify="center" >
-                <v-sheet color="white" elevation="4" width="600px" height="480px" class="my-6">
-                    <v-toolbar flat style="border-bottom:1px solid #dfdfdf;">
-                        <v-toolbar-title>My orders</v-toolbar-title>
-                        <v-spacer></v-spacer>
-                    </v-toolbar>
-                    <v-sheet class="pa-8">
-                        
-                    </v-sheet>
-                </v-sheet>
-            </v-row>
-        </v-col>
-    </v-container>
+    <div class="mainBox">
+        <div class="box_header">
+            <p>My orders({{getUserOrders.length}})</p>
+        </div>
+        <div class="box_content">
+        <div class="buy_item" v-for="orderItem in getUserOrders" :key="orderItem._id" >
+            <div class="cart_checkbox">
+            </div>
+            <div class="product_side" @click="$router.push(`/viewitem/${orderItem.itemID}`)">
+                <img :src="'http://localhost:5200' + orderItem.itemImage" style="cursor: pointer;">
+            </div>
+            <div class="def_side">
+                <span style="font-size: 17px">{{orderItem.itemName}}</span>
+                <hr style="border-bottom: 1px  solid #dfdfdf; border-top:-0px; margin-top:7px">
+                    <span style="font-size: 18px; margin-top:15px" ><b>₦{{orderItem.itemPrice}}</b></span>
+                    <br>
+                    <span style="font-size: 15px; margin-top:10px" >{{orderItem.itemQuantity}} ordered</span>
+                    <br>
+                    <span style="font-size: 15px; margin-top:10px" >Undelivered</span>
+                    <br>
+            </div>
+        </div>
+    </div>
+</div>
 </template>
 
 <script>
@@ -26,28 +35,109 @@ export default {
         }
     },
     methods:{
-        ...mapActions(['fetchProducts', 'fetchOneProduct']),
+        ...mapActions(['fetchOrders']),
     },
-    computed: mapGetters(['allProducts', 'oneProduct']),
+    computed: mapGetters(['getUserOrders']),
     created(){
+        this.fetchOrders()
     }
 }
 </script>
 
 <style scoped>
-    .todos{
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        grid-gap: 1em;
+    .mainBox{
+        width: 1050px;
+        margin: auto;
+        margin-bottom: 250px;
+        margin-top: 30px;
+        box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+        overflow: none;
     }
 
-    .todo{
-        border: 1px solid #ccc;
-        background: #41b883;
-        padding: 1rem;
-        border-radius: 5px;
-        text-align: center;
-        position: relative;
-        cursor: pointer;
+    .box_header{
+        height: 50px;
+        width: 100%;
+        border-bottom: 1px solid #e0dfdf;
+        padding: 13px;
+        font-size: 20px;
+        color: #141414;
+    }
+
+    .box_content{
+        padding: 15px;
+    }
+
+    .buy_item div{
+        float: left;
+        display: inline;
+    }
+
+    .buy_item{
+        height: 180px;
+        width: 100%;
+    }
+
+    .product_side{
+        width: 150px;
+        height: auto;
+        padding: 15px;   
+        margin: auto; 
+    }   
+
+    .product_side img{
+        width: 100px;
+        height: auto;
+        margin: auto;
+    }
+
+    .product_side img:hover{
+        transform: scale(1.05);
+    }
+
+    .def_side{
+        width: 400px;
+        height: auto;
+        padding: 15px;
+    }
+
+    .price_div{
+        width: 100%;
+        height: 120px;
+        border: 1px solid #4b4b4b;
+        margin-top: 00px;
+    }
+
+    .price_header{
+        width: 100%;
+        height: 40px;
+        background-color: #494949;
+        color: white;
+        padding: 5px;
+    }
+
+    .price_content{
+        width: 100%;
+        padding: 7px;
+    }
+
+    .choose_option{
+        height: auto;
+        width: 100%;
+        padding-top: 17px;
+    }
+
+    .del-btn {
+        float: right;
+        margin-left: 100%;
+        margin-top: -30px;
+    }
+
+    .cart_items{
+        width: 1300px;
+        margin: auto;
+    }
+
+    .btn-buy{
+        margin-left: 170px;
     }
 </style>

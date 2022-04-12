@@ -5,10 +5,10 @@
             <h2>Orders</h2>
             </v-col>
             <v-col cols="2">
-                <v-text-field :items="items" label="Search" ></v-text-field>
+                <v-text-field label="Search" ></v-text-field>
             </v-col>
             <v-col cols="2">
-                <v-select :items="items" label="Filter By"  ></v-select>
+                <v-select label="Filter By"  ></v-select>
             </v-col>
             
         </v-row>
@@ -20,8 +20,9 @@
                         <th>Order ID</th>
                         <th>Product ID</th>
                         <th>Product Name</th>
+                        <th>Quantity</th>
+                        <th>Price</th>
                         <th>Date Ordered</th>
-                        <th>Delivery Date</th>
                         <th>Receiver Name</th>
                         <th>Receiver Address</th>
                         <th>Receiver No.</th>
@@ -29,16 +30,17 @@
                         <th></th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
-                        <td>Abubakar</td>
-                        <td>Ibrahim</td>
-                        <td>909162222</td>
-                        <td>Boskitechh@gmail.com</td>
-                        <td>Boskitechh@gmail.com</td>
-                        <td>Boskitechh@gmail.com</td>
-                        <td>Boskitechh@gmail.com</td>
-                        <td>Boskitechh@gmail.com</td>
+                <tbody >
+                    <tr v-for="orders in getOrders" :key="orders._id">
+                        <td>{{orders._id}}</td>
+                        <td>{{orders.itemID}}</td>
+                        <td>{{orders.itemName}}</td>
+                        <td>{{orders.itemQuantity}}</td>
+                        <td>{{orders.itemPrice}}</td>
+                        <td>{{orders.dateOrdered}}</td>
+                        <td>{{orders.receiverName}}</td>
+                        <td>{{orders.receiverAddress}}</td>
+                        <td>{{orders.receiverNo}}</td>
                          <td>
                         <v-tooltip top>
                             <template v-slot:activator="{ on, attrs }">
@@ -60,96 +62,6 @@
                         </v-tooltip>
                         </td>
                     </tr>
-                    <tr>
-                        <td>Abubakar</td>
-                        <td>Ibrahim</td>
-                        <td>909162222</td>
-                        <td>Boskitechh@gmail.com</td>
-                        <td>Boskitechh@gmail.com</td>
-                        <td>Boskitechh@gmail.com</td>
-                        <td>Boskitechh@gmail.com</td>
-                        <td>Boskitechh@gmail.com</td>
-                        <td>
-                        <v-tooltip top>
-                            <template v-slot:activator="{ on, attrs }">
-                                <v-btn fab small color="blue white--text" v-bind="attrs" v-on="on" >
-                                    <v-icon>mdi-view-list</v-icon>
-                                </v-btn>
-                            </template>
-                            <span>View Order</span>
-                        </v-tooltip>
-                        </td>
-                        <td>
-                        <v-tooltip top>
-                            <template v-slot:activator="{ on, attrs }">
-                                <v-btn fab small color="green white--text" v-bind="attrs" v-on="on" >
-                                    <v-icon>mdi-clock-check</v-icon>
-                                </v-btn>
-                            </template>
-                            <span>Uncompleted</span>
-                        </v-tooltip>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Abubakar</td>
-                        <td>Ibrahim</td>
-                        <td>909162222</td>
-                        <td>Boskitechh@gmail.com</td>
-                        <td>Boskitechh@gmail.com</td>
-                        <td>Boskitechh@gmail.com</td>
-                        <td>Boskitechh@gmail.com</td>
-                        <td>Boskitechh@gmail.com</td>
-                        <td>
-                        <v-tooltip top>
-                            <template v-slot:activator="{ on, attrs }">
-                                <v-btn fab small color="blue white--text" v-bind="attrs" v-on="on" >
-                                    <v-icon>mdi-view-list</v-icon>
-                                </v-btn>
-                            </template>
-                            <span>View Order</span>
-                        </v-tooltip>
-                        </td>
-                        <td>
-                        <v-tooltip top>
-                            <template v-slot:activator="{ on, attrs }">
-                                <v-btn fab small color="indigo white--text" v-bind="attrs" v-on="on" >
-                                    <v-icon>mdi-clock</v-icon>
-                                </v-btn>
-                            </template>
-                            <span>Uncompleted</span>
-                        </v-tooltip>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Abubakar</td>
-                        <td>Ibrahim</td>
-                        <td>909162222</td>
-                        <td>Boskitechh@gmail.com</td>
-                        <td>Boskitechh@gmail.com</td>
-                        <td>Boskitechh@gmail.com</td>
-                        <td>Boskitechh@gmail.com</td>
-                        <td>Boskitechh@gmail.com</td>
-                         <td>
-                        <v-tooltip top>
-                            <template v-slot:activator="{ on, attrs }">
-                                <v-btn fab small color="blue white--text" v-bind="attrs" v-on="on" >
-                                    <v-icon>mdi-view-list</v-icon>
-                                </v-btn>
-                            </template>
-                            <span>View Order</span>
-                        </v-tooltip>
-                        </td>
-                        <td>
-                        <v-tooltip top>
-                            <template v-slot:activator="{ on, attrs }">
-                                <v-btn fab small color="indigo white--text" v-bind="attrs" v-on="on" >
-                                    <v-icon>mdi-clock</v-icon>
-                                </v-btn>
-                            </template>
-                            <span>Uncompleted</span>
-                        </v-tooltip>
-                        </td>
-                    </tr>
                 </tbody>
             </table>
         </v-col>
@@ -158,8 +70,24 @@
 </template>
 
 <script>
+import { mapGetters, mapActions} from 'vuex'
 export default {
     name: "ViewOrders",
+    data(){
+        return{
+        }
+    },
+    methods:{
+        ...mapActions(['fetchOrders']),
+        showOrders(){
+            console.log(this.getOrders)
+        }
+    },
+    computed: mapGetters(['getOrders']),
+    created(){
+        this.fetchOrders();
+        console.log(this.getOrders)
+    }
 }
 </script>
 

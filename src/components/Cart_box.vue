@@ -17,6 +17,13 @@
                 <v-divider></v-divider>
 
                 <v-card-actions>
+                     <v-btn
+                    plain
+                    color="#141414"
+                    @click="$router.push('/orders')"
+                >
+                    View orders
+                </v-btn>
                 <v-spacer></v-spacer>
                 <v-btn
                     plain
@@ -189,7 +196,10 @@ export default {
                 Arr.push({ 
                     userID:element.userID, 
                     itemID:element.itemID, 
-                    cartItemName:element.cartItemName, 
+                    itemImage:element.cartItemImage, 
+                    itemName:element.cartItemName, 
+                    itemQuantity:element.cartItemQuantity, 
+                    itemPrice:element.cartItemPrice, 
                     dateOrdered:Date.now(),
                     receiverName:this.getUser.firstname + ' ' + this.getUser.lastname, 
                     receiverAddress:this.getUser.country, 

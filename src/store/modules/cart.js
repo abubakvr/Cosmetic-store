@@ -7,8 +7,8 @@ const state = {
     shipping: 0,
     subTotal: 0,
     total: 0,
-    itemNo:0,
-    quantity:''
+    itemNo: 0,
+    quantity: ''
 }
 
 const getters = {
@@ -24,30 +24,30 @@ const mutations = {
     setCart: (state, cart) => (state.myCart = cart),
     removeFromCart: (state, id) => state.myCart = state.myCart.filter(item => item._id !== id),
     setSubTotal(state) {
-        const pricesArray = state.myCart.map(product=>product.cartItemPrice*product.cartItemQuantity)
-        state.subTotal = pricesArray.flat().reduce((acc,sum)=>acc+sum)
-    }, 
+        const pricesArray = state.myCart.map(product => product.cartItemPrice * product.cartItemQuantity)
+        state.subTotal = pricesArray.flat().reduce((acc, sum) => acc + sum)
+    },
     setShipping(state) {
-        const priceArray = state.myCart.map(product=>product.itemShippingPrice*product.cartItemQuantity)
-        state.shipping = priceArray.flat().reduce((acc,sum)=>acc+sum)
-    }, 
+        const priceArray = state.myCart.map(product => product.itemShippingPrice * product.cartItemQuantity)
+        state.shipping = priceArray.flat().reduce((acc, sum) => acc + sum)
+    },
     //setShipping: (state) => state.shipping = state.myCart.reduce((n, {itemShippingPrice}) => n + parseFloat(itemShippingPrice), 0),
-    setQuantity: (state) => state.quantity = state.myCart.reduce((n, {cartItemQuantity}) => n + parseFloat(cartItemQuantity), 0),
+    setQuantity: (state) => state.quantity = state.myCart.reduce((n, { cartItemQuantity }) => n + parseFloat(cartItemQuantity), 0),
     setTotal: (state) => state.total = state.subTotal + state.shipping,
-    setBadge:(state, cartt) => state.myCart.push(cartt),
+    setBadge: (state, cartt) => state.myCart.push(cartt),
     clearBadge(state) {
         state.myCart = []
     },
 }
 
 const actions = {
-    async fetctCartItems({commit}){
+    async fetctCartItems({ commit }) {
         const response = await axios.get('http://localhost:5200/api/cart/');
         commit('setCart', response.data)
     },
 
-    async fetchByUser({commit}, user){
-        const response =  await axios.get(`http://localhost:5200/api/cart/user/${user}`)
+    async fetchByUser({ commit }, user) {
+        const response = await axios.get(`http://localhost:5200/api/cart/user/${user}`)
         commit('setCart', response.data)
         commit('setSubTotal')
         commit('setShipping')
@@ -55,10 +55,10 @@ const actions = {
         commit('setQuantity')
     },
 
-    async addToCart({commit}, payload){
+    async addToCart({ commit }, payload) {
         const data = {
             userID: payload.userID,
-            itemID: payload. itemID,
+            itemID: payload.itemID,
             cartItemName: payload.cartItemName,
             cartItemPrice: payload.cartItemPrice,
             itemShippingPrice: payload.itemShippingPrice,
@@ -68,9 +68,9 @@ const actions = {
         commit('setBadge', data)
     },
 
-    async deleteFromCart({commit}, id){
+    async deleteFromCart({ commit }, id) {
         await axios.delete(`http://localhost:5200/api/cart/${id}`)
-        .catch(err => console.log(err));
+            .catch(err => console.log(err));
         commit('removeFromCart', id)
         commit('setSubTotal')
         commit('setShipping')
@@ -78,7 +78,7 @@ const actions = {
         commit('setQuantity')
     },
 
-    clearCart({commit}){
+    clearCart({ commit }) {
         commit('clearBadge')
     }
 }
