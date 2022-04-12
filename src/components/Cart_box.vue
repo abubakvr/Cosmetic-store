@@ -149,7 +149,7 @@ export default {
         }
     },
     methods:{
-        ...mapActions(['fetchByUser']),
+        ...mapActions(['fetchByUser', 'setOrders']),
         //Adding quantity in cart
         plusFunc(cartItem){
             this.id = cartItem._id
@@ -202,8 +202,8 @@ export default {
                     itemPrice:element.cartItemPrice, 
                     dateOrdered:Date.now(),
                     receiverName:this.getUser.firstname + ' ' + this.getUser.lastname, 
-                    receiverAddress:this.getUser.country, 
-                    receiverNo:this.getUser.email, 
+                    receiverAddress:this.getUser.address, 
+                    receiverNo:this.getUser.telephone, 
                     completed:"False"
                 })
             });    
@@ -218,6 +218,7 @@ export default {
                                 this.contentMessage = "You've successfully placed your order"
                                 this.checkout_dialog = true
                                 this.fetchByUser(this.getId)
+                                this.setOrders()
                             }else{
                                 this.headerMessage = "Error"
                                 this.contentMessage = "Unsuccessful. Try again later"

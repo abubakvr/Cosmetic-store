@@ -18,7 +18,8 @@
                     <v-sheet class="pa-8">
                        <p><b>Name:</b> {{getUser.firstname + ' ' + getUser.lastname}}</p>
                        <p><b>Email:</b> {{getUser.email}}</p>
-                       <p><b>Country:</b> {{getUser.country}}</p>
+                       <p><b>Phone:</b> {{getUser.telephone}}</p>
+                       <p><b>Address:</b> {{getUser.address}}</p>
                        <p><b>Gender:</b> {{getUser.gender}}</p>
                     </v-sheet>
                 </v-sheet>

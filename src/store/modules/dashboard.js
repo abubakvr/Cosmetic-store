@@ -22,6 +22,10 @@ const actions = {
         commit('setOrders', response.data)
         commit('setUserOrders')
     },
+
+    setOrders({commit}){
+        commit('setUserOrders')
+    }
 }
 
 export default {

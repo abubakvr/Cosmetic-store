@@ -5,11 +5,16 @@
             <v-col cols="5">
                 <div class="mainbox pa-7">
                     <v-row>
-                        <v-col cols="6">
+                        <v-col cols="12">
                             <v-text-field filled label="Product Name" v-model="product.name"></v-text-field>
                         </v-col>    
+                    </v-row>
+                    <v-row>
                         <v-col cols="6">
                             <v-text-field filled label="Price" v-model="product.price"></v-text-field>
+                        </v-col>    
+                        <v-col cols="6">
+                            <v-text-field filled label="Shipping Price" v-model="product.shippingPrice"></v-text-field>
                         </v-col>
                     </v-row>
                     <v-row>
@@ -64,6 +69,7 @@ export default {
             product:{
                 name:'',
                 price:'',
+                shippingPrice:'',
                 brand:'',
                 category:'',
                 quantity:'',
@@ -78,6 +84,7 @@ export default {
             const meta = {
                 productName: this.product.name,
                 productPrice:this.product.price,
+                productShipping:this.product.shippingPrice,
                 productBrand: this.product.brand,
                 productCategory: this.product.category,
                 productQuantity: this.product.quantity,

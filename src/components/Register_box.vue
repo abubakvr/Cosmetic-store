@@ -11,11 +11,12 @@
                             <v-col cols="6">
                                 <v-text-field v-model="firstname" outlined label="Firstname"></v-text-field>
                                 <v-text-field v-model="email" outlined label="Email"></v-text-field><v-spacer></v-spacer>
+                                <v-text-field v-model="telephone" outlined label="Phone"></v-text-field><v-spacer></v-spacer>
                                 <v-select v-model="gender" :items="genderItems" outlined label="Gender"></v-select>
                             </v-col>
                             <v-col cols="6">
                                 <v-text-field v-model="lastname" outlined label="Lastname"></v-text-field>
-                                <v-text-field v-model="country" outlined label="Country"></v-text-field>
+                                <v-text-field v-model="address" outlined label="Address"></v-text-field>
                                 <v-text-field v-model="password" outlined label="Password"></v-text-field><v-spacer></v-spacer>
                                 <v-text-field v-model="confPass" outlined label="Confirm Password"></v-text-field>
                             </v-col>
@@ -43,7 +44,8 @@ export default {
             firstname:'',
             lastname: '',
             email:'',
-            country:'',
+            telephone:'',
+            address:'',
             genderItems:['Male', 'Female'],
             gender:'',
             password:'',
@@ -55,8 +57,9 @@ export default {
             const meta = {
                 firstname: this.firstname,
                 lastname: this.lastname,
-                country: this.country,
                 email:this.email,
+                telephone:this.telephone,
+                address: this.address,
                 gender: this.gender,
                 password:this.password
             }

@@ -22,55 +22,20 @@
                         <th>Last Name</th>
                         <th>Phone Number</th>
                         <th>Email Address</th>
-                        <th>Country</th>
+                        <th>Address</th>
                         <th>Gender</th>
-                        <th>Postal Code</th>
                         <th></th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>11</td>
-                        <td>Abubakar</td>
-                        <td>Ibrahim</td>
-                        <td>909162222</td>
-                        <td>Boskitechh@gmail.com</td>
-                        <td>Boskitechh@gmail.com</td>
-                        <td>Boskitechh@gmail.com</td>
-                        <td>Boskitechh@gmail.com</td>
-                        <td><v-btn color="blue white--text">Block/Remove</v-btn></td>
-                    </tr>
-                    <tr>
-                        <td>11</td>
-                        <td>Abubakar</td>
-                        <td>Ibrahim</td>
-                        <td>909162222</td>
-                        <td>Boskitechh@gmail.com</td>
-                        <td>Boskitechh@gmail.com</td>
-                        <td>Boskitechh@gmail.com</td>
-                        <td>Boskitechh@gmail.com</td>
-                        <td><v-btn color="blue white--text">Block/Remove</v-btn></td>
-                    </tr>
-                    <tr>
-                        <td>11</td>
-                        <td>Abubakar</td>
-                        <td>Ibrahim</td>
-                        <td>909162222</td>
-                        <td>Boskitechh@gmail.com</td>
-                        <td>Boskitechh@gmail.com</td>
-                        <td>Boskitechh@gmail.com</td>
-                        <td>Boskitechh@gmail.com</td>
-                        <td><v-btn color="blue white--text">Block/Remove</v-btn></td>
-                    </tr>
-                    <tr>
-                        <td>11</td>
-                        <td>Abubakar</td>
-                        <td>Ibrahim</td>
-                        <td>909162222</td>
-                        <td>Boskitechh@gmail.com</td>
-                        <td>Boskitechh@gmail.com</td>
-                        <td>Boskitechh@gmail.com</td>
-                        <td>Boskitechh@gmail.com</td>
+                    <tr v-for="user, index in getUsers" :key="user._id">
+                        <td>{{index + 1}}</td>
+                        <td>{{user.firstname}}</td>
+                        <td>{{user.lastname}}</td>
+                        <td>{{user.telephone}}</td>
+                        <td>{{user.email}}</td>
+                        <td>{{user.address}}</td>
+                        <td>{{user.gender}}</td>
                         <td><v-btn color="blue white--text">Block/Remove</v-btn></td>
                     </tr>
                 </tbody>
@@ -81,8 +46,22 @@
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex'
+
 export default {
     name: "ManageUsers",
+    data(){
+        return{
+        }
+    },
+    methods:{
+        ...mapActions(['fetchUsers']),
+        
+    },
+    computed: mapGetters(['getUsers']),
+    created(){
+        this.fetchUsers();
+    }
 }
 </script>
 

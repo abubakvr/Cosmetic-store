@@ -17,11 +17,12 @@
             <table class="styled-table">
                 <thead>
                     <tr>
+                        <th>S/N</th>
                         <th>Order ID</th>
                         <th>Product ID</th>
                         <th>Product Name</th>
                         <th>Quantity</th>
-                        <th>Price</th>
+                        <th>Unit Price</th>
                         <th>Date Ordered</th>
                         <th>Receiver Name</th>
                         <th>Receiver Address</th>
@@ -31,7 +32,8 @@
                     </tr>
                 </thead>
                 <tbody >
-                    <tr v-for="orders in getOrders" :key="orders._id">
+                    <tr v-for="(orders, index) in getOrders" :key="orders._id">
+                        <td>{{index + 1}}</td>
                         <td>{{orders._id}}</td>
                         <td>{{orders.itemID}}</td>
                         <td>{{orders.itemName}}</td>
@@ -79,14 +81,11 @@ export default {
     },
     methods:{
         ...mapActions(['fetchOrders']),
-        showOrders(){
-            console.log(this.getOrders)
-        }
+    
     },
     computed: mapGetters(['getOrders']),
     created(){
         this.fetchOrders();
-        console.log(this.getOrders)
     }
 }
 </script>

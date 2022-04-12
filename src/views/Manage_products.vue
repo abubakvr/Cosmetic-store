@@ -30,14 +30,14 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>12</td>
-                        <td>156267278</td>
-                        <td>Lip Balm</td>
-                        <td>12090</td>
-                        <td>234</td>
-                        <td>Chanel</td>
-                        <td>Lips</td>
+                    <tr v-for="(product, index) in allProducts" :key="product._id">
+                        <td>{{index + 1 }}</td>
+                        <td>{{product._id}}</td>
+                        <td>{{product.productName}}</td>
+                        <td>{{product.productPrice}}</td>
+                        <td>{{product.productQuantity}}</td>
+                        <td>{{product.productBrand}}</td>
+                        <td>{{product.productCategory}}</td>
                          <td>
                         <v-tooltip top>
                             <template v-slot:activator="{ on, attrs }">
@@ -62,85 +62,7 @@
                         <v-tooltip top>
                             <template v-slot:activator="{ on, attrs }">
                                 <v-btn fab small color="red white--text" v-bind="attrs" v-on="on" >
-                                    <v-icon>mdi-close</v-icon>
-                                </v-btn>
-                            </template>
-                            <span>Remove Product</span>
-                        </v-tooltip>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>12</td>
-                        <td>156267278</td>
-                        <td>Lip Balm</td>
-                        <td>12090</td>
-                        <td>234</td>
-                        <td>Chanel</td>
-                        <td>Lips</td>
-                         <td>
-                        <v-tooltip top>
-                            <template v-slot:activator="{ on, attrs }">
-                                <v-btn fab small color="green white--text" v-bind="attrs" v-on="on" >
-                                    <v-icon>mdi-plus</v-icon>
-                                </v-btn>
-                            </template>
-                            <span>Add Product</span>
-                        </v-tooltip>
-                        </td>
-                        <td>
-                        <v-tooltip top>
-                            <template v-slot:activator="{ on, attrs }">
-                                <v-btn fab small color="orange white--text" v-bind="attrs" v-on="on" >
-                                    <v-icon>mdi-pencil</v-icon>
-                                </v-btn>
-                            </template>
-                            <span>Edit</span>
-                        </v-tooltip>
-                        </td>
-                        <td>
-                        <v-tooltip top>
-                            <template v-slot:activator="{ on, attrs }">
-                                <v-btn fab small color="red white--text" v-bind="attrs" v-on="on" >
-                                    <v-icon>mdi-close</v-icon>
-                                </v-btn>
-                            </template>
-                            <span>Remove Product</span>
-                        </v-tooltip>
-                        </td>
-                    </tr>
-                      <tr>
-                        <td>12</td>
-                        <td>156267278</td>
-                        <td>Lip Balm</td>
-                        <td>12090</td>
-                        <td>234</td>
-                        <td>Chanel</td>
-                        <td>Lips</td>
-                         <td>
-                        <v-tooltip top>
-                            <template v-slot:activator="{ on, attrs }">
-                                <v-btn fab small color="green white--text" v-bind="attrs" v-on="on" >
-                                    <v-icon>mdi-plus</v-icon>
-                                </v-btn>
-                            </template>
-                            <span>Add Product</span>
-                        </v-tooltip>
-                        </td>
-                        <td>
-                        <v-tooltip top>
-                            <template v-slot:activator="{ on, attrs }">
-                                <v-btn fab small color="orange white--text" v-bind="attrs" v-on="on" >
-                                    <v-icon>mdi-pencil</v-icon>
-                                </v-btn>
-                            </template>
-                            <span>Edit</span>
-                        </v-tooltip>
-                        </td>
-                        <td>
-                        <v-tooltip top>
-                            <template v-slot:activator="{ on, attrs }">
-                                <v-btn fab small color="red white--text" v-bind="attrs" v-on="on" >
-                                    <v-icon>mdi-close</v-icon>
+                                    <v-icon>mdi-trash-can</v-icon>
                                 </v-btn>
                             </template>
                             <span>Remove Product</span>
@@ -155,8 +77,22 @@
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex'
+
 export default {
     name: "ManageProducts",
+    data(){
+        return{
+        }
+    },
+    methods:{
+        ...mapActions(['fetchProducts']),
+        
+    },
+    computed: mapGetters(['allProducts']),
+    created(){
+        this.fetchProducts();
+    }
 }
 </script>
 

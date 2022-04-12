@@ -61,7 +61,7 @@
                         </div>
                     </div>
                     <div class="choose_option">
-                        <p style="font-size: 14px; margin-top:10px">Shipping ₦1,200-------ID is {{ getId }}</p>
+                        <p style="font-size: 14px; margin-top:10px">Shipping ₦1,200</p>
                         <hr style="border-bottom: 1px  solid #dfdfdf; border-top:0px">
                         <p style="font-size: 17px; margin-top:10px">Quantity</p>
                         <v-btn icon small dark color="white" style="background-color:#444444" @click="minusfunc()" :disabled="quantity == 1">

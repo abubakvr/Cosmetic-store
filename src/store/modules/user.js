@@ -5,7 +5,8 @@ const state = {
     token: localStorage.getItem('token') || null,
     user: JSON.parse(localStorage.getItem('user')) || null,
     profile: [],
-    usr: []
+    usr: [],
+    users: []
 }
 
 const getters = {
@@ -13,12 +14,14 @@ const getters = {
     getProfile: state => state.profile,
     getToken: state => state.token,
     getUser: (state) => state.user,
+    getUsers:state => state.users
 }
 
 const mutations = {
     setToken: (state, token) => (state.token = token),
     setUser: (state, user) => (state.user = user),
     setUsr: (state, usr) => (state.usr = usr),
+    setUsers: (state, users) => (state.users = users),
     signOut(state) {
         state.user = null
         state.token = null
@@ -39,7 +42,10 @@ const actions = {
                 commit('setUser', response.data.user)
                 localStorage.setItem('token', response.data.token);
                 localStorage.setItem('user', JSON.stringify(response.data.user));
-                router.go(-1)
+                router.push('/')
+                .catch(error => {
+                    console.info(error.message)
+                });
             }else{
                 console.log("Sign In Error")
             }
@@ -75,6 +81,12 @@ const actions = {
             console.log('Error>>> ', error)
         });
     },
+
+    async fetchUsers({commit}){
+        const response = await axios.get('http://localhost:5200/api/users/getusers');
+        commit('setUsers', response.data)
+    },
+
     logOut({ commit }) {
         router.push('/login')
         commit('signOut')

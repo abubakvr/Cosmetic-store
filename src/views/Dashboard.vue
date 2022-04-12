@@ -4,7 +4,7 @@
         <router-view></router-view>
     </v-container>
 
-    <v-navigation-drawer absolute permanent left >
+    <v-navigation-drawer absolute permanent left style="position:fixed; top=0" >
       <template v-slot:prepend>
         <v-list-item>
           <v-list-item-avatar>
