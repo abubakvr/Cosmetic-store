@@ -115,10 +115,11 @@
                     :reference="reference"
                     :callback="processPayment"
                     :close="close"
+                    style="width:100%"
                 >
-                <v-btn color="orange white--text" width="100%" :disabled="getUserItems.length == 0">
-                    Buy({{getUserItems.length}})
-                </v-btn>
+                    <v-btn color="orange white--text" width="100%" :disabled="getUserItems.length == 0">
+                            Buy({{getUserItems.length}})
+                    </v-btn>
                 </paystack>
             </div>
         </div>
@@ -201,14 +202,6 @@ export default {
             this.snackbar = true
         },
 
-
-        processPayment: () => {
-            window.alert("Payment recieved")
-            },
-        close: () => {
-            console.log("You closed checkout page")
-        },
-
         //CheckOut
         addOrder(){
             let Arr = []
@@ -228,7 +221,6 @@ export default {
                     completed:"False"
                 })
             });    
-
             
             axios.post('http://localhost:5200/api/orders/',Arr, {})
                 .then((res) =>{
@@ -259,7 +251,15 @@ export default {
                     this.checkout_dialog = true
                 })
             console.log(Arr)
-        }
+        },
+
+        processPayment(){
+                this.addOrder()
+        },
+        
+        close: () => {
+            console.log("You closed checkout page")
+        },
 
     },
     computed:{ 
