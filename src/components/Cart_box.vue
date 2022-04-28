@@ -108,9 +108,18 @@
                 <p style="font-size: 15px;" >Shipping: <span style="float:right" >N{{getShipping}}</span></p>
                 <br>
                 <p style="font-size: 20px;" >Total: <span style="float: right" >N{{getTotal }}</span></p>
-                <v-btn color="orange white--text" width="100%" :disabled="getUserItems.length == 0" @click="addOrder()">
+                <paystack
+                    :amount="parseInt(this.getTotal * 100)"
+                    :email="this.getUser.email"
+                    paystackkey="pk_test_f56f0dd5c762870e327443055e2896f81a028443"
+                    :reference="reference"
+                    :callback="processPayment"
+                    :close="close"
+                >
+                <v-btn color="orange white--text" width="100%" :disabled="getUserItems.length == 0">
                     Buy({{getUserItems.length}})
                 </v-btn>
+                </paystack>
             </div>
         </div>
         <v-snackbar v-model="snackbar" >
@@ -130,11 +139,15 @@
 </template>
 
 <script>
+import paystack from 'vue-paystack';
 import axios from 'axios'
 import { mapActions, mapGetters } from 'vuex'
 
 export default {
     name: 'CartBox',
+    components: {
+        paystack
+    },
     data(){
         return{
             quantity: [],
@@ -188,6 +201,14 @@ export default {
             this.snackbar = true
         },
 
+
+        processPayment: () => {
+            window.alert("Payment recieved")
+            },
+        close: () => {
+            console.log("You closed checkout page")
+        },
+
         //CheckOut
         addOrder(){
             let Arr = []
@@ -208,6 +229,7 @@ export default {
                 })
             });    
 
+            
             axios.post('http://localhost:5200/api/orders/',Arr, {})
                 .then((res) =>{
                     if(res.data.message === "success"){
@@ -242,6 +264,14 @@ export default {
     },
     computed:{ 
         ...mapGetters(['getUserItems', 'getId', 'getTotal', 'getShipping', 'getSubTotal', 'getQuantity', 'getUser']),
+        reference() {
+            let text = "";
+            let possible =
+                "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+            for (let i = 0; i < 10; i++)
+                text += possible.charAt(Math.floor(Math.random() * possible.length));
+            return text;
+        }
     },
     mounted(){
         //Fetch user details
