@@ -42,7 +42,7 @@
         <div class="productbox"  v-for="product in allProducts" :key="product._id" style="cursor: pointer;">
             <div class="inBox">
                 <div @click="$router.push(`/viewitem/${product._id}`)" >
-                    <img :src="'https://shoppeefy.herokuapp.com/' + product.productImage">
+                    <img :src="'https://shoppeefy.herokuapp.com' + product.productImage">
                     <br>
                     <br>
                     <p v-if="product.productName.length < 35" class="nameTag" >{{ product.productName }}</p>

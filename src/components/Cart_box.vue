@@ -117,7 +117,7 @@
                     <div class="cart_checkbox">
                     </div>
                     <div class="product_side" @click="$router.push(`/viewitem/${cartItem.itemID}`)">
-                        <img :src="'https://shoppeefy.herokuapp.com/' + cartItem.cartItemImage" style="cursor: pointer;">
+                        <img :src="'https://shoppeefy.herokuapp.com' + cartItem.cartItemImage" style="cursor: pointer;">
                     </div>
                     <div class="def_side">
                         <span style="font-size: 15px">{{cartItem.cartItemName}}</span>
@@ -236,7 +236,7 @@ export default {
             const meta = {
                 quantity: this.quantity
             }
-            axios.patch(`https://shoppeefy.herokuapp.com//api/cart/quantity/${this.id}`, meta, {})
+            axios.patch(`https://shoppeefy.herokuapp.com/api/cart/quantity/${this.id}`, meta, {})
             .then(() => this.fetchByUser(this.getId))
             console.log(this.quantity)
         },
@@ -248,7 +248,7 @@ export default {
             const meta = {
                 quantity: this.quantity
             }
-            axios.patch(`https://shoppeefy.herokuapp.com//api/cart/quantity/${this.id}`, meta, {})
+            axios.patch(`https://shoppeefy.herokuapp.com/api/cart/quantity/${this.id}`, meta, {})
             .then(() => this.fetchByUser(this.getId))
             console.log(this.quantity)
         },
@@ -288,10 +288,10 @@ export default {
             });    
             
             //Post Items To the server
-            axios.post('https://shoppeefy.herokuapp.com//api/orders/',Arr, {})
+            axios.post('https://shoppeefy.herokuapp.com/api/orders/',Arr, {})
                 .then((res) =>{
                     if(res.data.message === "success"){
-                        axios.delete(`https://shoppeefy.herokuapp.com//api/cart/clearcart/${this.getId}`)
+                        axios.delete(`https://shoppeefy.herokuapp.com/api/cart/clearcart/${this.getId}`)
                         .then((res) => {
                             if(res.data.message === "success"){
                                 this.headerMessage = "Success"
@@ -352,7 +352,8 @@ export default {
 <style scoped>
     .mainBox{
         width: 750px;
-        margin: 30px;
+        position: relative;
+        margin-top: 80px;
         margin-bottom: 250px;
         box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
         overflow: none;
@@ -453,7 +454,7 @@ export default {
         top: 0px;
         width: 450px;
         height: 270px;
-        margin: 30px auto;
+        margin: 80px auto;
         box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
     }
 

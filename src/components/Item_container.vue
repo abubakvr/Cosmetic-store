@@ -3,7 +3,7 @@
         <div class="mainBox">
             <div class="buy_item">
                 <div class="product_side">
-                    <img :src="'https://shoppeefy.herokuapp.com/' + oneProduct.productImage">
+                    <img :src="'https://shoppeefy.herokuapp.com' + oneProduct.productImage">
                     <div class="share_div">
                         <span style="font-size: 17px">SHARE THIS PRODUCT</span><br>
                         <v-btn icon dark color="black">
@@ -134,7 +134,7 @@ export default {
                     cartItemImage: product.productImage
                 }
 
-                axios.post('https://shoppeefy.herokuapp.com//api/cart/',meta, {})
+                axios.post('https://shoppeefy.herokuapp.com/api/cart/',meta, {})
                 .then((res) =>{
                     if(res.data.message === "success"){
                         this.$store.dispatch("addToCart", meta);
@@ -169,7 +169,7 @@ export default {
 
     .mainBox{
         width: 900px;
-        margin: 30px auto;
+        margin: 80px auto;
         overflow: auto;
         box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
     }

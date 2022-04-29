@@ -8,7 +8,7 @@
             <div class="cart_checkbox">
             </div>
             <div class="product_side" @click="$router.push(`/viewitem/${orderItem.itemID}`)">
-                <img :src="'http://localhost:5200' + orderItem.itemImage" style="cursor: pointer;">
+                <img :src="'https://shoppeefy.herokuapp.com' + orderItem.itemImage" style="cursor: pointer;">
             </div>
             <div class="def_side">
                 <span style="font-size: 17px">{{orderItem.itemName}}</span>
@@ -49,7 +49,7 @@ export default {
         width: 1050px;
         margin: auto;
         margin-bottom: 250px;
-        margin-top: 30px;
+        margin-top: 80px;
         box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
         overflow: none;
     }
