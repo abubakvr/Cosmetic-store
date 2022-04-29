@@ -1,7 +1,5 @@
 <template>
     <section class="b">
-        <br>
-        <br>
         <div style="text-align: center">
         <p> DON'T MISS OUT</p>
         <h1>NOW <i>Trending</i></h1>
@@ -49,7 +47,8 @@ export default {
 .b{
   /*clip-path: polygon(0 0, 100% 50%, 100% 100%, 0 100%);*/
   background: White;
-  margin: 550px auto;
+  margin: auto;
+  margin-top: 590px;
   width: 80%;
   text-align: center;
 }
@@ -126,8 +125,8 @@ export default {
 @media only screen and (max-width: 500px) {
 .b{
   /*clip-path: polygon(0 0, 100% 50%, 100% 100%, 0 100%);*/
-  width: 90%;
-    margin-top: 10px;
+    width: 90%;
+    margin-top:0px;
 }
 
 .section_products img{
