@@ -109,7 +109,7 @@
     <div class="mobileNav">
         <v-app-bar
       ccolor="#141414"
-      dark style="position: fixed; top: 0; margin-bottom:30px; color: white; z-index:999 "
+      dark style="position:fixed; top: 0; margin-bottom:30px; color: white; z-index:999 "
     >
       <v-app-bar-nav-icon @click="drawer = true"></v-app-bar-nav-icon>
 
@@ -183,7 +183,7 @@
       absolute
       temporary
       color="#FFF" 
-      style="z-index:9999;"
+      style="z-index:9999; position:fixed;"
     >
       <v-list
         nav

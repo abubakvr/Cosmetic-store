@@ -1,5 +1,7 @@
 <template>
     <section class="b">
+        <br>
+        <br>
         <div style="text-align: center">
         <p> DON'T MISS OUT</p>
         <h1>NOW <i>Trending</i></h1>
@@ -47,7 +49,7 @@ export default {
 .b{
   /*clip-path: polygon(0 0, 100% 50%, 100% 100%, 0 100%);*/
   background: White;
-  margin: auto;
+  margin: 550px auto;
   width: 80%;
   text-align: center;
 }
