@@ -18,7 +18,7 @@ const mutations = {
 
 const actions = {
     async fetchOrders({commit}){
-        const response =  await axios.get('http://localhost:5200/api/orders/')
+        const response =  await axios.get('https://shoppeefy.herokuapp.com/api/orders/')
         commit('setOrders', response.data)
         commit('setUserOrders')
     },

@@ -193,27 +193,27 @@
           v-model="group"
           style="margin-top:30px"
         >
-          <v-list-item>
+          <v-list-item @click="$router.push('/')">
+            <v-list-item-title><b>SHOPPEE</b></v-list-item-title>
+          </v-list-item>
+
+          <v-list-item @click="$router.push('/shopall')">
             <v-list-item-title>SHOP ALL</v-list-item-title>
           </v-list-item>
           
-          <v-list-item>
-            <v-list-item-title>SHOP ALL</v-list-item-title>
-          </v-list-item>
-          
-          <v-list-item>
+          <v-list-item @click="$router.push('/newitems')">
             <v-list-item-title>NEW</v-list-item-title>
           </v-list-item>
 
-          <v-list-item>
-            <v-list-item-title>BEST SELLERS</v-list-item-title>
+          <v-list-item @click="$router.push('/eyeproducts')">
+            <v-list-item-title>EYES</v-list-item-title>
           </v-list-item>
 
-          <v-list-item>
+          <v-list-item @click="$router.push('/faceproducts')">
             <v-list-item-title>FACE</v-list-item-title>
           </v-list-item>
 
-          <v-list-item>
+          <v-list-item @click="$router.push('/lipsproducts')">
             <v-list-item-title>LIPS</v-list-item-title>
           </v-list-item>
 

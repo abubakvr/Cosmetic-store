@@ -64,7 +64,7 @@ export default {
                 password:this.password
             }
 
-            axios.post('http://localhost:5200/api/users/register/',meta, {}).
+            axios.post('https://shoppeefy.herokuapp.com//api/users/register/',meta, {}).
                 then(this.$router.push('/login'))
                 .catch(err => console.log(err));
 

@@ -42,7 +42,7 @@
         <div class="productbox"  v-for="product in allProducts" :key="product._id" style="cursor: pointer;">
             <div class="inBox">
                 <div @click="$router.push(`/viewitem/${product._id}`)" >
-                    <img :src="'http://localhost:5200' + product.productImage">
+                    <img :src="'https://shoppeefy.herokuapp.com/' + product.productImage">
                     <br>
                     <br>
                     <p v-if="product.productName.length < 35" class="nameTag" >{{ product.productName }}</p>
@@ -102,7 +102,7 @@ export default{
                         cartItemImage: product.productImage
                     }
                         
-                    axios.post('http://localhost:5200/api/cart/',meta, {})
+                    axios.post('https://shoppeefy.herokuapp.com//api/cart/',meta, {})
                     .then((res) =>{
                         if(res.data.message === "success"){
                             this.$store.dispatch("addToCart", meta);

@@ -45,12 +45,12 @@ const mutations = {
 
 const actions = {
     async fetctCartItems({ commit }) {
-        const response = await axios.get('http://localhost:5200/api/cart/');
+        const response = await axios.get('https://shoppeefy.herokuapp.com/api/cart/');
         commit('setCart', response.data)
     },
 
     async fetchByUser({ commit }, user) {
-        const response = await axios.get(`http://localhost:5200/api/cart/user/${user}`)
+        const response = await axios.get(`https://shoppeefy.herokuapp.com/api/cart/user/${user}`)
         commit('setCart', response.data)
         commit('setSubTotal')
         commit('setShipping')
@@ -72,7 +72,7 @@ const actions = {
     },
 
     async deleteFromCart({ commit }, id) {
-        await axios.delete(`http://localhost:5200/api/cart/${id}`)
+        await axios.delete(`https://shoppeefy.herokuapp.com/api/cart/${id}`)
             .catch(err => console.log(err));
         commit('removeFromCart', id)
         commit('setSubTotal')

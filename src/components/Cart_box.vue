@@ -117,7 +117,7 @@
                     <div class="cart_checkbox">
                     </div>
                     <div class="product_side" @click="$router.push(`/viewitem/${cartItem.itemID}`)">
-                        <img :src="'http://localhost:5200' + cartItem.cartItemImage" style="cursor: pointer;">
+                        <img :src="'https://shoppeefy.herokuapp.com/' + cartItem.cartItemImage" style="cursor: pointer;">
                     </div>
                     <div class="def_side">
                         <span style="font-size: 15px">{{cartItem.cartItemName}}</span>
@@ -236,7 +236,7 @@ export default {
             const meta = {
                 quantity: this.quantity
             }
-            axios.patch(`http://localhost:5200/api/cart/quantity/${this.id}`, meta, {})
+            axios.patch(`https://shoppeefy.herokuapp.com//api/cart/quantity/${this.id}`, meta, {})
             .then(() => this.fetchByUser(this.getId))
             console.log(this.quantity)
         },
@@ -248,7 +248,7 @@ export default {
             const meta = {
                 quantity: this.quantity
             }
-            axios.patch(`http://localhost:5200/api/cart/quantity/${this.id}`, meta, {})
+            axios.patch(`https://shoppeefy.herokuapp.com//api/cart/quantity/${this.id}`, meta, {})
             .then(() => this.fetchByUser(this.getId))
             console.log(this.quantity)
         },
@@ -288,10 +288,10 @@ export default {
             });    
             
             //Post Items To the server
-            axios.post('http://localhost:5200/api/orders/',Arr, {})
+            axios.post('https://shoppeefy.herokuapp.com//api/orders/',Arr, {})
                 .then((res) =>{
                     if(res.data.message === "success"){
-                        axios.delete(`http://localhost:5200/api/cart/clearcart/${this.getId}`)
+                        axios.delete(`https://shoppeefy.herokuapp.com//api/cart/clearcart/${this.getId}`)
                         .then((res) => {
                             if(res.data.message === "success"){
                                 this.headerMessage = "Success"

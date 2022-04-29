@@ -35,7 +35,7 @@ const actions = {
             email: payload.email,
             password: payload.password
         }
-        await axios.post('http://localhost:5200/api/users/login/',data, {withCredentials:true})
+        await axios.post('https://shoppeefy.herokuapp.com/api/users/login/',data, {withCredentials:true})
         .then((response) => {
             if(response.data.message === 'success'){
                 commit('setToken', response.data.token)
@@ -64,7 +64,7 @@ const actions = {
             gender: payload.gender,
             password: payload.password
         }
-        await axios.post('http://localhost:5200/api/users/register/',data, {})
+        await axios.post('https://shoppeefy.herokuapp.com/api/users/register/',data, {})
         .then((response) => {
             if(response.data.message === 'success'){
                 router.push('/login')
@@ -83,7 +83,7 @@ const actions = {
     },
 
     async fetchUsers({commit}){
-        const response = await axios.get('http://localhost:5200/api/users/getusers');
+        const response = await axios.get('https://shoppeefy.herokuapp.com/api/users/getusers');
         commit('setUsers', response.data)
     },
 
