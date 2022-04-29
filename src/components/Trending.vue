@@ -29,12 +29,11 @@
             <img src="../assets/img/kindpng_2386942.png">
             <p>Duzzle eyeshadow <br>$200</p>
         </div>
-        <br>
-        <br>
-        <br>
+      
+        </div>
+
         <p class="shop_btn"><router-link to="/bestsellers" style="text-decoration:none">
         <v-btn outlined color="black">Shop Trending</v-btn></router-link></p>
-        </div>
     </section>
 </template>
 
@@ -57,8 +56,12 @@ export default {
   height: 150px;
 }
 
+.section_products{
+    height: 270px;
+}
+
 .shop_btn{
-  margin-top:220px
+  margin-top:0px
 }
 
 .section_products div{
@@ -78,6 +81,17 @@ export default {
 .inner_divv :hover{
         box-shadow: none;
         transform: none; 
+}
+
+@media only screen and (max-width: 1100px) {
+    .b{
+        width: 90%;
+        margin-top: 600px;
+    }
+    .section_products img{
+        height: 120px;
+        width: 60%;
+    }
 }
 
 @media only screen and (max-width: 800px) {
@@ -103,7 +117,7 @@ export default {
 }
 
 .shop_btn{
-  margin-top:450px
+  margin-top:250px
 }
 }
 

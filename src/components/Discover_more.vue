@@ -92,6 +92,37 @@ export default {
     z-index: 9999; text-align: center; margin-top: -40px; font-size: 40px; color: white;
 }
 
+@media only screen and (max-width: 1100px) {
+  .e_section_products{
+    width: 85%;
+    margin: auto;
+  }
+  .e_section_products img{
+    height: 100%;
+    transition: transform .2s; /* Animation */
+    border-radius: 1%;
+    width: 100%;
+  }
+
+  .e_section_products div{
+    text-align: center;
+    float: right;
+    display: inline;
+    width: 30%;
+    margin: 10px 25px 30px 0px;
+    height: 270px;
+    cursor: pointer;
+  }
+
+  .footer{
+    width: 100%;
+    background-color: black;
+    margin-top:240px;
+    padding-top:90px;
+    padding-bottom: 30px;
+  }
+}
+
 @media only screen and (max-width: 800px) {
 .e_section_products{
   width: 80%;
