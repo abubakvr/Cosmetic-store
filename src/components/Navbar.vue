@@ -182,8 +182,8 @@
       v-model="drawer"
       absolute
       temporary
-      color="#FFF" 
-      style="z-index:9999; position:fixed;"
+      color="#333333" 
+      style="z-index:9999; position:fixed; color:white"
     >
       <v-list
         nav
@@ -191,31 +191,36 @@
       >
         <v-list-item-group
           v-model="group"
-          style="margin-top:30px"
+          style="margin-top:10px; color:white"
         >
-          <v-list-item @click="$router.push('/')">
-            <v-list-item-title><b>SHOPPEE</b></v-list-item-title>
+          <v-list-item @click="$router.push('/')" >
+            <v-list-item-title style="color:#fff" ><v-icon color="#7e181b">mdi-arrow-right-thin</v-icon><b>HOME</b></v-list-item-title>
           </v-list-item>
-
+            <hr style="border-bottom: 1px  solid #dfdfdf; border-top:-0px; width:90%; margin:-5px auto 0px auto">
           <v-list-item @click="$router.push('/shopall')">
-            <v-list-item-title>SHOP ALL</v-list-item-title>
+            <v-list-item-title style="color:#fff"><v-icon color="#7e181b">mdi-arrow-right-thin</v-icon>SHOP ALL</v-list-item-title>
           </v-list-item>
+            <hr style="border-bottom: 1px  solid #dfdfdf; border-top:-0px; width:90%; margin:-5px auto 0px auto">
           
           <v-list-item @click="$router.push('/newitems')">
-            <v-list-item-title>NEW</v-list-item-title>
-          </v-list-item>
+            <v-list-item-title style="color:#fff"><v-icon color="#7e181b">mdi-arrow-right-thin</v-icon>NEW</v-list-item-title>
+          </v-list-item >
+            <hr style="border-bottom: 1px  solid #dfdfdf; border-top:-0px; width:90%; margin:-5px auto 0px auto">
 
           <v-list-item @click="$router.push('/eyeproducts')">
-            <v-list-item-title>EYES</v-list-item-title>
+            <v-list-item-title style="color:#fff"><v-icon color="#7e181b">mdi-arrow-right-thin</v-icon>EYES</v-list-item-title>
           </v-list-item>
+            <hr style="border-bottom: 1px  solid #dfdfdf; border-top:-0px; width:90%; margin:-5px auto 0px auto">
 
           <v-list-item @click="$router.push('/faceproducts')">
-            <v-list-item-title>FACE</v-list-item-title>
+            <v-list-item-title style="color:#fff"><v-icon color="#7e181b">mdi-arrow-right-thin</v-icon>FACE</v-list-item-title>
           </v-list-item>
+            <hr style="border-bottom: 1px  solid #dfdfdf; border-top:-0px; width:90%; margin:-5px auto 0px auto">
 
           <v-list-item @click="$router.push('/lipsproducts')">
-            <v-list-item-title>LIPS</v-list-item-title>
+            <v-list-item-title style="color:#fff"><v-icon color="#7e181b">mdi-arrow-right-thin</v-icon>LIPS</v-list-item-title>
           </v-list-item>
+            <hr style="border-bottom: 1px  solid #dfdfdf; border-top:-0px; width:90%; margin:-5px auto 0px auto">
 
         </v-list-item-group>
       </v-list>
