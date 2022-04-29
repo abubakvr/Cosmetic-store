@@ -1,6 +1,6 @@
 <template>
     <section class="e">
-        <div style="text-align: center; margin-top:90px">
+        <div style="text-align: center; margin-top:50px">
         <h1><b>Discover</b> <i>More</i></h1>
         </div>
         <div class="e_section_products">
@@ -100,14 +100,21 @@ export default {
 .e_section_products div{
   width: 30%;
   float: left;
-  margin: 30px 20px 0px 0px;
+  margin: 10px 20px 0px 0px;
   height: 300px;
+}
+
+.e_section_products img{
+  height: 80%;
+  transition: transform .2s; /* Animation */
+  border-radius: 1%;
+  width: 100%;
 }
 
 .footer{
   width: 100%;
   background-color: black;
-  margin-top: 250px;
+  margin-top: 150px;
   padding: 170px 15px 0px 15px;
 }
 
@@ -129,6 +136,13 @@ export default {
   margin: auto;
   height: 300px;
   padding-top:30px;
+}
+
+.e_section_products img{
+  height: 100%;
+  transition: transform .2s; /* Animation */
+  border-radius: 1%;
+  width: 100%;
 }
 
 .footer{

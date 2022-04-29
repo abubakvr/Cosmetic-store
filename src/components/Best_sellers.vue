@@ -34,7 +34,7 @@
         <br>
         <br>
         <br>
-        <p class="shop_btn"><router-link to="/bestsellers" style="text-decoration:none">
+        <p class="shop_btn"><router-link to="/bestsellers" style="text-decoration:none;">
         <v-btn outlined color="black">Shop Best Sellers</v-btn></router-link></p>
         </div>
     </section>
@@ -90,24 +90,29 @@ export default {
 
 .section_products img{
   height: 170px;
-  width: 100%;
+  width: 47%;
 }
 
 
 .section_products div{
   height: 200px;
-  width: 16%;
+  width: 32%;
 }
+
+.shop_btn{
+  margin-top:450px
+}
+
 }
 
 @media only screen and (max-width: 500px) {
 .b{
   /*clip-path: polygon(0 0, 100% 50%, 100% 100%, 0 100%);*/
-  width: 80%;
+  width: 90%;
 }
 
 .section_products img{
-  height: 220px;
+  height: 180px;
   width: 80%;
   margin: auto;
 }
@@ -115,9 +120,13 @@ export default {
 
 .section_products div{
   height: 300px;
-  margin: auto;
-  float: none;
-  width: 80%;
+  margin: 0px auto;
+  float: left;
+  width: 47%;
+}
+
+.section_products{
+ margin-top: 30px;
 }
 
 .shop_btn{
