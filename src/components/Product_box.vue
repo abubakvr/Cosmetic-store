@@ -208,7 +208,7 @@ export default{
         .mainbox{
             width: 75%;
             height: auto;
-            margin: 30px auto;
+            margin: 80px auto;
             margin-bottom: 250px;
             box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
         }
@@ -226,7 +226,7 @@ export default{
    @media only screen and (max-width: 1100px) {
         .mainbox{
             width: 90%;
-            margin: 30px auto;
+            margin: 70px auto;
             margin-bottom: 250px;
             box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
         }

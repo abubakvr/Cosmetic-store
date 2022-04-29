@@ -474,7 +474,7 @@ export default {
 
         .mainBox{
             width:65%;
-            margin: 30px auto;
+            margin: 85px auto;
             margin-bottom: 250px;
             padding: 0px;
             box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);

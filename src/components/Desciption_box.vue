@@ -47,7 +47,7 @@ export default {
     .mainBox{
         width: 900px;
         height: auto;
-        margin: 30px auto;
+        margin: 0px auto;
         box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
         margin-top: 0px;
         margin-bottom: 250px;
@@ -81,7 +81,7 @@ export default {
     @media only screen and (max-width: 700px) {
         .mainBox{
             width: 95%;
-            margin: 30px auto;
+            margin: 0px auto;
             padding: 10px;
             margin-bottom: 400px;
         }

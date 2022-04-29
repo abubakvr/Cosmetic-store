@@ -145,7 +145,7 @@ export default {
    @media only screen and (max-width: 1100px) {
         .mainBox{
             width: 70%;
-         
+            margin: 70px auto;
         }     
 
         .product_side{
