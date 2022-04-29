@@ -141,7 +141,7 @@ export default{
  .mainbox{
         width: 70%;
         height: auto;
-        margin: 30px auto;
+        margin: 80px auto;
         margin-bottom: 250px;
         box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
         overflow: auto;
@@ -163,7 +163,7 @@ export default{
         margin-bottom: 10px;
         margin-right: 0.1%;
         width: 19.9%;
-        height: 480px;
+        height: 500px;
         padding: 17px;
     }
 
