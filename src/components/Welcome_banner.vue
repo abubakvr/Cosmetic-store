@@ -57,6 +57,7 @@ export default {
         background-attachment: auto;
         height: 500px;
         width: 100%;
+        margin-top:50px;
     }
 
     .a div{
@@ -78,6 +79,7 @@ export default {
         color: white;
         height: 400px;
         width: 100%;
+        margin-top:50px;
     }
 
     .a div{

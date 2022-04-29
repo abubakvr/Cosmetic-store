@@ -1,5 +1,6 @@
 <template>
     <div>
+    <!------Web nav----------->
     <div class="normalNav">
     <v-app-bar absolute color="#141414" class="navbar" style="position: fixed; top: 0; color: white;" >
 
@@ -37,6 +38,8 @@
 
       <v-spacer></v-spacer>
   
+
+      <!---Cart Button--------------------->
       <router-link to="/cart" style="text-decoration:none">
       <v-btn text color="white lighten-5">
         <v-badge
@@ -49,7 +52,9 @@
         <v-icon  v-if="getItemNo < 1">mdi-cart</v-icon> Cart
       </v-btn>
       </router-link>
-      <v-menu offset-y max-width="300px">
+
+    <!---Account Button---------------->
+    <v-menu offset-y max-width="300px">
       <template v-slot:activator="{ on, attrs }">
         <v-btn  
           color="white"
@@ -98,10 +103,13 @@
 
     </v-app-bar>
     </div>
+
+
+    <!---Mobile Nav-------------------------->
     <div class="mobileNav">
         <v-app-bar
       ccolor="#141414"
-      dark
+      dark style="position: fixed; top: 0; margin-bottom:30px; color: white; z-index:999 "
     >
       <v-app-bar-nav-icon @click="drawer = true"></v-app-bar-nav-icon>
 
@@ -109,18 +117,64 @@
 
       <v-spacer></v-spacer>
 
-      <v-btn icon color="white lighten-5" >
+      <v-btn icon color="white lighten-5" @click="$router.push('/cart')">
         <v-badge
         color="orange"
         overlap
-        dot
+        :content="getItemNo"
+        v-if="getItemNo > 0"
         >
-        <v-icon>mdi-cart</v-icon></v-badge> 
+        <v-icon>mdi-cart</v-icon></v-badge>
+        <v-icon  v-if="getItemNo < 1">mdi-cart</v-icon> 
       </v-btn>
 
-      <v-btn icon color="white">
-        <v-icon>mdi-account</v-icon>
-      </v-btn>
+       <!---Account Button---------------->
+    <v-menu offset-y max-width="300px">
+      <template v-slot:activator="{ on, attrs }">
+        <v-btn  
+          color="white"
+          icon
+          v-bind="attrs"
+          v-on="on"
+        >
+         <v-icon>mdi-account-circle</v-icon>
+        </v-btn>
+      </template>
+      <v-list width="250px">
+           <v-list-item-group color="primary">
+        <v-list-item v-if="loginBtn">
+          <v-list-item-content>
+            <v-btn color="orange white--text" @click="$router.push('/login')">
+              Login
+            </v-btn> 
+          </v-list-item-content>
+        </v-list-item>
+        <v-list-item @click="$router.push('/account')">
+          <v-list-item-icon>
+            <v-icon >mdi-account-circle-outline</v-icon>
+          </v-list-item-icon>
+          <v-list-item-content>
+            <v-list-item-title>My Account</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+        <v-list-item @click="$router.push('/orders')">
+          <v-list-item-icon>
+            <v-icon >mdi-store-check-outline</v-icon>
+          </v-list-item-icon>
+          <v-list-item-content>
+            <v-list-item-title>My orders</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+        <v-list-item v-if="!loginBtn">
+          <v-list-item-content>
+            <v-btn color="orange white--text" @click="logout()">
+              logout
+            </v-btn> 
+          </v-list-item-content>
+        </v-list-item>
+      </v-list-item-group>
+      </v-list>
+    </v-menu>
 
     </v-app-bar>
 
@@ -128,7 +182,8 @@
       v-model="drawer"
       absolute
       temporary
-      color="#FFFFFF" style="color: white"
+      color="#FFF" 
+      style="z-index:9999;"
     >
       <v-list
         nav
@@ -136,12 +191,16 @@
       >
         <v-list-item-group
           v-model="group"
+          style="margin-top:30px"
         >
-
           <v-list-item>
             <v-list-item-title>SHOP ALL</v-list-item-title>
           </v-list-item>
-
+          
+          <v-list-item>
+            <v-list-item-title>SHOP ALL</v-list-item-title>
+          </v-list-item>
+          
           <v-list-item>
             <v-list-item-title>NEW</v-list-item-title>
           </v-list-item>
@@ -157,6 +216,7 @@
           <v-list-item>
             <v-list-item-title>LIPS</v-list-item-title>
           </v-list-item>
+
         </v-list-item-group>
       </v-list>
     </v-navigation-drawer>

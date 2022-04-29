@@ -169,7 +169,7 @@ export default {
        .mainBox{
             width: 85%;
             margin-bottom: 280px;
-            margin-top:15px
+            margin-top: 70px;
         }     
 
         .product_side{
@@ -192,6 +192,7 @@ export default {
         .mainBox{
             width: 94%;
             margin-bottom: 400px;
+            margin-top: 70px;
         }     
 
         .product_side{

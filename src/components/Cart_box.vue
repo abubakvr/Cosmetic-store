@@ -529,7 +529,7 @@ export default {
         }
         .mainBox{
             width: 95%;
-            margin: 30px auto;
+            margin: 70px auto;
             float: none;
             margin-bottom: 350px;
         }     
@@ -575,7 +575,7 @@ export default {
         }
         .mainBox{
             width: 94%;
-            margin: 15px auto;
+            margin: 70px auto;
             float: none;
             margin-bottom: 400px;
 
@@ -611,7 +611,7 @@ export default {
             position:fixed; 
             bottom:20px; 
             right:15px; 
-            z-index:9999;
+            z-index:999;
         }
         
     }

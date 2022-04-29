@@ -239,6 +239,7 @@ export default {
     @media only screen and (max-width: 800px) {
         .mainBox{
             width: 90%;
+            margin-top: 70px;
         }
 
         .product_side{
@@ -264,7 +265,7 @@ export default {
     @media only screen and (max-width: 500px) {
         .mainBox{
             width: 95%;
-            margin: 30px auto;
+            margin: 70px auto;
             padding: 10px;
         }
 
