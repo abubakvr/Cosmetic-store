@@ -102,7 +102,7 @@ export default{
                         cartItemImage: product.productImage
                     }
                         
-                    axios.post('https://shoppeefy.herokuapp.com//api/cart/',meta, {})
+                    axios.post('https://shoppeefy.herokuapp.com/api/cart/',meta, {})
                     .then((res) =>{
                         if(res.data.message === "success"){
                             this.$store.dispatch("addToCart", meta);
