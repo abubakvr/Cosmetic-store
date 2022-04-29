@@ -1,7 +1,7 @@
 <template>
 <div>
     <Navbar/>
-    <ProductBox/>
+    <ProductBox category="Shop All"/>
     <Footer/>
 </div>
 </template>

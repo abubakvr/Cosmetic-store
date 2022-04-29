@@ -1,9 +1,18 @@
 <template>
     <div class="cart_items">
+        <v-btn v-if="getUserItems.length > 0" class="mobileCheckout" fab color="orange" @click="openMobileSummay">
+            <v-badge
+            color="#333333"
+            overlap
+            :content="getUserItems.length"
+            >
+            <v-icon color="white">mdi-cart</v-icon></v-badge>
+        </v-btn>
+        <!--Added Items Dialog-->
         <v-dialog
         v-model="checkout_dialog"
         transition="dialog-top-transition"
-        width="500"
+        width="500" 
         >
             <v-card>
                 <v-card-title class="text-h5 lighten-2 white--text" style="background-color:#222222">
@@ -35,11 +44,51 @@
                 </v-card-actions>
             </v-card>
         </v-dialog>
-        <div class="mainBox">
+
+         <!--Moblie summary Dialog-->
+        <v-dialog
+        v-model="summary_dialog"
+        transition="dialog-top-transition"
+        style="background-color: #ffffff; box-shadow:none"
+        width="500"
+        >
+            <!---Summary Box--->
+            <div class="mobile_summary" >
+                <div class="box_header">
+                    <p>Order Summary</p>
+                </div>
+                <div class="box_content">
+                    <p style="font-size: 15px;" >Subtotal: <span style="float:right" >N{{getSubTotal}}</span></p>
+                    <p style="font-size: 15px;" >Shipping: <span style="float:right" >N{{getShipping}}</span></p>
+                    <br>
+                    <p style="font-size: 20px;" >Total: <span style="float: right" >N{{getTotal }}</span></p>
+                    <paystack
+                        :amount="parseInt(this.getTotal * 100)"
+                        :email="this.getUser.email"
+                        paystackkey="pk_test_f56f0dd5c762870e327443055e2896f81a028443"
+                        :reference="reference"
+                        :callback="processPayment"
+                        :close="close"
+                        style="width:100%"
+                    >
+                        <v-btn @click="closeMobileDialog" color="orange white--text" width="100%" :disabled="getUserItems.length == 0">
+                                Buy({{getUserItems.length}})
+                        </v-btn>
+                    </paystack>
+                </div>
+            </div>
+        </v-dialog>
+        <!---Cart empty display--->
+        <div v-if="getUserItems.length == 0" style="text-align:center; margin-top:160px; color:#333333">
+            <h2>Cart is empty :)</h2>
+        </div>
+        <!---Cart Main Box--->
+        <div class="mainBox" v-if="getUserItems.length > 0">
             <div class="box_header">
                 <p>Cart Items({{getUserItems.length}})</p>
             </div>
             <div class="box_content">
+                <!--Delete Items Dialog---->
                 <v-dialog v-model="dialog" transition="dialog-top-transition" persistent :retain-focus="false" width="500" >
                     <v-card>
                         <v-card-title class="text-h5 lighten-2 white--text" style="background-color:#222222">
@@ -63,6 +112,7 @@
                         </v-card-actions>
                     </v-card>
                 </v-dialog>
+                <!--- Cart Items array---->
                <div class="buy_item" v-for="cartItem in getUserItems" :key="cartItem._id" >
                     <div class="cart_checkbox">
                     </div>
@@ -99,7 +149,8 @@
                 </div>
             </div>
         </div>  
-        <div class="order_summary" position="fixed" top="0">
+        <!---Summary Box--->
+        <div v-if="getUserItems.length > 0" class="order_summary" position="fixed" top="0">
             <div class="box_header">
                 <p>Order Summary</p>
             </div>
@@ -122,7 +173,9 @@
                     </v-btn>
                 </paystack>
             </div>
+            
         </div>
+        <!---Delete Item Snackbar----->
         <v-snackbar v-model="snackbar" >
             Item Deleted
             <template v-slot:action="{ attrs }">
@@ -136,6 +189,7 @@
                 </v-btn>
             </template>
         </v-snackbar>
+        
     </div>
 </template>
 
@@ -158,12 +212,23 @@ export default {
             contentMessage:'',  
             dialog: false,
             checkout_dialog:false,
+            summary_dialog:false,
             snackbar:false,
             // 82522403296
         }
     },
     methods:{
         ...mapActions(['fetchByUser', 'setOrders']),
+        //Open Mobile summay box
+        openMobileSummay(){
+            this.summary_dialog = true
+        },
+
+        //Close Mobile summay box
+        closeMobileDialog(){
+            this.summary_dialog = false
+        },
+
         //Adding quantity in cart
         plusFunc(cartItem){
             this.id = cartItem._id
@@ -222,6 +287,7 @@ export default {
                 })
             });    
             
+            //Post Items To the server
             axios.post('http://localhost:5200/api/orders/',Arr, {})
                 .then((res) =>{
                     if(res.data.message === "success"){
@@ -253,10 +319,12 @@ export default {
             console.log(Arr)
         },
 
+        //Paystack Process payment bar
         processPayment(){
                 this.addOrder()
         },
         
+        //Patstack close dialog bar
         close: () => {
             console.log("You closed checkout page")
         },
@@ -264,6 +332,7 @@ export default {
     },
     computed:{ 
         ...mapGetters(['getUserItems', 'getId', 'getTotal', 'getShipping', 'getSubTotal', 'getQuantity', 'getUser']),
+        //Paystack validation
         reference() {
             let text = "";
             let possible =
@@ -388,15 +457,24 @@ export default {
         box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
     }
 
+    .mobile_summary {
+        visibility: hidden;
+    }
+
+    .mobileCheckout{
+        visibility: hidden;
+    }
+
     @media only screen and (max-width: 1450px) {
         .cart_items{
-            width: 80%;
+            width: 90%;
             margin: auto;
         }
 
         .mainBox{
             width:65%;
             margin: 30px auto;
+            margin-bottom: 250px;
             padding: 0px;
             box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
             padding: 0px;
@@ -442,71 +520,22 @@ export default {
         }
     }
 
+
+
     @media only screen and (max-width: 800px) {
-        .cart_items{
+       .cart_items{
             width: 100%;
             margin: auto;
         }
-
         .mainBox{
-            width:96%;
-            margin: 30px auto;
-            padding: 0px;
-            box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
-            margin-left: 2%;
-            padding: 0px;
-        }
-
-        .order_summary {
-            float:left;
-            display: inline;;
-            top: 0px;
-            width: 96%;
-            height: 270px;
-            margin: 30px auto;
-            box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
-            margin-left: 2%;
-        }
-
-        
-    }
-
-    @media only screen and (max-width: 700px) {
-        .cart_items{
             width: 95%;
-            margin: auto;
-        }
-
-        .cart_items div{
-            float: none;
-            display: inline;;
-        }
-
-        .mainBox{
-            width:90%;
             margin: 30px auto;
-            padding: 0px;
-            box-shadow: none;
-            padding: 0px;
-        }
-
-        .buy_item{
-            height: auto;
-            width: 100%;
-            padding: 0px;
-            margin: 10px auto;
-        }
-
-        .buy_item div{
             float: none;
-            display: block;
-        }
+            margin-bottom: 350px;
+        }     
 
         .product_side{
-            width: 100%;
-            height: auto;
-            padding: 5px;   
-            margin: auto; 
+            width: 25%;
         }   
 
         .product_side img{
@@ -515,34 +544,89 @@ export default {
             margin: auto;
         }
 
-        .cart_checkbox{
-            margin-left: 0px;
+        .def_side{
+            width: 70%;
         }
 
-        .def_side{
+        .order_summary{
+            display: none;
+        }
+
+        .mobile_summary {
+            visibility: visible;
+            width: 100%;
+            background-color: #fff;
+            margin: 0px auto;
+        }
+
+        .mobileCheckout{
+            visibility: visible;
+            position:fixed; 
+            bottom:30px; 
+            right:20px; 
+            z-index:999
+        }
+    }
+
+     @media only screen and (max-width: 500px) {
+         .cart_items{
+            width: 100%;
+            margin: auto;
+        }
+        .mainBox{
+            width: 94%;
+            margin: 15px auto;
+            float: none;
+            margin-bottom: 400px;
+
+        }     
+
+        .product_side{
+            width: 25%;
+        }   
+
+        .product_side img{
             width: 100%;
             height: auto;
-            padding: 5px;
             margin: auto;
         }
 
-        .choose_option{
-            height: auto;
-            width: 100%;
-            padding: 15px;
-        }
-   
-        .order_summary{
-            height: unset;
-            width: unset;
-            visibility: collapse;
-            display: none;
-            overflow: hidden;
+        .def_side{
+            width: 70%;
         }
 
-        .btn-buy{
-            float: right;
-            margin-left: 0px;
+        .order_summary{
+            display: none;
         }
+
+        .mobile_summary {
+            visibility: visible;
+            width: 100%;
+            background-color: #fff;
+            margin: 0px auto;
+        }
+
+        .mobileCheckout{
+            visibility: visible;
+            position:fixed; 
+            bottom:20px; 
+            right:15px; 
+            z-index:9999;
+        }
+        
+    }
+
+    @media only screen and (max-width: 350px) {
+        .mainBox{
+            margin-bottom: 420px;
+
+        }     
+    }
+
+     @media only screen and (max-width: 300px) {
+        .mainBox{
+            margin-bottom: 519px;
+
+        }     
     }
 </style>

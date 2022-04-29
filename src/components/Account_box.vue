@@ -1,5 +1,5 @@
 <template>
-    <v-container width="100%" height="100%" class="my-6">
+    <v-container width="100%" height="100%" class="my-6" style="margin-bottom:500px">
         <v-col>
             <v-row justify="center" >
                 <v-sheet color="white" elevation="4" width="600px" height="480px" class="my-6">

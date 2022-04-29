@@ -1,7 +1,7 @@
 <template>
     <div class="mainbox">
         <div class="box_header">
-            <p>Shop All</p>
+            <p>{{category}}</p>
         </div>
         <v-dialog
         v-model="dialog"
@@ -45,8 +45,8 @@
                     <img :src="'http://localhost:5200' + product.productImage">
                     <br>
                     <br>
-                    <h4 v-if="product.productName.length < 50" style="height:45px;">{{ product.productName }}</h4>
-                    <h4 v-else style="height:45px;">{{ product.productName.substring(0,50)+'...'  }}</h4>
+                    <p v-if="product.productName.length < 35" class="nameTag" >{{ product.productName }}</p>
+                    <p v-else class="nameTag" >{{ product.productName.substring(0,32)+'...'  }}</p>
                     <hr style="border-bottom: 1px  solid #dfdfdf; border-top:-0px; margin-top:14px">
                     <h3>₦{{ product.productPrice }}</h3>
                     <hr style="border-bottom: 1px  solid #dfdfdf; border-top:-0px; margin-top:7px">
@@ -78,6 +78,7 @@ import {mapActions, mapGetters } from 'vuex'
 
 export default{
         name:"ProductBox",
+        props: ['category'],
         data(){
             return{
                 snackbar: false,
@@ -137,7 +138,7 @@ export default{
 </script>
 
 <style scoped>
-    .mainbox{
+ .mainbox{
         width: 70%;
         height: auto;
         margin: 30px auto;
@@ -198,22 +199,27 @@ export default{
         height: 220px;
     }
 
-    /*Media Display */
+    .nameTag{
+        height:60px; 
+        font-size: 15px
+    }
+
     @media only screen and (max-width: 1450px) {
         .mainbox{
             width: 75%;
+            height: auto;
             margin: 30px auto;
+            margin-bottom: 250px;
             box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
         }
 
         .productbox div img{
-            width: 75%;
-            height: 150px;
-            margin-left: 10%;
+            width: 100%;
+            height: 180px;
         }
 
          .productbox{
-            height: 340px;
+            height: 445px;
         }
     }
 
@@ -221,17 +227,17 @@ export default{
         .mainbox{
             width: 90%;
             margin: 30px auto;
+            margin-bottom: 250px;
             box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
         }
 
         .productbox div img{
-            width: 75%;
-            height: 150px;
-            margin-left: 10%;
+            width: 100%;
+            height: 200px;
         }
 
          .productbox{
-            height: 340px;
+            height: 470px;
         }
     }
 
@@ -240,6 +246,7 @@ export default{
         .mainbox{
             width: 90%;
             margin: 30px auto;
+            margin-bottom: 320px;
             box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
         }
 
@@ -255,17 +262,21 @@ export default{
 
         .productbox{
             width: 33.2%;
-            padding: 10px;
         }
 
         .productbox div img{
-            width: 75%;
+            width: 100%;
             height: 150px;
-            margin-left: 10%;
         }
 
         .class_btn{
             display: none;
+        }
+
+        .nameTag{
+            height:70px; 
+            font-size: 15px;
+            overflow:hidden
         }
     }
 
@@ -273,6 +284,7 @@ export default{
         .mainbox{
             width: 90%;
             margin: 30px auto;
+            margin-bottom: 450px;
             box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
         }
 
@@ -288,17 +300,21 @@ export default{
 
         .productbox{
             width: 49.8%;
-            padding: 10px;
         }
 
         .productbox div img{
-            width: 75%;
+            width: 100%;
             height: 150px;
-            margin-left: 10%;
         }
 
         .class_btn{
             display: none;
+        }
+
+        .nameTag{
+            height:70px; 
+            font-size: 15px;
+            overflow:hidden
         }
     }
 

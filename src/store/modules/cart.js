@@ -36,7 +36,10 @@ const mutations = {
     setTotal: (state) => state.total = state.subTotal + state.shipping,
     setBadge: (state, cartt) => state.myCart.push(cartt),
     clearBadge(state) {
-        state.myCart = []
+        state.myCart = [],
+        state.subTotal = 0,
+        state.shipping = 0,
+        state.total = 0
     },
 }
 

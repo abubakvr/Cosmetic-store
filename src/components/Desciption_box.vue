@@ -83,6 +83,7 @@ export default {
             width: 95%;
             margin: 30px auto;
             padding: 10px;
+            margin-bottom: 400px;
         }
     }
 </style>

@@ -140,4 +140,74 @@ export default {
     .btn-buy{
         margin-left: 170px;
     }
+
+
+   @media only screen and (max-width: 1100px) {
+        .mainBox{
+            width: 70%;
+         
+        }     
+
+        .product_side{
+            width: 25%;
+        }   
+
+        .product_side img{
+            width: 100%;
+            height: auto;
+            margin: auto;
+        }
+
+
+        .def_side{
+            width: 70%;
+        }
+    }
+
+
+    @media only screen and (max-width: 800px) {
+       .mainBox{
+            width: 85%;
+            margin-bottom: 280px;
+            margin-top:15px
+        }     
+
+        .product_side{
+            width: 25%;
+        }   
+
+        .product_side img{
+            width: 100%;
+            height: auto;
+            margin: auto;
+        }
+
+
+        .def_side{
+            width: 70%;
+        }
+    }
+
+     @media only screen and (max-width: 500px) {
+        .mainBox{
+            width: 94%;
+            margin-bottom: 400px;
+        }     
+
+        .product_side{
+            width: 25%;
+        }   
+
+        .product_side img{
+            width: 100%;
+            height: auto;
+            margin: auto;
+        }
+
+
+        .def_side{
+            width: 70%;
+        }
+        
+    }
 </style>
