@@ -64,7 +64,7 @@ export default {
     methods:{
         submit(){
             const meta = {
-                email:this.email,
+                email:this.email.toLowerCase(),
                 password:this.password
             }
 

@@ -10,16 +10,16 @@
                         <v-form ref="form">
                             <v-row>
                                 <v-col cols="6">
-                                    <v-text-field type="text" v-model="firstname" outlined label="Firstname"></v-text-field>
-                                    <v-text-field type="email" v-model="email" outlined label="Email"></v-text-field><v-spacer></v-spacer>
-                                    <v-text-field type="number" v-model="telephone" outlined label="Phone"></v-text-field><v-spacer></v-spacer>
-                                    <v-text-field type="password" v-model="password" outlined label="Password"></v-text-field><v-spacer></v-spacer>
+                                    <v-text-field type="text" :rules="[rules.required]" v-model="firstname" outlined label="Firstname"></v-text-field>
+                                    <v-text-field type="email" :rules="[rules.email, rules.required]" v-model="email" outlined label="Email"></v-text-field><v-spacer></v-spacer>
+                                    <v-text-field type="number" :rules="[rules.required]" v-model="telephone" outlined label="Phone"></v-text-field><v-spacer></v-spacer>
+                                    <v-text-field type="password" :rules="[rules.password, rules.required]" v-model="password" outlined label="Password"></v-text-field><v-spacer></v-spacer>
                                 </v-col>
                                 <v-col cols="6">
-                                    <v-text-field type="text" v-model="lastname" outlined label="Lastname"></v-text-field>
-                                    <v-text-field type="text" v-model="address" outlined label="Address"></v-text-field>
-                                    <v-select v-model="gender" :items="genderItems" outlined label="Gender"></v-select>
-                                    <v-text-field type="password" v-model="confPass" outlined label="Confirm Password"></v-text-field>
+                                    <v-text-field type="text" :rules="[rules.required]" v-model="lastname" outlined label="Lastname"></v-text-field>
+                                    <v-text-field type="text" :rules="[rules.required]" v-model="address" outlined label="Address"></v-text-field>
+                                    <v-select v-model="gender" :rules="[rules.required]" :items="genderItems" outlined label="Gender"></v-select>
+                                    <v-text-field type="password" :rules="[rules.password, rules.confirmPassword, rules.required]" v-model="confPass" outlined label="Confirm Password"></v-text-field>
                                 </v-col>
                             </v-row>
                         </v-form>
@@ -62,29 +62,37 @@ export default {
                 required: (v) => !!v || "This field is required",
                 password: (value) =>
                     (value && value.length >= 5) || "Minimum length is 5 characters",
+                confirmPassword: (value) =>
+                    (this.password == value) || "Passwords do not match",
             },
         }
     },
     methods:{
         submit(){
-            const meta = {
-                firstname: this.firstname,
-                lastname: this.lastname,
-                email:this.email,
-                telephone:this.telephone,
-                address: this.address,
-                gender: this.gender,
-                password:this.password
+            if(this.$refs.form.validate()) {
+                const meta = {
+                    firstname: this.firstname,
+                    lastname: this.lastname,
+                    email:this.email.toLowerCase(),
+                    telephone:this.telephone,
+                    address: this.address,
+                    gender: this.gender,
+                    password:this.password
+                }
+
+                axios.post('https://shoppeefy.herokuapp.com/api/users/register/',meta, {}).
+                    then(this.$router.push('/login'))
+                    .catch(err => console.log(err));
+
+
+                // this.$store.dispatch("signUp", meta);
+                }
             }
+        },
 
-            axios.post('https://shoppeefy.herokuapp.com/api/users/register/',meta, {}).
-                then(this.$router.push('/login'))
-                .catch(err => console.log(err));
-
-
-            // this.$store.dispatch("signUp", meta);
-            }
-        }
+        confirmpassword: () => ({
+            
+        })
     }
 </script>
 
