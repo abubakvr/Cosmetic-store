@@ -130,14 +130,14 @@ export default {
 }
 
 .section_products img{
-  height: 180px;
-  width: 80%;
+  height: 120px;
+  width: 65%;
   margin: auto;
 }
 
 
 .section_products div{
-  height: 300px;
+  height: 200px;
   margin: 0px auto;
   float: left;
   width: 47%;
