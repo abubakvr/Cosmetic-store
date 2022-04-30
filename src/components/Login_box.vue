@@ -2,19 +2,37 @@
     <v-container width="100%" height="100%" class="my-12">
         <v-col>
             <v-row justify="center" >
-                <v-sheet color="white" elevation="4" width="500px" height="390px" class="my-12">
-                    <v-toolbar flat color="#222222" class="white--text">
+                <v-sheet color="white" elevation="2" width="500px" height="390px" class="my-12">
+                    <v-toolbar flat color="#fff" class="black--text px-2">
                         <v-toolbar-title>Login</v-toolbar-title>
                     </v-toolbar>
-                    <v-sheet height="10%" class="pa-8">
-                        <v-text-field v-model="email" outlined label="Email"></v-text-field>
-                        <v-text-field v-model="password" outlined label="Password"></v-text-field>
-                        <v-btn color="orange" width="100%" height="50px" class="white--text h3--text" style="font-size:19px" @click="submit()">Login</v-btn>
-                        <v-row>
-                            <v-btn plain color="blue darken-3" justify="start" class="px-4 my-6">Forgot Password</v-btn>
-                            <v-spacer></v-spacer>
-                            <v-btn plain color="blue darken-3" style="float:right" class="px-3 my-6" @click="$router.push('/register')">Register</v-btn>
-                        </v-row>
+                    <v-sheet height="10%" class="px-5 py-3" >
+                        <v-form ref="form">
+                            <v-text-field 
+                                v-model="email" 
+                                outlined label="Email" 
+                                type="email"
+                                @keypress.enter="signIn()"
+                                append-icon="mdi-email"
+                                :rules="[rules.email, rules.required]"
+                            >
+                            </v-text-field>
+                            <v-text-field 
+                                v-model="password" 
+                                type="password"
+                                outlined label="Password" 
+                                @keypress.enter="signIn()"
+                                append-icon="mdi-lock"
+                                :rules="[rules.password, rules.required]"
+                            >
+                            </v-text-field>
+                            <v-btn color="orange" width="100%" height="50px" class="white--text h3--text" style="font-size:19px" @click="submit()">Login</v-btn>
+                            <v-row>
+                                <v-btn plain color="blue darken-3" justify="start" class="px-4 my-6">Forgot Password</v-btn>
+                                <v-spacer></v-spacer>
+                                <v-btn plain color="blue darken-3" style="float:right" class="px-3 my-6" @click="$router.push('/register')">Register</v-btn>
+                            </v-row>
+                        </v-form>
                     </v-sheet>
                 </v-sheet>
             </v-row>
@@ -32,6 +50,15 @@ export default {
         return{
             email: '',
             password: '',
+            form: false,
+            rules: {
+                email: (v) => !!(v || "").match(/@/) || "Please enter a valid email",
+                length: (len) => (v) =>
+                    (v || "").length >= len || `Invalid character length, required ${len}`,
+                required: (v) => !!v || "This field is required",
+                password: (value) =>
+                    (value && value.length >= 1) || "Minimum length is 5 characters",
+            },
         }
     },
     methods:{
@@ -48,8 +75,10 @@ export default {
             // })
             // .catch(err => console.log(err));
 
-            this.$store.dispatch("signIn", meta);
-            console.log(this.$store.state.token)
+            if(this.$refs.form.validate()) {
+                this.$store.dispatch("signIn", meta);
+                console.log(this.$store.state.token)
+            }
 
         }
     },
