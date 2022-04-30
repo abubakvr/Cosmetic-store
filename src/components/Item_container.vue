@@ -134,24 +134,30 @@ export default {
                     cartItemImage: product.productImage
                 }
 
-                axios.post('https://shoppeefy.herokuapp.com/api/cart/',meta, {})
-                .then((res) =>{
-                    if(res.data.message === "success"){
-                        this.$store.dispatch("addToCart", meta);
-                        this.headerMessage = "Success"
-                        this.contentMessage = "Item successfully added to cart"
-                        this.dialog = true
-                    }else{
+                if(localStorage.getItem('token')){
+                    axios.post('https://shoppeefy.herokuapp.com/api/cart/',meta, {})
+                    .then((res) =>{
+                        if(res.data.message === "success"){
+                            this.$store.dispatch("addToCart", meta);
+                            this.headerMessage = "Success"
+                            this.contentMessage = "Item successfully added to cart"
+                            this.dialog = true
+                        }else{
+                            this.headerMessage = "Error"
+                            this.contentMessage = "Item not added. Try again later"
+                            this.dialog = true
+                        }
+                    })
+                    .catch(() => { 
                         this.headerMessage = "Error"
                         this.contentMessage = "Item not added. Try again later"
                         this.dialog = true
-                    }
-                })
-                .catch(() => { 
-                    this.headerMessage = "Error"
-                    this.contentMessage = "Item not added. Try again later"
+                    })
+                }else{
+                    this.headerMessage = "You're not logged in"
+                    this.contentMessage = "Log in to continue"
                     this.dialog = true
-                })
+                }
 
                 // this.$store.dispatch("addToCart", meta);
             }

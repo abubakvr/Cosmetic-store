@@ -1,5 +1,41 @@
 <template>
     <v-container width="100%" height="100%" class="my-9">
+         <v-dialog
+            v-model="dialog"
+            transition="dialog-top-transition"
+            width="500"
+            >
+                <v-card>
+                    <v-card-title class="text-h5 lighten-2 white--text" style="background-color:#222222">
+                    {{headerMessage}}
+                    </v-card-title>
+
+                    <v-card-text class="py-4">
+                        {{contentMessage}}
+                    </v-card-text>
+
+                    <v-divider></v-divider>
+
+                    <v-card-actions>
+                    <v-spacer></v-spacer>
+                    <v-btn
+                        v-if="headerMessage === 'Success'"
+                        plain
+                        color="#141414 white--text"
+                        @click="$router.push('/cart')"
+                    >
+                        View Cart
+                    </v-btn>
+                    <v-btn
+                        plain
+                        color="#141414"
+                        @click="dialog = false"
+                    >
+                        Close
+                    </v-btn>
+                    </v-card-actions>
+                </v-card>
+            </v-dialog>
         <v-col>
             <v-row justify="center" >
                 <v-sheet color="white" elevation="2" width="600px" height="auto" class="my-9">
@@ -55,6 +91,7 @@ export default {
             password:'',
             confPass:'',
             form: false,
+            dialog:false,
             rules: {
                 email: (v) => !!(v || "").match(/@/) || "Please enter a valid email",
                 length: (len) => (v) =>
@@ -80,10 +117,21 @@ export default {
                     password:this.password
                 }
 
-                axios.post('https://shoppeefy.herokuapp.com/api/users/register/',meta, {}).
-                    then(this.$router.push('/login'))
-                    .catch(err => console.log(err));
-
+                axios.post('https://shoppeefy.herokuapp.com/api/users/register/',meta, {})
+                   .then((res) =>{
+                        if(res.data.message === "success"){
+                            this.$router.push('/login')
+                        }else{
+                            this.headerMessage = "Error"
+                            this.contentMessage = "User Not registered. Try again"
+                            this.dialog = true
+                        }
+                    })
+                    .catch(() => { 
+                        this.headerMessage = "Error"
+                        this.contentMessage = "User not registered. Try again later"
+                        this.dialog = true
+                    })
 
                 // this.$store.dispatch("signUp", meta);
                 }

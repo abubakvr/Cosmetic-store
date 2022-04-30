@@ -1,5 +1,41 @@
 <template>
     <v-container width="100%" height="100%" class="my-12">
+        <v-dialog
+        v-model="dialog"
+        transition="dialog-top-transition"
+        width="500"
+        >
+            <v-card>
+                <v-card-title class="text-h5 lighten-2 white--text" style="background-color:#222222">
+                {{headerMessage}}
+                </v-card-title>
+
+                <v-card-text class="py-4">
+                    {{contentMessage}}
+                </v-card-text>
+
+                <v-divider></v-divider>
+
+                <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn
+                    v-if="headerMessage === 'Success'"
+                    plain
+                    color="#141414 white--text"
+                    @click="$router.push('/cart')"
+                >
+                    View Cart
+                </v-btn>
+                <v-btn
+                    plain
+                    color="#141414"
+                    @click="dialog = false"
+                >
+                    Close
+                </v-btn>
+                </v-card-actions>
+            </v-card>
+        </v-dialog>
         <v-col>
             <v-row justify="center" >
                 <v-sheet color="white" elevation="2" width="500px" height="390px" class="my-12">
@@ -51,6 +87,7 @@ export default {
             email: '',
             password: '',
             form: false,
+            dialog:false,
             rules: {
                 email: (v) => !!(v || "").match(/@/) || "Please enter a valid email",
                 length: (len) => (v) =>
@@ -76,8 +113,11 @@ export default {
             // .catch(err => console.log(err));
 
             if(this.$refs.form.validate()) {
-                this.$store.dispatch("signIn", meta);
-                console.log(this.$store.state.token)
+                if(!this.$store.dispatch("signIn", meta)){
+                    this.headerMessage = "Error"
+                    this.contentMessage = "User not found. Try again"
+                    this.dialog = true
+                }
             }
 
         }
