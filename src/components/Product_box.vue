@@ -273,6 +273,11 @@ export default{
 
         }
 
+        .productbox :hover{
+            box-shadow: none;
+            transform: scale(1.00); 
+        }
+
         .productbox{
             width: 33.2%;
         }
@@ -306,7 +311,6 @@ export default{
             display: inline;
             margin: auto;
             margin-bottom: 10px;
-            margin-right: 0.1%;
             height: auto;
 
         }
