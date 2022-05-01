@@ -269,6 +269,7 @@ export default {
 
         //CheckOut
         addOrder(){
+            this.$store.dispatch('startLoader')
             let Arr = []
             this.getUserItems.forEach(element => {
                 console.log(element)
@@ -294,24 +295,28 @@ export default {
                         axios.delete(`https://shoppeefy.herokuapp.com/api/cart/clearcart/${this.getId}`)
                         .then((res) => {
                             if(res.data.message === "success"){
+                                this.$store.dispatch('stopLoader')
                                 this.headerMessage = "Success"
                                 this.contentMessage = "You've successfully placed your order"
                                 this.checkout_dialog = true
                                 this.fetchByUser(this.getId)
                                 this.setOrders()
                             }else{
+                                this.$store.dispatch('stopLoader')
                                 this.headerMessage = "Error"
                                 this.contentMessage = "Unsuccessful. Try again later"
                                 this.checkout_dialog = true
                             }
                         })
                     }else{
+                        this.$store.dispatch('stopLoader')
                         this.headerMessage = "Error"
                         this.contentMessage = "Unsuccessful. Try again later"
                         this.checkout_dialog = true
                     }
                 })
                 .catch(() => { 
+                    this.$store.dispatch('stopLoader')
                     this.headerMessage = "Error"
                     this.contentMessage = "Unsuccessful. Try again later"
                     this.checkout_dialog = true
@@ -583,7 +588,8 @@ export default {
         }     
 
         .product_side{
-            width: 25%;
+            width: 30%;
+            padding: 5px;   
         }   
 
         .product_side img{
@@ -593,7 +599,7 @@ export default {
         }
 
         .def_side{
-            width: 70%;
+            width: 67%;
         }
 
         .order_summary{
