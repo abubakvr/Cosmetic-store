@@ -121,7 +121,7 @@ export default {
         }
     },
     mounted(){
- 
+        this.$store.dispatch("stopLoader")
     }
 }
 </script>

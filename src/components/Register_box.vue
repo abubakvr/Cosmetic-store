@@ -92,6 +92,8 @@ export default {
             confPass:'',
             form: false,
             dialog:false,
+            headerMessage:'',
+            contentMessage:'',
             rules: {
                 email: (v) => !!(v || "").match(/@/) || "Please enter a valid email",
                 length: (len) => (v) =>
