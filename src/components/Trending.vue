@@ -5,34 +5,34 @@
         <h1>NOW <i>Trending</i></h1>
         </div>
         <div class="section_products">
-        <div class="inner_divv">
+        <div class="inner_divv"  @click="$router.push('/viewitem/6241df12da94022939375a67')">
             <img src="../assets/img/favpng_pencil-eye-liner-color-black.png">
             <p>Black Powder Pencil <br>$150</p>
         </div>
-        <div class="inner_divv">
+        <div class="inner_divv" @click="$router.push('/viewitem/6241df12da94022939375a67')">
             <img src="../assets/img/kindpng_2387099.png">
             <p>Glossy Rose<br>$100</p>
         </div>
-        <div class="inner_divv">
+        <div class="inner_divv" @click="$router.push('/viewitem/6241df12da94022939375a67')">
             <img src="../assets/img/pngwing.com.png">
             <p>Mad Lip Gloss<br>$300</p>
         </div>
-        <div class="inner_divv">
+        <div class="inner_divv" @click="$router.push('/viewitem/6241df12da94022939375a67')">
             <img src="../assets/img/—Pngtree—liquid foundation_5649017.png">
             <p>Slick Rui Foundation <br>$450</p>
         </div>
-        <div class="inner_divv">
+        <div class="inner_divv" @click="$router.push('/viewitem/6241df12da94022939375a67')">
             <img src="../assets/img/face_powder_PNG76465.png">
             <p>Mirror Powder <br>$80</p>
         </div>
-        <div class="inner_divv last_div">
+        <div class="inner_divv last_div" @click="$router.push('/viewitem/6241df12da94022939375a67')">
             <img src="../assets/img/kindpng_2386942.png">
             <p>Duzzle eyeshadow <br>$200</p>
         </div>
       
         </div>
 
-        <p class="shop_btn"><router-link to="/bestsellers" style="text-decoration:none">
+        <p class="shop_btn"><router-link to="/shopall" style="text-decoration:none">
         <v-btn outlined color="black">Shop Trending</v-btn></router-link></p>
     </section>
 </template>
@@ -75,13 +75,13 @@ export default {
 }
 
 .section_products :hover{
-        transform: scale(1.06); 
-        cursor: pointer;
+  transform: scale(1.06); 
+  cursor: pointer;
 }
 
 .inner_divv :hover{
-        box-shadow: none;
-        transform: none; 
+  box-shadow: none;
+  transform: none; 
 }
 
 @media only screen and (max-width: 1100px) {
@@ -134,7 +134,6 @@ export default {
   width: 65%;
   margin: auto;
 }
-
 
 .section_products div{
   height: 200px;

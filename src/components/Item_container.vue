@@ -282,6 +282,10 @@ export default {
             padding: 0px;
         }
 
+        .def_side{
+            padding-top: -50px;
+        }
+
         .share_div{
             visibility:hidden;
             display: none;
