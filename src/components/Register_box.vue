@@ -116,7 +116,7 @@ export default {
                     gender: this.gender,
                     password:this.password
                 }
-
+                this.$store.dispatch("startLoader")
                 axios.post('https://shoppeefy.herokuapp.com/api/users/register/',meta, {})
                    .then((res) =>{
                         if(res.data.message === "success"){
@@ -134,14 +134,15 @@ export default {
                     })
 
                 // this.$store.dispatch("signUp", meta);
-                }
             }
-        },
-
-        confirmpassword: () => ({
-            
-        })
+        }
+    },
+    mounted(){
+        this.$store.dispatch("stopLoader")
     }
+}
+    
+        
 </script>
 
 <style scoped>

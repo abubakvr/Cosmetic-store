@@ -113,11 +113,9 @@ export default {
             // .catch(err => console.log(err));
 
             if(this.$refs.form.validate()) {
-                if(!this.$store.dispatch("signIn", meta)){
-                    this.headerMessage = "Error"
-                    this.contentMessage = "User not found. Try again"
-                    this.dialog = true
-                }
+                this.$store.dispatch("startLoader")
+                this.$store.dispatch("signIn", meta)
+                    
             }
 
         }

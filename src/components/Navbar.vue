@@ -100,8 +100,9 @@
       </v-list-item-group>
       </v-list>
     </v-menu>
+    <v-progress-linear v-if="getLoader" style="margin-top:60px; position:fixed; margin-left:-20px" indeterminate color="orange darken-3"></v-progress-linear>
+
     </v-app-bar>
-    <!-- <v-progress-linear style="margin-top:63px; position:fixed" indeterminate color="orange darken-3"></v-progress-linear> -->
     </div>
     
 
@@ -175,7 +176,7 @@
       </v-list-item-group>
       </v-list>
     </v-menu>
-
+    <v-progress-linear v-if="getLoader" style="margin-top:60px; position:fixed; margin-left:-15px" indeterminate color="orange darken-3"></v-progress-linear>
     </v-app-bar>
 
     <v-navigation-drawer
@@ -248,10 +249,11 @@ import { mapActions, mapGetters } from 'vuex'
 
           }
         },
-        computed:mapGetters(['getItemNo', 'getId']),
+        computed:mapGetters(['getItemNo', 'getId', 'getLoader']),
         created(){
         },
         mounted(){
+          this.$store.dispatch("stopLoader")
           if(this.chkToken){
             this.loginBtn = false
             this.fetchByUser(this.getId)

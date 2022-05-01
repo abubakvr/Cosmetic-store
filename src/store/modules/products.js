@@ -3,13 +3,15 @@ import axios from 'axios'
 const state = {
     products: [],
     product: [],
-    category: []
+    category: [],
+    loader:false,
 }
 
 const getters = {
     allProducts: state => state.products,
     prodCategory: state => state.category,
-    oneProduct: state => state.product
+    oneProduct: state => state.product,
+    getLoader: state => state.loader
 }
 
 const mutations = {
@@ -24,6 +26,8 @@ const mutations = {
         }
     },
     removeProduct: (state, id) => state.products = state.products.filter(product => product.id !== id),
+    startLoader:(state) => state.loader = true,
+    stopLoader:(state) => state.loader = false
 }
 
 const actions = {
@@ -55,7 +59,15 @@ const actions = {
     async updateProduct({ commit }, updateProduct){
         const response =  await axios.put(`https://shoppeefy.herokuapp.com/api/product/${updateProduct.id}`, updateProduct);
         commit('updateTodo', response.data)
-    }
+    },
+
+    startLoader: ({commit}) => (
+        commit('startLoader')
+    ),
+
+    stopLoader: ({commit}) => (
+        commit('stopLoader')
+    )
 }
 
 export default {

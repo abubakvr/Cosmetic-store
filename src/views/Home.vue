@@ -28,6 +28,9 @@ export default {
     Trending,
     DiscoverMore
   },
+  mounted(){
+    this.$store.dispatch("stopLoader")
+  }
 }
 </script>
 
