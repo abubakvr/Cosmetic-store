@@ -1,4 +1,4 @@
-<template>
+<template><div>
     <section class="a">
           <div>
                <p>NEW RELEASE</p>
@@ -10,6 +10,7 @@
               <v-btn outlined color="white" @click="$router.push('/shopall')">Shop</v-btn>
           </div>
         </section>
+          </div>
 </template>
 
 <script>

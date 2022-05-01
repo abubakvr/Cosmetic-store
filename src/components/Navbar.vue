@@ -100,10 +100,10 @@
       </v-list-item-group>
       </v-list>
     </v-menu>
-
     </v-app-bar>
+    <!-- <v-progress-linear style="margin-top:63px; position:fixed" indeterminate color="orange darken-3"></v-progress-linear> -->
     </div>
-
+    
 
     <!---Mobile Nav-------------------------->
     <div class="mobileNav">
