@@ -231,26 +231,44 @@ export default {
 
         //Adding quantity in cart
         plusFunc(cartItem){
+            this.$store.dispatch('startLoader')
             this.id = cartItem._id
             this.quantity = parseInt(cartItem.cartItemQuantity) + 1
             const meta = {
                 quantity: this.quantity
             }
             axios.patch(`https://shoppeefy.herokuapp.com/api/cart/quantity/${this.id}`, meta, {})
-            .then(() => this.fetchByUser(this.getId))
-            console.log(this.quantity)
+            .then(() => {
+                this.fetchByUser(this.getId)
+                this.$store.dispatch('stopLoader')
+            })
+            .catch(() => { 
+                this.$store.dispatch('stopLoader')
+                this.headerMessage = "Error"
+                this.contentMessage = "Cannot add quantity at the moment"
+                this.dialog = true
+            })
         },
 
         //Subtacting quantity in cart
         minusFunc(cartItem){
+            this.$store.dispatch('startLoader')
             this.id = cartItem._id
             this.quantity = parseInt(cartItem.cartItemQuantity) - 1
             const meta = {
                 quantity: this.quantity
             }
             axios.patch(`https://shoppeefy.herokuapp.com/api/cart/quantity/${this.id}`, meta, {})
-            .then(() => this.fetchByUser(this.getId))
-            console.log(this.quantity)
+            .then(() => {
+                this.fetchByUser(this.getId)
+                this.$store.dispatch('stopLoader')
+            })
+            .catch(() => { 
+                this.$store.dispatch('stopLoader')
+                this.headerMessage = "Error"
+                this.contentMessage = "Cannot add quantity at the moment"
+                this.dialog = true
+            })
         },
 
         //Remove item modal
