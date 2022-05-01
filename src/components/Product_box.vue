@@ -14,13 +14,21 @@
                 </v-card-title>
 
                 <v-card-text class="py-4">
-                    {{contentMessage}}
+                {{contentMessage}}
                 </v-card-text>
 
                 <v-divider></v-divider>
 
                 <v-card-actions>
                 <v-spacer></v-spacer>
+                   <v-btn
+                    v-if="contentMessage === 'Log in to continue'"
+                    flat
+                    color="orange white--text darken-2"
+                    @click="$router.push('/cart')"
+                >
+                    Login
+                </v-btn> 
                 <v-btn
                     v-if="headerMessage === 'Success'"
                     plain
@@ -31,10 +39,10 @@
                 </v-btn>
                 <v-btn
                     plain
-                    color="#141414"
+                    color="red"
                     @click="dialog = false"
                 >
-                    Continue Shopping
+                    Close
                 </v-btn>
                 </v-card-actions>
             </v-card>
@@ -92,6 +100,7 @@ export default{
 
             addToCart(product){
                 if(localStorage.getItem('token')){
+                    this.$store.dispatch('startLoader')
                     const meta = {
                         userID: this.getId,
                         itemID: product. _id,
@@ -106,22 +115,26 @@ export default{
                     .then((res) =>{
                         if(res.data.message === "success"){
                             this.$store.dispatch("addToCart", meta);
+                            this.$store.dispatch('stopLoader')
                             this.headerMessage = "Success"
                             this.contentMessage = "Item successfully added to cart"
                             this.dialog = true
                             
                         }else{
+                            this.$store.dispatch('stopLoader')
                             this.headerMessage = "Error"
                             this.contentMessage = "Item not added. Try again later"
                             this.dialog = true
                         }
                     })
                     .catch(() => { 
+                        this.$store.dispatch('stopLoader')
                         this.headerMessage = "Error"
                         this.contentMessage = "Item not added. Try again later"
                         this.dialog = true
                     })
                 }else{
+                    this.$store.dispatch('stopLoader')
                     this.headerMessage = "You're not logged in"
                     this.contentMessage = "Log in to continue"
                     this.dialog = true
@@ -148,11 +161,11 @@ export default{
     }
 
     .box_header{
-        height: 70px;
+        height: 58px;
         width: 100%;
         border-bottom: 1px solid #e0dfdf;
         padding: 10px;
-        font-size: 25px;
+        font-size: 23px;
         color: #141414;
     }
 
@@ -244,7 +257,7 @@ export default{
 
     @media only screen and (max-width: 800px) {
         .mainbox{
-            width: 90%;
+            width: 92%;
             margin: 70px auto;
             margin-bottom: 320px;
             box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
@@ -282,10 +295,10 @@ export default{
 
      @media only screen and (max-width: 500px) {
         .mainbox{
-            width: 90%;
-            margin: 70px auto;
+            width: 96%;
+            margin: 65px auto;
             margin-bottom: 450px;
-            box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+            box-shadow: none;
         }
 
         .mainbox .productbox{

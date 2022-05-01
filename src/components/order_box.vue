@@ -38,8 +38,9 @@ export default {
         ...mapActions(['fetchOrders']),
     },
     computed: mapGetters(['getUserOrders']),
-    created(){
+    mounted(){
         this.fetchOrders()
+        this.$store.dispatch('setOrders')
     }
 }
 </script>

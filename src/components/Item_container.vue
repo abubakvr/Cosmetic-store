@@ -135,25 +135,30 @@ export default {
                 }
 
                 if(localStorage.getItem('token')){
+                    this.$store.dispatch('startLoader')
                     axios.post('https://shoppeefy.herokuapp.com/api/cart/',meta, {})
                     .then((res) =>{
                         if(res.data.message === "success"){
                             this.$store.dispatch("addToCart", meta);
+                            this.$store.dispatch('stopLoader')
                             this.headerMessage = "Success"
                             this.contentMessage = "Item successfully added to cart"
                             this.dialog = true
                         }else{
+                            this.$store.dispatch('stopLoader')
                             this.headerMessage = "Error"
                             this.contentMessage = "Item not added. Try again later"
                             this.dialog = true
                         }
                     })
                     .catch(() => { 
+                        this.$store.dispatch('stopLoader')
                         this.headerMessage = "Error"
                         this.contentMessage = "Item not added. Try again later"
                         this.dialog = true
                     })
                 }else{
+                    this.$store.dispatch('stopLoader')
                     this.headerMessage = "You're not logged in"
                     this.contentMessage = "Log in to continue"
                     this.dialog = true
