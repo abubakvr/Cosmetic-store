@@ -154,7 +154,7 @@ export default{
 </script>
 
 <style scoped>
-    .mainbox{
+   .mainbox{
         width: 70%;
         height: auto;
         margin: 80px auto;
@@ -164,11 +164,11 @@ export default{
     }
 
     .box_header{
-        height: 70px;
+        height: 55px;
         width: 100%;
         border-bottom: 1px solid #e0dfdf;
         padding: 10px;
-        font-size: 25px;
+        font-size: 23px;
         color: #141414;
     }
 
@@ -250,7 +250,6 @@ export default{
         .productbox div img{
             width: 100%;
             height: 200px;
-            margin-left: 10%;
         }
 
          .productbox{
@@ -261,9 +260,9 @@ export default{
 
     @media only screen and (max-width: 800px) {
         .mainbox{
-            width: 90%;
+            width: 92%;
             margin: 70px auto;
-            margin-bottom: 300px;
+            margin-bottom: 320px;
             box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
         }
 
@@ -272,8 +271,14 @@ export default{
             display: inline;
             margin: auto;
             margin-bottom: 10px;
+            margin-right: 0.1%;
             height: auto;
 
+        }
+
+        .productbox :hover{
+            box-shadow: none;
+            transform: scale(1.00); 
         }
 
         .productbox{
@@ -288,12 +293,18 @@ export default{
         .class_btn{
             display: none;
         }
+
+        .nameTag{
+            height:70px; 
+            font-size: 15px;
+            overflow:hidden
+        }
     }
 
      @media only screen and (max-width: 500px) {
         .mainbox{
             width: 96%;
-            margin: 70px auto;
+            margin: 65px auto;
             margin-bottom: 450px;
             box-shadow: none;
         }
@@ -305,11 +316,6 @@ export default{
             margin-bottom: 10px;
             height: auto;
 
-        }
-
-        .productbox :hover{
-            box-shadow: none;
-            transform: scale(1.00); 
         }
 
         .productbox{
@@ -331,6 +337,5 @@ export default{
             overflow:hidden
         }
     }
-
 
 </style>
