@@ -131,6 +131,7 @@ export default {
 .b{
   /*clip-path: polygon(0 0, 100% 50%, 100% 100%, 0 100%);*/
   width: 90%;
+  margin-top: -29px;
 }
 
 .section_products img{
