@@ -176,7 +176,7 @@
       </v-list-item-group>
       </v-list>
     </v-menu>
-    <v-progress-linear v-if="getLoader" style="margin-top:60px; position:fixed; margin-left:-15px" indeterminate color="orange darken-3"></v-progress-linear>
+    <v-progress-linear v-if="getLoader" style="margin-top:52px; position:fixed; margin-left:-17px" indeterminate color="orange darken-3"></v-progress-linear>
     </v-app-bar>
 
     <v-navigation-drawer
